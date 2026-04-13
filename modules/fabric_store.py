@@ -7,10 +7,11 @@ FILE = "data/fabric_stock.csv"
 def run():
     st.header("🧵 Fabric Store")
 
-    # Create file if not exists
+    # Create folder if not exists
     if not os.path.exists("data"):
         os.makedirs("data")
 
+    # Create file if not exists
     if not os.path.exists(FILE):
         df = pd.DataFrame(columns=["Roll No", "Fabric Type", "Color", "Kg"])
         df.to_csv(FILE, index=False)
@@ -42,6 +43,7 @@ def run():
             df.to_csv(FILE, index=False)
 
             st.success("✅ Added Successfully")
+            st.rerun()
 
     # Display
     st.subheader("📦 Current Stock")
@@ -54,3 +56,10 @@ def run():
     }), use_container_width=True)
 
     st.metric("Total Fabric", f"{round(df['Kg'].sum(),2)} kg")
+
+    # ✅ CLEAR DATA BUTTON (INSIDE FUNCTION)
+    if st.button("🗑️ Clear All Fabric Data"):
+        df = pd.DataFrame(columns=["Roll No", "Fabric Type", "Color", "Kg"])
+        df.to_csv(FILE, index=False)
+        st.warning("All fabric data cleared!")
+        st.rerun()

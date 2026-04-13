@@ -17,3 +17,8 @@ def run():
         st.success(f"Excess: {round(balance, 2)} kg")
     else:
         st.error(f"Shortage: {abs(round(balance, 2))} kg")
+
+    # ✅ RESET BUTTON INSIDE FUNCTION
+    if st.button("🗑️ Reset Planning"):
+        st.rerun()
+

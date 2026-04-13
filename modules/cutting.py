@@ -4,13 +4,15 @@ import os
 
 FILE = "data/cutting_data.csv"
 
-def run():   # ✅ IMPORTANT NAME
+def run():
 
     st.header("✂️ Cutting Entry")
 
+    # Create folder if not exists
     if not os.path.exists("data"):
         os.makedirs("data")
 
+    # Create file if not exists
     if not os.path.exists(FILE):
         df = pd.DataFrame(columns=[
             "Lay Length", "Plies", "Pieces", "Consumption", "Wastage %"
@@ -39,6 +41,16 @@ def run():   # ✅ IMPORTANT NAME
         df.to_csv(FILE, index=False)
 
         st.success(f"✅ Wastage: {round(wastage, 2)}%")
+        st.rerun()
 
     st.subheader("📋 Cutting History")
-    st.dataframe(df)
+    st.dataframe(df, use_container_width=True)
+
+    # ✅ CLEAR DATA BUTTON (INSIDE FUNCTION)
+    if st.button("🗑️ Clear Cutting Data"):
+        df = pd.DataFrame(columns=[
+            "Lay Length", "Plies", "Pieces", "Consumption", "Wastage %"
+        ])
+        df.to_csv(FILE, index=False)
+        st.warning("Cutting data cleared!")
+        st.rerun()
