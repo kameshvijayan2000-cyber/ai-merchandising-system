@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 def calculate_piece_weight(
     garment_type,
     total_length,
@@ -32,7 +32,7 @@ def calculate_piece_weight(
         return round(piece_weight, 3)
 
     return 0
-=======
+
 def calculate_piece_weight(
     garment_type,
     total_length,
@@ -66,4 +66,3 @@ def calculate_piece_weight(
         return round(piece_weight, 3)
 
     return 0
->>>>>>> 542cdebd01ea9baf46f7d3618875dfb4a486bc55
