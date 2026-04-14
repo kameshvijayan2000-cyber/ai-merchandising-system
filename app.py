@@ -29,6 +29,9 @@ from modules.count_calculator import count_calculator_module
 from modules.fabric_store import run as fabric_store_module
 from modules.cutting import run as cutting_module
 from modules.planning import run as planning_module
+from modules.production_tracker import run as production_tracker_module
+from modules.fabric_tracking_advanced import run as fabric_tracking_advanced_module
+
 
 
 # ================= PAGE =================
@@ -53,6 +56,8 @@ option = st.sidebar.radio(
         "📧 Vendor Mail",
         "🤖 AI Directory",
         "💰 Costing",
+        "📧 Production Tracking",
+        "📊 Fabric Tracking Advanced",
         "📅 T&A"
     ]
 )
@@ -131,7 +136,12 @@ elif option == "📧 Vendor Mail":
 
 elif option == "🤖 AI Directory":
     auto_directory_module()
+# ================= Production Tracking =================
+elif option == "📧 Production Tracking":
+    production_tracker_module()
 
+elif option == "📊 Fabric Tracking Advanced":
+    fabric_tracking_advanced_module()
 
 # ================= COSTING =================
 elif option == "💰 Costing":
