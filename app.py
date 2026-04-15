@@ -137,7 +137,7 @@ elif option == "📧 Vendor Mail":
 elif option == "🤖 AI Directory":
     auto_directory_module()
 # ================= Production Tracking =================
-elif option == "📧 Production Tracking":
+elif option == "📧 Production Tracker":
     production_tracker_module()
 
 elif option == "📊 Fabric Tracking Advanced":
