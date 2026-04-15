@@ -14,14 +14,14 @@ def run():
 
     if not os.path.exists(FILE):
         df = pd.DataFrame(columns=[
-            "Date", "Process", "Type", "Qty", "Unit", "Party"
+            "Date", "Process", "Type", "Qty", "Unit", "Party", "Description", "Rate"
         ])
         df.to_csv(FILE, index=False)
 
     df = pd.read_csv(FILE)
 
     # ---------- FIX OLD FILE STRUCTURE ----------
-    expected_cols = ["Date", "Process", "Type", "Qty", "Unit", "Party"]
+    expected_cols = ["Date", "Process", "Type", "Qty", "Unit", "Party", "Description", "Rate"]
 
     for col in expected_cols:
         if col not in df.columns:
@@ -29,8 +29,9 @@ def run():
 
     df = df[expected_cols]
 
-    # Convert Qty to numeric (VERY IMPORTANT)
+    # Convert numeric columns
     df["Qty"] = pd.to_numeric(df["Qty"], errors="coerce").fillna(0)
+    df["Rate"] = pd.to_numeric(df["Rate"], errors="coerce").fillna(0)
 
     # ---------- INPUT SECTION ----------
     st.subheader("➕ Add Entry")
@@ -69,6 +70,10 @@ def run():
 
     party = st.text_input("Party / Unit Name")
 
+    # 🔥 NEW FIELDS
+    description = st.text_input("Description (Optional)")
+    rate = st.number_input("Rate (₹ per unit)", min_value=0.0)
+
     if st.button("Save Entry"):
 
         new = pd.DataFrame([[
@@ -77,7 +82,9 @@ def run():
             entry_type,
             qty,
             unit,
-            party
+            party,
+            description,
+            rate
         ]], columns=df.columns)
 
         df = pd.concat([df, new], ignore_index=True)
@@ -136,6 +143,16 @@ def run():
 
         st.dataframe(summary_df)
 
+    # ---------- COST SUMMARY (NEW 🔥) ----------
+    st.subheader("💰 Cost Summary")
+
+    df["Total Cost"] = df["Qty"] * df["Rate"]
+
+    cost_summary = df.groupby("Process")["Total Cost"].sum().reset_index()
+
+    st.dataframe(cost_summary)
+
+    st.metric("Total Cost", f"₹ {round(df['Total Cost'].sum(),2)}")
 
     # ---------- CLEAR ----------
     if st.button("🗑️ Clear All Data"):

@@ -1,1 +1,13 @@
-Date,Process,Type,Qty,Unit,Party
+Date,Process,Type,Qty,Unit,Party,Description,Rate
+2026-03-05,Yarn 24s,Input,1920.0,KG,Easwari Tex,60/40 - Vishnu Knits,221.0
+2026-03-10,Yarn 24s,Input,1920.0,KG,Easwari Tex,60/40 - Vishnu Knits,221.0
+2026-03-12,Yarn 24s,Input,640.0,KG,Easwari Tex,60/40 - Vishnu Knits,221.0
+2026-03-17,Yarn 24s,Input,4800.0,KG,Easwari Tex,60/40 - Vishnu Knits,221.0
+2026-02-23,Yarn 20s,Input,2100.0,KG,Easwari Tex,60/40 - Vishnu Knits,198.0
+2026-03-03,Yarn 20s,Input,723.5,KG,Easwari Tex,60/40 - Vishnu Knits - OE,198.0
+2026-03-17,Yarn 20s,Input,1560.0,KG,Easwari Tex,60/40 - Vishnu Knits - OE,198.0
+2026-03-16,Yarn 20s,Input,1800.0,KG,Easwari Tex,60/40 - Vishnu Knits - OE,198.0
+2026-03-21,Yarn 20s,Input,1600.0,KG,Easwari Tex,60/40 - Vishnu Knits - SEMI,228.0
+2026-03-21,Yarn 20s - 100% cotton,Input,2298.24,KG,Easwari Tex,100% cotton - Shree shree Knits ,244.0
+2026-03-21,Yarn 30s - 100% cotton,Input,300.0,KG,NSP,100% cotton - Shree shree Knits ,252.0
+2026-03-05,Yarn 24s,Input,3200.0,KG,Eshwari Tex,60/40 - Vishnu Knits,221.0
