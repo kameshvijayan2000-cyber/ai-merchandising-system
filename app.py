@@ -56,7 +56,7 @@ option = st.sidebar.radio(
         "📧 Vendor Mail",
         "🤖 AI Directory",
         "💰 Costing",
-        "📧 Production Tracking",
+        "📧 Production Tracker",
         "📊 Fabric Tracking Advanced",
         "📅 T&A"
     ]
