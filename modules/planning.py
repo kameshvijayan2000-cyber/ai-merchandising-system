@@ -3,20 +3,20 @@ import pandas as pd
 import os
 from datetime import date
 
-FILE = "data/production_detailed.csv"
+ORDER_FILE = "data/order_details.csv"
+TRACK_FILE = "data/production_detailed.csv"
 
 def run():
 
     st.header("📊 Production Tracking (Advanced)")
 
-    # ✅ CHECK COUNT CALCULATOR DATA
-    if "order_detail" not in st.session_state:
-        st.warning("⚠️ Please calculate order in Count Calculator first")
+    # ---------- LOAD ORDER ----------
+    if not os.path.exists(ORDER_FILE):
+        st.warning("⚠️ Run Count Calculator first")
         return
 
-    order_df = st.session_state["order_detail"]
+    order_df = pd.read_csv(ORDER_FILE)
 
-    # ---------- SHOW TARGET ----------
     st.subheader("🎯 Target Plan")
     st.dataframe(order_df, use_container_width=True)
 
@@ -24,27 +24,25 @@ def run():
     if not os.path.exists("data"):
         os.makedirs("data")
 
-    if not os.path.exists(FILE):
-        df = pd.DataFrame(columns=[
-            "Date", "Process", "Color", "Size", "Qty"
-        ])
-        df.to_csv(FILE, index=False)
+    if not os.path.exists(TRACK_FILE):
+        df = pd.DataFrame(columns=["Date", "Process", "Color", "Size", "Qty"])
+        df.to_csv(TRACK_FILE, index=False)
 
-    df = pd.read_csv(FILE)
+    df = pd.read_csv(TRACK_FILE)
 
     # ---------- INPUT ----------
     st.subheader("➕ Enter Production")
 
     entry_date = st.date_input("Date", value=date.today())
-    process = st.text_input("Process (Cutting / Stitching / etc)")
+    process = st.text_input("Process")
 
     color_list = order_df["Color"].unique().tolist()
     size_list = order_df["Size"].unique().tolist()
 
-    selected_color = st.selectbox("Select Color", color_list)
-    selected_size = st.selectbox("Select Size", size_list)
+    selected_color = st.selectbox("Color", color_list)
+    selected_size = st.selectbox("Size", size_list)
 
-    qty = st.number_input("Produced Quantity", min_value=0)
+    qty = st.number_input("Produced Qty", 0)
 
     if st.button("Save Entry"):
 
@@ -52,33 +50,23 @@ def run():
                            columns=df.columns)
 
         df = pd.concat([df, new], ignore_index=True)
-        df.to_csv(FILE, index=False)
+        df.to_csv(TRACK_FILE, index=False)
 
-        st.success("✅ Production Saved")
+        st.success("Saved")
 
-    # ---------- LOG ----------
-    st.subheader("📋 Production Log")
-    st.dataframe(df, use_container_width=True)
-
-    # ---------- PROCESS FILTER (🔥 MAIN FIX) ----------
+    # ---------- PROCESS VIEW ----------
     st.subheader("📈 Size-wise Progress")
 
     if not df.empty:
 
         process_list = df["Process"].unique().tolist()
-        selected_process = st.selectbox("Select Process to View", process_list)
+        selected_process = st.selectbox("Select Process", process_list)
 
-        # FILTER ONLY SELECTED PROCESS
         filtered_df = df[df["Process"] == selected_process]
 
         produced_df = filtered_df.groupby(["Color", "Size"])["Qty"].sum().reset_index()
 
-        merged = pd.merge(
-            order_df,
-            produced_df,
-            on=["Color", "Size"],
-            how="left"
-        )
+        merged = pd.merge(order_df, produced_df, on=["Color", "Size"], how="left")
 
         merged["Qty"] = merged["Qty"].fillna(0)
         merged["Pending"] = merged["Quantity"] - merged["Qty"]
@@ -90,37 +78,19 @@ def run():
 
         st.dataframe(merged, use_container_width=True)
 
-        # ---------- TOTALS (FOR SELECTED PROCESS ONLY) ----------
-        total_target = merged["Target"].sum()
-        total_done = merged["Produced"].sum()
-        total_pending = merged["Pending"].sum()
+        st.metric("Total Target", int(merged["Target"].sum()))
+        st.metric("Produced", int(merged["Produced"].sum()))
+        st.metric("Pending", int(merged["Pending"].sum()))
 
-        col1, col2, col3 = st.columns(3)
-
-        col1.metric("🎯 Total Target", int(total_target))
-        col2.metric("✅ Produced", int(total_done))
-        col3.metric("⏳ Pending", int(total_pending))
-
-    # ---------- PROCESS SUMMARY ----------
-    st.subheader("📊 Process-wise Production")
-
-    if not df.empty:
-        process_summary = df.groupby("Process")["Qty"].sum().reset_index()
-        st.dataframe(process_summary, use_container_width=True)
+    # ---------- LOG ----------
+    st.subheader("📋 Log")
+    st.dataframe(df)
 
     # ---------- DELETE ----------
-    st.subheader("🗑️ Delete Entry")
-
     if len(df) > 0:
-        index = st.number_input("Row Number", 0, len(df)-1, 0)
+        idx = st.number_input("Row No", 0, len(df)-1, 0)
 
-        if st.button("Delete Row"):
-            df = df.drop(index).reset_index(drop=True)
-            df.to_csv(FILE, index=False)
-            st.success("Row deleted")
-
-    # ---------- CLEAR ----------
-    if st.button("🗑️ Clear All Data"):
-        df = pd.DataFrame(columns=df.columns)
-        df.to_csv(FILE, index=False)
-        st.warning("All data cleared")
+        if st.button("Delete"):
+            df = df.drop(idx).reset_index(drop=True)
+            df.to_csv(TRACK_FILE, index=False)
+            st.success("Deleted")
