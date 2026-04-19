@@ -14,7 +14,7 @@ def calculate_order_distribution(base_per_ratio, color_ratios):
 
         for size, ratio in sizes.items():
 
-            qty = ratio * base_per_ratio   # ✅ MAIN LOGIC CHANGE
+            qty = ratio * base_per_ratio   # ✅ YOUR REQUIRED LOGIC
 
             color_total += qty
 
@@ -39,7 +39,7 @@ def calculate_order_distribution(base_per_ratio, color_ratios):
 # -------- STREAMLIT UI --------
 def count_calculator_module():
 
-    st.header("Order Count Calculator (Carton Based)")
+    st.header("📦 Order Count Calculator (Advanced)")
 
     product_name = st.text_input("Product Name")
 
@@ -54,7 +54,6 @@ def count_calculator_module():
 
     # ✅ ALWAYS ROUND UP
     extra_qty = math.ceil(base_qty * extra_percent / 100)
-
     final_carton_qty = math.ceil(cartons + (cartons * extra_percent / 100))
 
     st.info(f"Base Quantity: {base_qty}")
@@ -91,23 +90,29 @@ def count_calculator_module():
             color_ratios[color_name] = size_ratios
 
     # -------- CALCULATE --------
-    if st.button("Calculate Order Distribution"):
+    if st.button("🚀 Calculate Order Distribution"):
 
         if not color_ratios:
             st.warning("Please enter at least one color name")
             return
 
         df_detail, df_summary = calculate_order_distribution(
-            final_carton_qty,   # ✅ PASS 284 HERE
+            final_carton_qty,
             color_ratios
         )
 
+        # ✅ SAVE FOR PLANNING MODULE
+        st.session_state["order_detail"] = df_detail
+        st.session_state["order_summary"] = df_summary
+
+        st.success("✅ Data saved for Production Tracking")
+
         # -------- DISPLAY --------
         st.subheader("Size-wise Quantity")
-        st.dataframe(df_detail)
+        st.dataframe(df_detail, use_container_width=True)
 
         st.subheader("Color-wise Total")
-        st.dataframe(df_summary)
+        st.dataframe(df_summary, use_container_width=True)
 
         # -------- DOWNLOAD --------
         file_name = f"{product_name}_Order_Count.xlsx"
@@ -117,8 +122,4 @@ def count_calculator_module():
             df_summary.to_excel(writer, sheet_name="Color Summary", index=False)
 
         with open(file_name, "rb") as f:
-            st.download_button(
-                "Download Excel",
-                f,
-                file_name=file_name
-            )
+            st.download_button("Download Excel", f, file_name=file_name)
