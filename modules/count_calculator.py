@@ -1,31 +1,20 @@
 import streamlit as st
 import pandas as pd
+import math
 
 # -------- LOGIC FUNCTION --------
-def calculate_order_distribution(total_qty, color_ratios):
+def calculate_order_distribution(base_per_ratio, color_ratios):
 
     result_rows = []
     summary_rows = []
 
-    # Total ratio
-    total_ratio_units = 0
-    for color in color_ratios:
-        total_ratio_units += sum(color_ratios[color].values())
-
-    if total_ratio_units == 0:
-        return pd.DataFrame(), pd.DataFrame()
-
-    base_value = total_qty / total_ratio_units
-
-    # Calculation
     for color, sizes in color_ratios.items():
 
         color_total = 0
 
         for size, ratio in sizes.items():
 
-            qty = ratio * base_value
-            qty = round(qty)
+            qty = ratio * base_per_ratio   # ✅ MAIN LOGIC CHANGE
 
             color_total += qty
 
@@ -57,17 +46,20 @@ def count_calculator_module():
     # -------- CARTON INPUT --------
     st.subheader("Carton Planning")
 
-    cartons = st.number_input("Number of Cartons", value=100)
-    pcs_per_carton = st.number_input("Pieces per Carton", value=50)
+    cartons = st.number_input("Number of Cartons", value=270)
+    pcs_per_carton = st.number_input("Pieces per Carton", value=1)
     extra_percent = st.number_input("Extra % (Carton)", value=5.0)
 
     base_qty = cartons * pcs_per_carton
-    extra_qty = int(base_qty * extra_percent / 100)
-    total_qty = int(base_qty + extra_qty)
+
+    # ✅ ALWAYS ROUND UP
+    extra_qty = math.ceil(base_qty * extra_percent / 100)
+
+    final_carton_qty = math.ceil(cartons + (cartons * extra_percent / 100))
 
     st.info(f"Base Quantity: {base_qty}")
     st.info(f"Extra Quantity: {extra_qty}")
-    st.success(f"Final Order Quantity: {total_qty}")
+    st.success(f"Final Carton Quantity (Per Ratio Unit): {final_carton_qty}")
 
     # -------- SIZE INPUT --------
     size_input = st.text_input("Sizes (comma separated)", "XS,S,M,L,XL")
@@ -106,7 +98,7 @@ def count_calculator_module():
             return
 
         df_detail, df_summary = calculate_order_distribution(
-            total_qty,
+            final_carton_qty,   # ✅ PASS 284 HERE
             color_ratios
         )
 
