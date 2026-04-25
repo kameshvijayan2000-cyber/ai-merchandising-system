@@ -17,6 +17,10 @@ def run():
 
     order_df = pd.read_csv(ORDER_FILE)
 
+    # ✅ CLEAN ORDER DATA
+    order_df["Color"] = order_df["Color"].astype(str).str.strip().str.title()
+    order_df["Size"] = order_df["Size"].astype(str).str.strip().str.upper()
+
     st.subheader("🎯 Target Plan")
     st.dataframe(order_df, use_container_width=True)
 
@@ -30,16 +34,18 @@ def run():
 
     df = pd.read_csv(TRACK_FILE)
 
-    # ✅ FIX DATA TYPES (VERY IMPORTANT)
+    # ✅ FIX OLD DATA (VERY IMPORTANT)
     df["Qty"] = pd.to_numeric(df["Qty"], errors="coerce").fillna(0)
     df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
+
+    df["Process"] = df["Process"].astype(str).str.strip().str.title()
+    df["Color"] = df["Color"].astype(str).str.strip().str.title()
+    df["Size"] = df["Size"].astype(str).str.strip().str.upper()
 
     # ---------- INPUT ----------
     st.subheader("➕ Enter Production")
 
     entry_date = st.date_input("Date", value=date.today())
-
-    # ✅ CONVERT INPUT DATE ALSO
     entry_date = pd.to_datetime(entry_date)
 
     process = st.text_input("Process")
@@ -54,10 +60,21 @@ def run():
 
     if st.button("Save Entry"):
 
-        new = pd.DataFrame([[entry_date, process, selected_color, selected_size, qty]],
+        # ✅ CLEAN INPUT BEFORE SAVING
+        process_clean = process.strip().title()
+        color_clean = selected_color.strip().title()
+        size_clean = selected_size.strip().upper()
+
+        new = pd.DataFrame([[entry_date, process_clean, color_clean, size_clean, qty]],
                            columns=df.columns)
 
         df = pd.concat([df, new], ignore_index=True)
+
+        # ✅ CLEAN AGAIN BEFORE SAVE (DOUBLE SAFETY)
+        df["Process"] = df["Process"].astype(str).str.strip().str.title()
+        df["Color"] = df["Color"].astype(str).str.strip().str.title()
+        df["Size"] = df["Size"].astype(str).str.strip().str.upper()
+
         df.to_csv(TRACK_FILE, index=False)
 
         st.success("✅ Saved")
