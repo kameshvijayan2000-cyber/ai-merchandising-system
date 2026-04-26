@@ -21,7 +21,7 @@ if not st.session_state.login:
 
 
 # ================= IMPORT MODULES =================
-from modules.fabric_program import calculate_fabric_program
+from modules.fabric_program import run as fabric_program_module
 from modules.piece_weight import calculate_piece_weight
 from modules.auto_directory import auto_directory_module
 from modules.vendor_mailer import vendor_mailer_module
@@ -77,45 +77,7 @@ if option == "🏠 Home":
 
 # ================= FABRIC PROGRAM =================
 elif option == "🧵 Fabric Program":
-
-    st.header("Fabric Program Calculator")
-
-    total_qty = st.number_input("Total Qty", value=7200)
-    extra_percent = st.number_input("Extra %", value=7.0)
-
-    size_input = st.text_input("Sizes", "XS,S,M,L,XL")
-    sizes_list = [s.strip() for s in size_input.split(",") if s.strip()]
-
-    body_weight = st.number_input("Body Weight", value=0.350)
-    rib_weight = st.number_input("Rib Weight", value=0.100)
-    sj_weight = st.number_input("SJ Weight", value=0.003)
-
-    body_loss = st.number_input("Body Loss %", value=13.0)
-    rib_loss = st.number_input("Rib Loss %", value=10.0)
-    sj_loss = st.number_input("SJ Loss %", value=0.0)
-
-    num_colors = st.number_input("No of Colors", min_value=1, value=1)
-
-    color_ratios = {}
-
-    for i in range(int(num_colors)):
-        color = st.text_input(f"Color {i+1}", key=f"c{i}")
-        ratios = {}
-
-        for size in sizes_list:
-            ratios[size] = st.number_input(size, key=f"{size}{i}", value=1)
-
-        if color:
-            color_ratios[color] = ratios
-
-    if st.button("Generate Fabric"):
-        df = calculate_fabric_program(
-            total_qty, color_ratios,
-            body_weight, rib_weight, sj_weight,
-            extra_percent,
-            body_loss, rib_loss, sj_loss
-        )
-        st.dataframe(df)
+    fabric_program_module()
 
 
 # ================= MODULE CALLS =================
