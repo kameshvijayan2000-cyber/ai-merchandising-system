@@ -1,291 +1,393 @@
 import streamlit as st
 import pandas as pd
-import os
-import json
+from modules.utils import load_json, save_json
 
-print("NEW FABRIC PROGRAM LOADED")
-
-DATA_FILE = "data/fabric_styles.json"
+MASTER_FILE = "data/style_master.json"
+FABRIC_FILE = "data/fabric_program.json"
 
 
-# ✅ CASE NORMALIZER
-def normalize_text(text):
-    if isinstance(text, str):
-        return text.strip().title()
-    return text
-
-
-def load_styles():
-    if os.path.exists(DATA_FILE):
-        with open(DATA_FILE, "r") as f:
-            return json.load(f)
-    return {}
-
-
-def save_styles(data):
-    if not os.path.exists("data"):
-        os.makedirs("data")
-
-    with open(DATA_FILE, "w") as f:
-        json.dump(data, f)
-
-
-# 🔥 MAIN FUNCTION
+# ================= MAIN =================
 def run():
 
-    st.header("🧵 Fabric Program Calculator")
+    st.header("🧵 Fabric Program")
 
-    styles = load_styles()
+    masters = load_json(MASTER_FILE)
 
-    # ✅ NORMALIZE OLD DATA (IMPORTANT)
-    normalized_styles = {}
-    for k, v in styles.items():
-        new_key = normalize_text(k)
+    if not masters:
 
-        df_temp = pd.DataFrame(v)
-        if "Color" in df_temp.columns:
-            df_temp["Color"] = df_temp["Color"].apply(normalize_text)
-
-        normalized_styles[new_key] = df_temp.to_dict(orient="records")
-
-    styles = normalized_styles
-    save_styles(styles)
-
-    # ---------- SELECT STYLE ----------
-    style_list = list(styles.keys())
-    selected_style = st.selectbox("Select Saved Style", ["New Style"] + style_list)
-
-    # ================= VIEW SAVED STYLE =================
-    if selected_style != "New Style":
-        st.success(f"Loaded: {selected_style}")
-        df_loaded = pd.DataFrame(styles[selected_style])
-
-        # ✅ Normalize display
-        df_loaded["Color"] = df_loaded["Color"].apply(normalize_text)
-
-        st.dataframe(df_loaded, use_container_width=True)
-
-    else:
-        # ---------- INPUT ----------
-        style_name = st.text_input("Style Name")
-
-        total_qty = st.number_input("Total Qty", value=7200)
-        extra_percent = st.number_input("Extra %", value=7.0)
-
-        size_input = st.text_input("Sizes", "XS,S,M,L,XL")
-        sizes_list = [s.strip() for s in size_input.split(",") if s.strip()]
-
-        body_weight = st.number_input("Body Weight", value=0.350)
-        rib_weight = st.number_input("Rib Weight", value=0.100)
-        sj_weight = st.number_input("SJ Weight", value=0.003)
-
-        body_loss = st.number_input("Body Loss %", value=13.0)
-        rib_loss = st.number_input("Rib Loss %", value=10.0)
-        sj_loss = st.number_input("SJ Loss %", value=0.0)
-
-        num_colors = st.number_input("No of Colors", min_value=1, value=1)
-
-        color_ratios = {}
-
-        for i in range(int(num_colors)):
-            # ✅ Normalize color input
-            color = normalize_text(st.text_input(f"Color {i+1}", key=f"c{i}"))
-            ratios = {}
-
-            for size in sizes_list:
-                ratios[size] = st.number_input(size, key=f"{size}{i}", value=1)
-
-            if color:
-                color_ratios[color] = ratios
-
-        # ---------- CALCULATE ----------
-        if st.button("Generate Fabric"):
-
-            if not style_name:
-                st.warning("Enter Style Name")
-                return
-
-            # ✅ Normalize style name
-            style_name = normalize_text(style_name)
-
-            results = []
-
-            total_ratio_units = sum(
-                sum(v.values()) for v in color_ratios.values()
-            )
-
-            base_value = total_qty / total_ratio_units
-
-            for color, sizes in color_ratios.items():
-
-                body_total = 0
-                rib_total = 0
-                sj_total = 0
-
-                for size, ratio in sizes.items():
-
-                    order_qty = ratio * base_value
-                    adjusted_qty = order_qty * (1 + extra_percent / 100)
-
-                    body_total += adjusted_qty * body_weight * (1 + body_loss / 100)
-                    rib_total += adjusted_qty * rib_weight * (1 + rib_loss / 100)
-                    sj_total += adjusted_qty * sj_weight * (1 + sj_loss / 100)
-
-                results.append({
-                    "Color": normalize_text(color),
-                    "Body Total (Kg)": round(body_total, 2),
-                    "Rib Total (Kg)": round(rib_total, 2),
-                    "SJ Total (Kg)": round(sj_total, 2)
-                })
-
-            df = pd.DataFrame(results)
-
-            st.dataframe(df, use_container_width=True)
-
-            # SAVE STYLE
-            styles[style_name] = df.to_dict(orient="records")
-            save_styles(styles)
-
-            st.success(f"✅ Saved style: {style_name}")
-
-    # ================= DELETE =================
-    st.markdown("---")
-    if style_list:
-        st.subheader("🗑️ Delete Style")
-
-        del_style = st.selectbox("Select Style to Delete", style_list)
-
-        if st.button("Delete Style"):
-            del styles[del_style]
-            save_styles(styles)
-            st.success("Deleted")
-            st.rerun()
-
-    # ================= 🔥 NEW FEATURE =================
-    st.markdown("---")
-    st.subheader("📦 All Styles Fabric Summary (Purchase View)")
-
-    if styles:
-
-        all_rows = []
-
-        for style, data in styles.items():
-
-            temp_df = pd.DataFrame(data)
-            temp_df["Style"] = normalize_text(style)
-
-            temp_df["Color"] = temp_df["Color"].apply(normalize_text)
-
-            temp_df["Body Total (Kg)"] = pd.to_numeric(temp_df["Body Total (Kg)"], errors="coerce").fillna(0)
-            temp_df["Rib Total (Kg)"] = pd.to_numeric(temp_df["Rib Total (Kg)"], errors="coerce").fillna(0)
-            temp_df["SJ Total (Kg)"] = pd.to_numeric(temp_df["SJ Total (Kg)"], errors="coerce").fillna(0)
-
-            temp_df["Total (Kg)"] = (
-                temp_df["Body Total (Kg)"] +
-                temp_df["Rib Total (Kg)"] +
-                temp_df["SJ Total (Kg)"]
-            )
-
-            all_rows.append(temp_df)
-
-        final_df = pd.concat(all_rows, ignore_index=True)
-
-        for style in final_df["Style"].unique():
-
-            st.markdown(f"### 🧵 Style: {style}")
-
-            style_df = final_df[final_df["Style"] == style]
-
-            st.dataframe(
-                style_df[["Color", "Body Total (Kg)", "Rib Total (Kg)", "SJ Total (Kg)", "Total (Kg)"]],
-                use_container_width=True
-            )
-
-        st.markdown("### 📊 Grand Total")
-
-        total_body = final_df["Body Total (Kg)"].sum()
-        total_rib = final_df["Rib Total (Kg)"].sum()
-        total_sj = final_df["SJ Total (Kg)"].sum()
-        grand_total = final_df["Total (Kg)"].sum()
-
-        summary_df = pd.DataFrame([{
-            "Body Total (Kg)": round(total_body, 2),
-            "Rib Total (Kg)": round(total_rib, 2),
-            "SJ Total (Kg)": round(total_sj, 2),
-            "Grand Total (Kg)": round(grand_total, 2)
-        }])
-
-        st.dataframe(summary_df, use_container_width=True)
-
-    else:
-        st.info("No styles saved yet")
-
-    # ================= COLOR MATRIX =================
-    st.markdown("---")
-    st.subheader("🎨 Color-wise Fabric Requirement (Style Matrix)")
-
-    if styles:
-
-        matrix_data = []
-        breakdown_data = {}
-
-        for style, data in styles.items():
-
-            temp_df = pd.DataFrame(data)
-            temp_df["Color"] = temp_df["Color"].apply(normalize_text)
-
-            temp_df["Total"] = (
-                temp_df["Body Total (Kg)"] +
-                temp_df["Rib Total (Kg)"] +
-                temp_df["SJ Total (Kg)"]
-            )
-
-            for _, row in temp_df.iterrows():
-
-                color = normalize_text(row["Color"])
-
-                matrix_data.append({
-                    "Style": normalize_text(style),
-                    "Color": color,
-                    "Total": row["Total"]
-                })
-
-                if color not in breakdown_data:
-                    breakdown_data[color] = {"Body": 0, "Rib": 0, "SJ": 0}
-
-                breakdown_data[color]["Body"] += row["Body Total (Kg)"]
-                breakdown_data[color]["Rib"] += row["Rib Total (Kg)"]
-                breakdown_data[color]["SJ"] += row["SJ Total (Kg)"]
-
-        matrix_df = pd.DataFrame(matrix_data)
-
-        pivot_df = matrix_df.pivot_table(
-            index="Color",
-            columns="Style",
-            values="Total",
-            aggfunc="sum",
-            fill_value=0
+        st.warning(
+            "No styles found. Please create style first."
         )
 
-        pivot_df["Grand Total"] = pivot_df.sum(axis=1)
+        return
 
-        st.dataframe(pivot_df, use_container_width=True)
+    fabric_data = load_json(FABRIC_FILE)
 
-        breakdown_list = []
+    # ================= STYLE =================
+    selected_style = st.selectbox(
+        "Select Style",
+        list(masters.keys())
+    )
 
-        for color, vals in breakdown_data.items():
+    master = masters[selected_style]
 
-            total = vals["Body"] + vals["Rib"] + vals["SJ"]
+    total_qty = master["total_qty"]
 
-            breakdown_list.append({
+    # 🔥 CUTTING EXTRA %
+    cut_qty_percent = master.get(
+        "cut_qty_percent",
+        0
+    )
+
+    # 🔥 PACK EXTRA %
+    extra_percent = master.get(
+        "extra_percent",
+        0
+    )
+
+    color_ratios = master["color_ratios"]
+
+    # ================= SHOW STYLE =================
+    st.subheader("📋 Style Information")
+
+    col1, col2, col3 = st.columns(3)
+
+    col1.info(f"Order Qty : {total_qty}")
+
+    col2.info(f"Pack Extra % : {extra_percent}")
+
+    col3.info(f"Cut Qty % : {cut_qty_percent}")
+
+    rows = []
+
+    for color, ratios in color_ratios.items():
+
+        row = {"Color": color}
+
+        row.update(ratios)
+
+        rows.append(row)
+
+    st.dataframe(
+        pd.DataFrame(rows),
+        use_container_width=True
+    )
+
+    # ================= FABRIC INPUTS =================
+    st.markdown("---")
+
+    st.subheader("⚖️ Fabric Inputs")
+
+    # 🔥 LOAD OLD INPUTS
+    old_inputs = {}
+
+    if (
+        selected_style in fabric_data and
+        "inputs" in fabric_data[selected_style]
+    ):
+
+        old_inputs = fabric_data[
+            selected_style
+        ]["inputs"]
+
+    body_weight = st.number_input(
+        "Body Weight",
+        value=float(
+            old_inputs.get(
+                "body_weight",
+                0.350
+            )
+        ),
+        format="%.3f"
+    )
+
+    rib_weight = st.number_input(
+        "Rib Weight",
+        value=float(
+            old_inputs.get(
+                "rib_weight",
+                0.100
+            )
+        ),
+        format="%.3f"
+    )
+
+    sj_weight = st.number_input(
+        "SJ Weight",
+        value=float(
+            old_inputs.get(
+                "sj_weight",
+                0.003
+            )
+        ),
+        format="%.3f"
+    )
+
+    body_loss = st.number_input(
+        "Body Loss %",
+        value=float(
+            old_inputs.get(
+                "body_loss",
+                13.0
+            )
+        )
+    )
+
+    rib_loss = st.number_input(
+        "Rib Loss %",
+        value=float(
+            old_inputs.get(
+                "rib_loss",
+                10.0
+            )
+        )
+    )
+
+    sj_loss = st.number_input(
+        "SJ Loss %",
+        value=float(
+            old_inputs.get(
+                "sj_loss",
+                0.0
+            )
+        )
+    )
+
+    # ================= GENERATE =================
+    if st.button("🚀 Generate Fabric"):
+
+        results = []
+
+        total_ratio_units = sum(
+            sum(v.values())
+            for v in color_ratios.values()
+        )
+
+        base_value = (
+            total_qty /
+            total_ratio_units
+        )
+
+        for color, sizes in color_ratios.items():
+
+            body_total = 0
+            rib_total = 0
+            sj_total = 0
+
+            color_qty = 0
+
+            for size, ratio in sizes.items():
+
+                order_qty = ratio * base_value
+
+                # 🔥 CUTTING EXTRA %
+                adjusted_qty = order_qty * (
+                    1 + cut_qty_percent / 100
+                )
+
+                color_qty += adjusted_qty
+
+                # 🔥 BODY
+                body_total += (
+                    adjusted_qty *
+                    body_weight *
+                    (1 + body_loss / 100)
+                )
+
+                # 🔥 RIB
+                rib_total += (
+                    adjusted_qty *
+                    rib_weight *
+                    (1 + rib_loss / 100)
+                )
+
+                # 🔥 SJ
+                sj_total += (
+                    adjusted_qty *
+                    sj_weight *
+                    (1 + sj_loss / 100)
+                )
+
+            results.append({
+
                 "Color": color,
-                "Body (Kg)": round(vals["Body"], 2),
-                "Rib (Kg)": round(vals["Rib"], 2),
-                "SJ (Kg)": round(vals["SJ"], 2),
-                "Total (Kg)": round(total, 2)
+
+                "Order Qty": round(
+                    color_qty,
+                    0
+                ),
+
+                "Body Total (Kg)": round(
+                    body_total,
+                    2
+                ),
+
+                "Rib Total (Kg)": round(
+                    rib_total,
+                    2
+                ),
+
+                "SJ Total (Kg)": round(
+                    sj_total,
+                    2
+                ),
+
+                "Grand Total (Kg)": round(
+                    body_total +
+                    rib_total +
+                    sj_total,
+                    2
+                )
             })
 
-        st.dataframe(pd.DataFrame(breakdown_list), use_container_width=True)
+        df = pd.DataFrame(results)
 
-    else:
-        st.info("No styles available")
+        # ================= DISPLAY =================
+        st.subheader("📊 Fabric Requirement")
+
+        st.dataframe(
+            df,
+            use_container_width=True
+        )
+
+        # ================= SAVE =================
+        fabric_data[selected_style] = {
+
+            "results": results,
+
+            "inputs": {
+
+                "body_weight": body_weight,
+
+                "rib_weight": rib_weight,
+
+                "sj_weight": sj_weight,
+
+                "body_loss": body_loss,
+
+                "rib_loss": rib_loss,
+
+                "sj_loss": sj_loss
+            }
+        }
+
+        save_json(
+            FABRIC_FILE,
+            fabric_data
+        )
+
+        st.success("✅ Fabric Saved Successfully")
+
+    # ================= VIEW SAVED =================
+    st.markdown("---")
+
+    if selected_style in fabric_data:
+
+        st.subheader("📂 Existing Fabric Data")
+
+        old_df = pd.DataFrame(
+            fabric_data[selected_style][
+                "results"
+            ]
+        )
+
+        st.dataframe(
+            old_df,
+            use_container_width=True
+        )
+
+    # ================= GRAND SUMMARY =================
+    st.markdown("---")
+
+    st.subheader("📦 All Styles Fabric Summary")
+
+    all_rows = []
+
+    for style, data in fabric_data.items():
+
+        if "results" not in data:
+            continue
+
+        temp_df = pd.DataFrame(
+            data["results"]
+        )
+
+        temp_df["Style"] = style
+
+        all_rows.append(temp_df)
+
+    if all_rows:
+
+        final_df = pd.concat(
+            all_rows,
+            ignore_index=True
+        )
+
+        st.dataframe(
+            final_df,
+            use_container_width=True
+        )
+
+        # ================= SUMMARY =================
+        summary_df = pd.DataFrame([{
+
+            "Body Total (Kg)": round(
+                final_df[
+                    "Body Total (Kg)"
+                ].sum(),
+                2
+            ),
+
+            "Rib Total (Kg)": round(
+                final_df[
+                    "Rib Total (Kg)"
+                ].sum(),
+                2
+            ),
+
+            "SJ Total (Kg)": round(
+                final_df[
+                    "SJ Total (Kg)"
+                ].sum(),
+                2
+            ),
+
+            "Grand Total (Kg)": round(
+                final_df[
+                    "Grand Total (Kg)"
+                ].sum(),
+                2
+            )
+
+        }])
+
+        st.subheader(
+            "📊 Grand Total Summary"
+        )
+
+        st.dataframe(
+            summary_df,
+            use_container_width=True
+        )
+
+    # ================= CLEAR CURRENT STYLE =================
+    st.markdown("---")
+
+    if st.button(
+        "🗑️ Clear Current Style Fabric Data"
+    ):
+
+        if selected_style in fabric_data:
+
+            del fabric_data[selected_style]
+
+            save_json(
+                FABRIC_FILE,
+                fabric_data
+            )
+
+            st.success(
+                f"{selected_style} data cleared"
+            )
+
+            st.rerun()

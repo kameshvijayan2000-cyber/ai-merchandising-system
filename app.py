@@ -1,280 +1,268 @@
 import streamlit as st
+import json
+import os
+from modules.utils import clear_all_data
 
-# ================= LOGIN =================
-if "login" not in st.session_state:
-    st.session_state.login = False
-
-if not st.session_state.login:
-    st.title("🔐 Login")
-
-    user = st.text_input("Username")
-    pwd = st.text_input("Password", type="password")
-
-    if st.button("Login"):
-        if user == "admin" and pwd == "1234":
-            st.session_state.login = True
-            st.rerun()
-        else:
-            st.error("Invalid login")
-
-    st.stop()
-
+# ================= PAGE CONFIG =================
+st.set_page_config(
+    page_title="PRP Garments System",
+    layout="wide"
+)
 
 # ================= IMPORT MODULES =================
 from modules.fabric_program import run as fabric_program_module
-from modules.piece_weight import calculate_piece_weight
-from modules.auto_directory import auto_directory_module
-from modules.vendor_mailer import vendor_mailer_module
 from modules.count_calculator import count_calculator_module
 from modules.fabric_store import run as fabric_store_module
-from modules.cutting import run as cutting_module
-from modules.planning import run as planning_module
 from modules.production_tracker import run as production_tracker_module
-from modules.fabric_tracking_advanced import run as fabric_tracking_advanced_module
+from modules.master_style import run as master_style_module
 
+# ================= FILES =================
+STYLE_FILE = "data/style_master.json"
+FABRIC_STORE_FILE = "data/fabric_store.json"
+PRODUCTION_FILE = "data/production_tracking.json"
 
+# ================= LOAD JSON =================
+def load_json(path):
 
-# ================= PAGE =================
-st.set_page_config(page_title="PRP Garments System", layout="wide")
+    if os.path.exists(path):
 
+        with open(path, "r") as f:
+            return json.load(f)
+
+    return {}
+
+# ================= LOAD DATA =================
+style_data = load_json(STYLE_FILE)
+fabric_data = load_json(FABRIC_STORE_FILE)
+production_data = load_json(PRODUCTION_FILE)
+
+# ================= CALCULATIONS =================
+total_styles = len(style_data)
+
+total_order_qty = 0
+
+for style, details in style_data.items():
+
+    total_order_qty += details.get(
+        "total_qty",
+        0
+    )
+
+total_fabric_stock = 0
+
+if "rolls" in fabric_data:
+
+    for roll in fabric_data["rolls"]:
+
+        total_fabric_stock += float(
+            roll.get("Kg", 0)
+        )
+
+total_entries = 0
+
+if "entries" in production_data:
+
+    total_entries = len(
+        production_data["entries"]
+    )
+
+# ================= TITLE =================
 st.title("🏭 PRP Garments Management System")
+
 st.caption("AI Merchandising Dashboard")
 
+# ================= OVERVIEW =================
+st.markdown("## 📊 Live Business Overview")
+
+col1, col2, col3, col4 = st.columns(4)
+
+with col1:
+
+    st.metric(
+        "Total Styles",
+        total_styles
+    )
+
+with col2:
+
+    st.metric(
+        "Order Qty",
+        total_order_qty
+    )
+
+with col3:
+
+    st.metric(
+        "Fabric Stock (Kg)",
+        round(total_fabric_stock, 2)
+    )
+
+with col4:
+
+    st.metric(
+        "Production Entries",
+        total_entries
+    )
+
+# ================= EXTRA INSIGHTS =================
+st.markdown("---")
+
+col5, col6 = st.columns(2)
+
+with col5:
+
+    st.subheader("📋 Current System Status")
+
+    if total_styles == 0:
+
+        st.warning(
+            "No styles created"
+        )
+
+    else:
+
+        st.success(
+            f"{total_styles} styles active in system"
+        )
+
+    if total_fabric_stock <= 0:
+
+        st.warning(
+            "Fabric stock empty"
+        )
+
+    else:
+
+        st.success(
+            f"{round(total_fabric_stock,2)} Kg fabric available"
+        )
+
+with col6:
+
+    st.subheader("🏭 Production Status")
+
+    if total_entries == 0:
+
+        st.warning(
+            "No production entries"
+        )
+
+    else:
+
+        st.success(
+            f"{total_entries} production entries updated"
+        )
+
+# ================= GLOBAL CLEAR =================
+with st.expander("⚠️ Danger Zone"):
+
+    st.warning(
+        "This will permanently delete ALL saved data."
+    )
+
+    confirm = st.checkbox(
+        "I understand everything will be deleted"
+    )
+
+    if st.button("🗑️ CLEAR COMPLETE SYSTEM"):
+
+        if confirm:
+
+            clear_all_data()
+
+            st.success(
+                "All data deleted successfully"
+            )
+
+            st.rerun()
+
+        else:
+
+            st.error(
+                "Please confirm first"
+            )
 
 # ================= SIDEBAR =================
 st.sidebar.title("📂 Modules")
 
 option = st.sidebar.radio(
+
     "Select Module",
+
     [
         "🏠 Home",
+        "📋 Style Master",
         "🧵 Fabric Program",
         "📊 Count Calculator",
         "📁 Fabric Store",
-        "✂️ Cutting",
-        "📈 Planning",
-        "📧 Vendor Mail",
-        "🤖 AI Directory",
-        "💰 Costing",
-        "📧 Production Tracker",
-        "📊 Fabric Tracking Advanced",
-        "📅 T&A"
+        "🏭 Production Tracker"
     ]
 )
 
 # ================= HOME =================
 if option == "🏠 Home":
-    st.header("Welcome to PRP Garments System")
 
-    col1, col2, col3 = st.columns(3)
+    st.header("🏠 Dashboard")
 
-    col1.metric("Orders Running", "12")
-    col2.metric("Production Status", "On Track")
-    col3.metric("Efficiency", "92%")
+    st.info(
+        "Use the sidebar to navigate between modules."
+    )
 
-    st.info("Use the sidebar to navigate modules")
+    st.markdown("---")
 
+    st.subheader("📌 Quick Summary")
+
+    quick1, quick2, quick3 = st.columns(3)
+
+    with quick1:
+
+        st.metric(
+            "Styles",
+            total_styles
+        )
+
+    with quick2:
+
+        st.metric(
+            "Orders",
+            total_order_qty
+        )
+
+    with quick3:
+
+        st.metric(
+            "Fabric Kg",
+            round(total_fabric_stock, 2)
+        )
+
+# ================= STYLE MASTER =================
+elif option == "📋 Style Master":
+
+    master_style_module()
 
 # ================= FABRIC PROGRAM =================
 elif option == "🧵 Fabric Program":
+
     fabric_program_module()
 
-
-# ================= MODULE CALLS =================
+# ================= COUNT CALCULATOR =================
 elif option == "📊 Count Calculator":
+
     count_calculator_module()
 
+# ================= FABRIC STORE =================
 elif option == "📁 Fabric Store":
+
     fabric_store_module()
 
-elif option == "✂️ Cutting":
-    cutting_module()
+# ================= PRODUCTION TRACKER =================
+elif option == "🏭 Production Tracker":
 
-elif option == "📈 Planning":
-    planning_module()
-
-elif option == "📧 Vendor Mail":
-    vendor_mailer_module()
-
-elif option == "🤖 AI Directory":
-    auto_directory_module()
-# ================= Production Tracking =================
-elif option == "📧 Production Tracker":
     production_tracker_module()
-
-elif option == "📊 Fabric Tracking Advanced":
-    fabric_tracking_advanced_module()
-
-# ================= COSTING =================
-elif option == "💰 Costing":
-
-    st.header("Garment Costing Module")
-
-    # -------- PIECE WEIGHT --------
-    st.subheader("Piece Weight")
-
-    garment_type = st.selectbox(
-        "Garment Type",
-        ["T-Shirt Full Sleeve", "T-Shirt Half Sleeve", "Track Pant"]
-    )
-
-    length = st.number_input("Length (cm)", value=70.0)
-    gsm = st.number_input("GSM", value=180.0)
-    extra = st.number_input("Extra Fabric (g)", value=10.0)
-
-    if "T-Shirt" in garment_type:
-        chest = st.number_input("Chest", value=50.0)
-        sleeve = st.number_input("Sleeve Length", value=60.0)
-        sleeve_w = st.number_input("Sleeve Width", value=20.0)
-
-        piece_weight = calculate_piece_weight(
-            garment_type, length, chest, sleeve, sleeve_w, gsm, extra
-        )
-    else:
-        thigh = st.number_input("Thigh", value=30.0)
-        piece_weight = calculate_piece_weight(
-            garment_type, length, thigh, 0, 0, gsm, extra
-        )
-
-    st.success(f"Piece Weight: {piece_weight} g")
-
-    piece_weight_kg = piece_weight / 1000
-
-    # -------- FABRIC COST --------
-    st.subheader("Fabric Process Cost (Per Kg)")
-
-    process_items = {
-        "Yarn": st.number_input("Yarn Rate", value=0.0),
-        "Knitting": st.number_input("Knitting Rate", value=0.0),
-        "Dyeing": st.number_input("Dyeing Rate", value=0.0),
-        "Compacting": st.number_input("Compacting Rate", value=0.0),
-        "Raising": st.number_input("Raising Rate", value=0.0),
-        "Washing": st.number_input("Washing Rate", value=0.0),
-        "Printing": st.number_input("Printing Rate", value=0.0)
-    }
-
-    total_fabric_rate = sum(process_items.values())
-    fabric_cost = piece_weight_kg * total_fabric_rate
-
-    st.info(f"Fabric Cost / Piece: ₹ {round(fabric_cost,2)}")
-
-    # -------- TRIMS --------
-    st.subheader("Trims")
-
-    trim_items = {
-        "Main Label": st.number_input("Main Label", 0.0),
-        "Wash Care": st.number_input("Wash Care", 0.0),
-        "Tag": st.number_input("Tag", 0.0),
-        "Thread": st.number_input("Thread", 0.0),
-        "Zipper": st.number_input("Zipper", 0.0)
-    }
-
-    trim_total = sum(trim_items.values())
-    st.info(f"Trim Cost: ₹ {round(trim_total,2)}")
-
-    # -------- PACKING --------
-    st.subheader("Packing")
-
-    packing_items = {
-        "Hanger": st.number_input("Hanger", 0.0),
-        "Polybag": st.number_input("Polybag", 0.0),
-        "Carton": st.number_input("Carton", 0.0)
-    }
-
-    packing_total = sum(packing_items.values())
-    st.info(f"Packing Cost: ₹ {round(packing_total,2)}")
-
-    # -------- FINAL --------
-    st.subheader("Final Cost")
-
-    cmt = st.number_input("CMT", value=0.0)
-
-    prime = fabric_cost + trim_total + packing_total + cmt
-
-    overhead = st.number_input("Overhead %", value=12.0)
-    margin = st.number_input("Profit %", value=20.0)
-
-    final = prime * (1 + overhead/100) * (1 + margin/100)
-
-    st.success(f"Final Price: ₹ {round(final,2)}")
-
-
-# ================= T&A =================
-elif option == "📅 T&A":
-
-    st.header("📅 Time & Action Calendar")
-
-    import pandas as pd
-    import datetime
-
-    # -------- BASIC INFO --------
-    style_name = st.text_input("Style Name")
-    total_qty = st.number_input("Total Order Quantity", value=5000)
-    dispatch_date = st.date_input("Dispatch Date")
-
-    st.subheader("Activity Duration (Days)")
-
-    activities = [
-        "Order Receipt",
-        "Consumption",
-        "BOM",
-        "PO Issue",
-        "Size Set",
-        "PP Meeting",
-        "Fabric Inhouse",
-        "Cutting",
-        "Stitching",
-        "Finishing",
-        "Packing",
-        "Inspection",
-        "Dispatch"
-    ]
-
-    lead_time = {}
-
-    for act in activities:
-        lead_time[act] = st.number_input(act, value=2, key=act)
-
-    # -------- GENERATE --------
-    if st.button("Generate T&A"):
-
-        if not style_name:
-            st.warning("Enter Style Name")
-            st.stop()
-
-        schedule = []
-        current_end = dispatch_date
-
-        for act in reversed(activities):
-            duration = lead_time[act]
-            end = current_end
-            start = end - datetime.timedelta(days=duration)
-
-            schedule.append([act, start, end, duration])
-            current_end = start
-
-        schedule.reverse()
-
-        df = pd.DataFrame(schedule, columns=[
-            "Activity", "Start", "End", "Days"
-        ])
-
-        st.subheader("📊 T&A Table")
-        st.dataframe(df, use_container_width=True)
-
-        # -------- DOWNLOAD --------
-        file_name = f"TNA_{style_name}.xlsx"
-        df.to_excel(file_name, index=False)
-
-        with open(file_name, "rb") as f:
-            st.download_button(
-                "📥 Download Excel",
-                f,
-                file_name=file_name
-            )
-
-
 
 # ================= FOOTER =================
 st.markdown("---")
-st.caption("Developed by Kamesh | PRP Garments")
+
+st.caption(
+    "Developed by Kamesh | PRP Garments"
+)

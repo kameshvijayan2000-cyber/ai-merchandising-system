@@ -1,232 +1,308 @@
 import streamlit as st
 import pandas as pd
 import math
-import os
+from modules.utils import load_json, save_json
 
-# FILES
-DETAIL_FILE = "data/order_details.csv"
-STYLE_FILE = "data/order_styles.csv"
-
-# -------- LOGIC FUNCTION --------
-def calculate_order_distribution(base_per_ratio, color_ratios):
-
-    result_rows = []
-    summary_rows = []
-
-    for color, sizes in color_ratios.items():
-
-        color_total = 0
-        units_per_pack = 0
-
-        for size, ratio in sizes.items():
-
-            qty = ratio * base_per_ratio
-            color_total += qty
-            units_per_pack += ratio
-
-            result_rows.append({
-                "Color": color,
-                "Size": size,
-                "Ratio": ratio,
-                "Quantity": qty
-            })
-
-        summary_rows.append({
-            "Color": color,
-            "Total Quantity": color_total,
-            "Units / Pack": units_per_pack
-        })
-
-    df_detail = pd.DataFrame(result_rows)
-    df_summary = pd.DataFrame(summary_rows)
-
-    return df_detail, df_summary
+MASTER_FILE = "data/style_master.json"
+COUNT_FILE = "data/count_data.json"
 
 
-# -------- MAIN MODULE --------
 def count_calculator_module():
 
-    st.header("📦 Order Count Calculator (Advanced)")
+    st.header("📦 Count Calculator")
 
-    # ---------- FOLDER ----------
-    if not os.path.exists("data"):
-        os.makedirs("data")
+    masters = load_json(MASTER_FILE)
 
-    # ---------- STYLE LIST ----------
-    styles = []
-    if os.path.exists(STYLE_FILE):
-        styles = pd.read_csv(STYLE_FILE)["Style"].dropna().unique().tolist()
+    if not masters:
 
-    selected_style = st.selectbox("Select Style", ["New"] + styles)
+        st.warning("No styles found")
+        return
 
-    product_name = st.text_input("Style Name")
+    count_data = load_json(COUNT_FILE)
 
-    # ---------- CARTON INPUT ----------
-    st.subheader("Carton Planning")
+    # ================= STYLE =================
+    selected_style = st.selectbox(
+        "Select Style",
+        list(masters.keys())
+    )
 
-    cartons = st.number_input("Number of Cartons", value=270)
-    pcs_per_carton = st.number_input("Pieces per Carton", value=1)
-    extra_percent = st.number_input("Extra % (Carton)", value=5.0)
+    master = masters[selected_style]
 
-    base_qty = cartons * pcs_per_carton
-    extra_qty = math.ceil(base_qty * extra_percent / 100)
-    final_carton_qty = math.ceil(cartons + (cartons * extra_percent / 100))
+    total_qty = master["total_qty"]
 
-    st.info(f"Base Quantity: {base_qty}")
-    st.info(f"Extra Quantity: {extra_qty}")
-    st.success(f"Final Carton Quantity (Per Ratio Unit): {final_carton_qty}")
+    extra_percent_master = master.get(
+        "extra_percent",
+        5.0
+    )
 
-    # ---------- SIZE ----------
-    size_input = st.text_input("Sizes", "XS,S,M,L,XL")
-    sizes_list = [s.strip() for s in size_input.split(",") if s.strip()]
+    color_ratios = master[
+        "color_ratios"
+    ]
 
-    # ---------- COLORS ----------
-    num_colors = st.number_input("Number of Colors", 1, 10, 1)
+    # ================= STYLE INFO =================
+    st.subheader("📋 Style Information")
 
-    color_ratios = {}
+    st.info(f"Total Qty : {total_qty}")
 
-    for i in range(int(num_colors)):
+    st.info(
+        f"Extra % : {extra_percent_master}"
+    )
 
-        st.subheader(f"Color {i+1}")
+    st.info(
+        f"Cut Qty % : {master.get('cut_qty_percent', 0)}"
+    )
 
-        color_name = st.text_input(f"Color Name {i+1}", key=f"color_{i}")
+    # ================= RATIO DISPLAY =================
+    rows = []
 
-        size_ratios = {}
+    for color, ratios in color_ratios.items():
 
-        for size in sizes_list:
-            ratio = st.number_input(
-                f"{size} Ratio",
-                min_value=0,
-                value=1,
-                key=f"{size}_{i}"
-            )
-            size_ratios[size] = ratio
+        row = {"Color": color}
 
-        if color_name:
-            color_ratios[color_name] = size_ratios
+        row.update(ratios)
 
-    # ---------- CALCULATE ----------
-    if st.button("🚀 Calculate Order Distribution"):
+        rows.append(row)
 
-        if not product_name:
-            st.warning("Enter Style Name")
-            return
+    st.dataframe(
+        pd.DataFrame(rows),
+        use_container_width=True
+    )
 
-        df_detail, df_summary = calculate_order_distribution(
-            final_carton_qty,
-            color_ratios
-        )
-
-        # SAVE FILES
-        detail_file = f"data/order_{product_name}.csv"
-        summary_file = f"data/order_summary_{product_name}.csv"
-
-        df_detail.to_csv(detail_file, index=False)
-        df_summary.to_csv(summary_file, index=False)
-
-        # SAVE STYLE NAME
-        pd.DataFrame([[product_name]], columns=["Style"]).to_csv(
-            STYLE_FILE,
-            mode="a",
-            header=not os.path.exists(STYLE_FILE),
-            index=False
-        )
-
-        st.success("✅ Style Saved Successfully")
-
-        # DISPLAY
-        st.subheader("📊 Size-wise Breakdown")
-        st.dataframe(df_detail, use_container_width=True)
-
-        st.subheader("🎨 Color-wise Summary")
-        st.dataframe(df_summary, use_container_width=True)
-
-        st.metric("📦 Total Order Qty", int(df_detail["Quantity"].sum()))
-
-    # ---------- LOAD OLD STYLE ----------
-    if selected_style != "New":
-
-        detail_file = f"data/order_{selected_style}.csv"
-        summary_file = f"data/order_summary_{selected_style}.csv"
-
-        if os.path.exists(detail_file) and os.path.exists(summary_file):
-
-            df_detail = pd.read_csv(detail_file)
-            df_summary = pd.read_csv(summary_file)
-
-            st.subheader(f"📂 Loaded Style: {selected_style}")
-
-            st.subheader("📊 Size-wise Breakdown")
-            st.dataframe(df_detail, use_container_width=True)
-
-            st.subheader("🎨 Color-wise Summary")
-            st.dataframe(df_summary, use_container_width=True)
-
-        else:
-            st.warning("⚠️ Style data missing")
-
-    # ---------- DELETE ----------
-    if selected_style != "New":
-        if st.button("🗑️ Delete This Style"):
-
-            detail_file = f"data/order_{selected_style}.csv"
-            summary_file = f"data/order_summary_{selected_style}.csv"
-
-            if os.path.exists(detail_file):
-                os.remove(detail_file)
-
-            if os.path.exists(summary_file):
-                os.remove(summary_file)
-
-            if os.path.exists(STYLE_FILE):
-                styles_df = pd.read_csv(STYLE_FILE)
-                styles_df = styles_df[styles_df["Style"] != selected_style]
-                styles_df.to_csv(STYLE_FILE, index=False)
-
-            st.success("✅ Style Deleted")
-            st.rerun()
-
-    # ================= NEW FEATURE =================
+    # ================= INPUTS =================
     st.markdown("---")
-    st.subheader("📦 All Styles Color-wise Summary")
 
-    if styles:
+    st.subheader("📦 Carton Planning")
 
-        all_rows = []
+    cartons = st.number_input(
+        "Cartons",
+        min_value=1,
+        value=250
+    )
 
-        for style in styles:
+    pcs_per_carton = st.number_input(
+        "PCS Per Carton",
+        min_value=1,
+        value=12
+    )
 
-            summary_file = f"data/order_summary_{style}.csv"
+    extra_percent = st.number_input(
+        "Extra %",
+        value=float(extra_percent_master)
+    )
 
-            if os.path.exists(summary_file):
+    # ================= CALCULATIONS =================
+    base_qty = cartons * pcs_per_carton
 
-                temp_df = pd.read_csv(summary_file)
-                temp_df["Style"] = style
+    extra_cartons = math.ceil(
+        cartons *
+        (extra_percent / 100)
+    )
 
-                all_rows.append(temp_df)
+    final_cartons = cartons + extra_cartons
 
-        if all_rows:
+    st.info(f"Base Qty : {base_qty}")
 
-            final_df = pd.concat(all_rows, ignore_index=True)
+    st.info(
+        f"Extra Cartons : {extra_cartons}"
+    )
 
-            # ---------- STYLE WISE ----------
-            for style in final_df["Style"].unique():
+    st.success(
+        f"Final Cartons : {final_cartons}"
+    )
 
-                st.markdown(f"### 🧵 Style: {style}")
+    # ================= GENERATE =================
+    if st.button("🚀 Calculate"):
 
-                style_df = final_df[final_df["Style"] == style]
+        result_rows = []
 
-                st.dataframe(style_df, use_container_width=True)
+        summary_rows = []
 
-            # ---------- GRAND TOTAL ----------
-            st.markdown("### 📊 Grand Total")
+        grand_total = 0
 
-            total_df = final_df.groupby("Color")["Total Quantity"].sum().reset_index()
+        # ================= COLOR LOOP =================
+        for color, ratios in color_ratios.items():
 
-            st.dataframe(total_df, use_container_width=True)
+            color_total = 0
 
-        else:
-            st.info("No summary data available")
+            color_ratio_total = sum(
+                ratios.values()
+            )
 
-    else:
-        st.info("No styles saved yet")
+            # ================= SIZE LOOP =================
+            for size, ratio in ratios.items():
+
+                qty = final_cartons * ratio
+
+                color_total += qty
+
+                grand_total += qty
+
+                result_rows.append({
+
+                    "Color": color,
+
+                    "Size": size,
+
+                    "Ratio": ratio,
+
+                    "Qty": int(qty)
+                })
+
+            # ================= SUMMARY =================
+            summary_rows.append({
+
+                "Color": color,
+
+                "Color Ratio Total":
+                color_ratio_total,
+
+                "Total Qty":
+                int(color_total)
+            })
+
+        # ================= DATAFRAMES =================
+        detail_df = pd.DataFrame(
+            result_rows
+        )
+
+        summary_df = pd.DataFrame(
+            summary_rows
+        )
+
+        # ================= DISPLAY =================
+        st.subheader(
+            "📊 Size-wise Breakdown"
+        )
+
+        st.dataframe(
+            detail_df,
+            use_container_width=True
+        )
+
+        st.metric(
+            "📦 Total Order Qty",
+            int(grand_total)
+        )
+
+        st.subheader(
+            "🎨 Color Summary"
+        )
+
+        st.dataframe(
+            summary_df,
+            use_container_width=True
+        )
+
+        # ================= SAVE =================
+        count_data[selected_style] = {
+
+            "results":
+            result_rows,
+
+            "summary":
+            summary_rows,
+
+            "inputs": {
+
+                "cartons":
+                cartons,
+
+                "pcs_per_carton":
+                pcs_per_carton,
+
+                "extra_percent":
+                extra_percent,
+
+                "final_cartons":
+                final_cartons
+            }
+        }
+
+        save_json(
+            COUNT_FILE,
+            count_data
+        )
+
+        st.success(
+            "✅ Count Saved Successfully"
+        )
+
+    # ================= OLD DATA =================
+    st.markdown("---")
+
+    if selected_style in count_data:
+
+        st.subheader(
+            "📂 Existing Count Data"
+        )
+
+        old_data = count_data[
+            selected_style
+        ]
+
+        # ================= OLD FORMAT =================
+        if isinstance(old_data, list):
+
+            old_df = pd.DataFrame(
+                old_data
+            )
+
+            st.dataframe(
+                old_df,
+                use_container_width=True
+            )
+
+        # ================= NEW FORMAT =================
+        elif isinstance(old_data, dict):
+
+            # ===== RESULTS =====
+            if "results" in old_data:
+
+                old_df = pd.DataFrame(
+                    old_data["results"]
+                )
+
+                st.dataframe(
+                    old_df,
+                    use_container_width=True
+                )
+
+            # ===== SUMMARY =====
+            if "summary" in old_data:
+
+                st.subheader(
+                    "🎨 Saved Color Summary"
+                )
+
+                old_summary = pd.DataFrame(
+                    old_data["summary"]
+                )
+
+                st.dataframe(
+                    old_summary,
+                    use_container_width=True
+                )
+
+    # ================= CLEAR =================
+    st.markdown("---")
+
+    if st.button(
+        "🗑️ Clear Current Style Count Data"
+    ):
+
+        if selected_style in count_data:
+
+            del count_data[
+                selected_style
+            ]
+
+            save_json(
+                COUNT_FILE,
+                count_data
+            )
+
+            st.success(
+                f"{selected_style} data cleared"
+            )
+
+            st.rerun()
