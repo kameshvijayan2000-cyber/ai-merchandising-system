@@ -1,0 +1,38 @@
+{
+    "SYLLA": {
+        "results": [
+            {
+                "Color": "BLACK",
+                "Order Qty": 1605.0,
+                "Body Total (Kg)": 725.46,
+                "Rib Total (Kg)": 158.9,
+                "SJ Total (Kg)": 70.62,
+                "Grand Total (Kg)": 954.98
+            },
+            {
+                "Color": "WHITE",
+                "Order Qty": 2942.0,
+                "Body Total (Kg)": 1330.01,
+                "Rib Total (Kg)": 291.31,
+                "SJ Total (Kg)": 129.47,
+                "Grand Total (Kg)": 1750.79
+            },
+            {
+                "Color": "RED",
+                "Order Qty": 1605.0,
+                "Body Total (Kg)": 725.46,
+                "Rib Total (Kg)": 158.9,
+                "SJ Total (Kg)": 70.62,
+                "Grand Total (Kg)": 954.98
+            }
+        ],
+        "inputs": {
+            "body_weight": 0.4,
+            "rib_weight": 0.09,
+            "sj_weight": 0.04,
+            "body_loss": 13.0,
+            "rib_loss": 10.0,
+            "sj_loss": 10.0
+        }
+    }
+}

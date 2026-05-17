@@ -1,0 +1,42 @@
+{
+    "SYLLA": {
+        "total_qty": 5750,
+        "extra_percent": 5.0,
+        "cut_qty_percent": 7.0,
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "colors": [
+            "BLACK",
+            "WHITE",
+            "RED"
+        ],
+        "color_ratios": {
+            "BLACK": {
+                "XS": 1,
+                "S": 1,
+                "M": 2,
+                "L": 1,
+                "XL": 1
+            },
+            "WHITE": {
+                "XS": 1,
+                "S": 2,
+                "M": 4,
+                "L": 3,
+                "XL": 1
+            },
+            "RED": {
+                "XS": 1,
+                "S": 1,
+                "M": 2,
+                "L": 1,
+                "XL": 1
+            }
+        }
+    }
+}

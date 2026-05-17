@@ -1,0 +1,119 @@
+{
+    "SYLLA": {
+        "results": [
+            {
+                "Color": "BLACK",
+                "Size": "XS",
+                "Ratio": 1,
+                "Qty": 263
+            },
+            {
+                "Color": "BLACK",
+                "Size": "S",
+                "Ratio": 1,
+                "Qty": 263
+            },
+            {
+                "Color": "BLACK",
+                "Size": "M",
+                "Ratio": 2,
+                "Qty": 526
+            },
+            {
+                "Color": "BLACK",
+                "Size": "L",
+                "Ratio": 1,
+                "Qty": 263
+            },
+            {
+                "Color": "BLACK",
+                "Size": "XL",
+                "Ratio": 1,
+                "Qty": 263
+            },
+            {
+                "Color": "WHITE",
+                "Size": "XS",
+                "Ratio": 1,
+                "Qty": 263
+            },
+            {
+                "Color": "WHITE",
+                "Size": "S",
+                "Ratio": 2,
+                "Qty": 526
+            },
+            {
+                "Color": "WHITE",
+                "Size": "M",
+                "Ratio": 4,
+                "Qty": 1052
+            },
+            {
+                "Color": "WHITE",
+                "Size": "L",
+                "Ratio": 3,
+                "Qty": 789
+            },
+            {
+                "Color": "WHITE",
+                "Size": "XL",
+                "Ratio": 1,
+                "Qty": 263
+            },
+            {
+                "Color": "RED",
+                "Size": "XS",
+                "Ratio": 1,
+                "Qty": 263
+            },
+            {
+                "Color": "RED",
+                "Size": "S",
+                "Ratio": 1,
+                "Qty": 263
+            },
+            {
+                "Color": "RED",
+                "Size": "M",
+                "Ratio": 2,
+                "Qty": 526
+            },
+            {
+                "Color": "RED",
+                "Size": "L",
+                "Ratio": 1,
+                "Qty": 263
+            },
+            {
+                "Color": "RED",
+                "Size": "XL",
+                "Ratio": 1,
+                "Qty": 263
+            }
+        ],
+        "summary": [
+            {
+                "Color": "BLACK",
+                "Color Ratio Total": 6,
+                "Total Qty": 1578
+            },
+            {
+                "Color": "WHITE",
+                "Color Ratio Total": 11,
+                "Total Qty": 2893
+            },
+            {
+                "Color": "RED",
+                "Color Ratio Total": 6,
+                "Total Qty": 1578
+            }
+        ],
+        "inputs": {
+            "cartons": 250,
+            "pcs_per_carton": 23,
+            "extra_percent": 5.0,
+            "final_cartons": 263
+        }
+    }
+}

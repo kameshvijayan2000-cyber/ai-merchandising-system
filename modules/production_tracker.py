@@ -17,48 +17,69 @@ def run():
         data["entries"] = []
 
     # ================= INPUT SECTION =================
-    st.subheader("➕ Add Entry")
+    st.subheader("➕ Add Production Entry")
 
-    process = st.selectbox(
+    col1, col2 = st.columns(2)
 
-        "Process",
+    with col1:
 
-        [
-            "Yarn",
-            "Knitting",
-            "Dyeing",
-            "Compacting",
-            "Washing",
-            "Fabric Inhouse",
-            "Cutting",
-            "Stitching",
-            "Checking",
-            "Ironing",
-            "Packing"
-        ]
-    )
+        process = st.selectbox(
 
-    custom_process = st.text_input(
-        "Or Add Custom Process"
-    )
+            "Process",
 
-    if custom_process:
-        process = custom_process
+            [
+                "Yarn",
+                "Knitting",
+                "Dyeing",
+                "Compacting",
+                "Washing",
+                "Fabric Inhouse",
+                "Cutting",
+                "Stitching",
+                "Checking",
+                "Ironing",
+                "Packing"
+            ]
+        )
 
-    entry_type = st.selectbox(
-        "Type",
-        ["Input", "Output"]
-    )
+        custom_process = st.text_input(
+            "Or Add Custom Process"
+        )
 
-    entry_date = st.date_input(
-        "Date",
-        value=date.today()
-    )
+        if custom_process:
+            process = custom_process
 
-    qty = st.number_input(
-        "Qty",
-        min_value=0.0
-    )
+        entry_type = st.selectbox(
+            "Type",
+            ["Input", "Output"]
+        )
+
+        entry_date = st.date_input(
+            "Date",
+            value=date.today()
+        )
+
+    with col2:
+
+        qty = st.number_input(
+            "Qty",
+            min_value=0.0,
+            format="%.2f"
+        )
+
+        party = st.text_input(
+            "Party / Unit"
+        )
+
+        rate = st.number_input(
+            "Rate",
+            min_value=0.0,
+            format="%.2f"
+        )
+
+        description = st.text_input(
+            "Description"
+        )
 
     # ================= UNIT =================
     if process in [
@@ -77,24 +98,22 @@ def run():
 
         unit = "KG"
 
-    party = st.text_input("Party")
-
-    description = st.text_input(
-        "Description"
-    )
-
-    rate = st.number_input(
-        "Rate",
-        min_value=0.0
-    )
-
     total = qty * rate
 
-    st.info(f"Unit : {unit}")
+    # ================= LIVE INFO =================
+    col3, col4 = st.columns(2)
 
-    st.success(
-        f"Total Cost : ₹ {round(total,2)}"
-    )
+    with col3:
+
+        st.info(
+            f"📦 Unit : {unit}"
+        )
+
+    with col4:
+
+        st.success(
+            f"💰 Total Cost : ₹ {round(total,2)}"
+        )
 
     # ================= SAVE =================
     if st.button("💾 Save Entry"):
@@ -122,26 +141,92 @@ def run():
 
         save_json(FILE, data)
 
-        st.success("✅ Entry Saved")
+        st.success(
+            "✅ Entry Saved Successfully"
+        )
 
         st.rerun()
 
     # ================= DISPLAY =================
     st.markdown("---")
 
-    df = pd.DataFrame(data["entries"])
+    df = pd.DataFrame(
+        data["entries"]
+    )
 
     if not df.empty:
 
-        st.subheader("📊 All Entries")
+        # ================= TABLE =================
+        st.subheader(
+            "📊 Production Entries"
+        )
+
+        display_df = df.copy()
+
+        display_df.index = (
+            display_df.index + 1
+        )
 
         st.dataframe(
-            df,
+            display_df,
             use_container_width=True
         )
 
+        # ================= TOP METRICS =================
+        st.markdown("---")
+
+        total_entries = len(df)
+
+        total_qty = round(
+            df["Qty"].sum(),
+            2
+        )
+
+        total_cost = round(
+            df["Total"].sum(),
+            2
+        )
+
+        total_process = df[
+            "Process"
+        ].nunique()
+
+        col5, col6, col7, col8 = st.columns(4)
+
+        with col5:
+
+            st.metric(
+                "📋 Entries",
+                total_entries
+            )
+
+        with col6:
+
+            st.metric(
+                "📦 Total Qty",
+                total_qty
+            )
+
+        with col7:
+
+            st.metric(
+                "🏭 Processes",
+                total_process
+            )
+
+        with col8:
+
+            st.metric(
+                "💰 Total Cost",
+                f"₹ {total_cost}"
+            )
+
         # ================= STAGE SUMMARY =================
-        st.subheader("📈 Stage Summary")
+        st.markdown("---")
+
+        st.subheader(
+            "📈 Stage Summary"
+        )
 
         summary = []
 
@@ -187,55 +272,102 @@ def run():
         )
 
         # ================= COST SUMMARY =================
-        st.subheader("💰 Cost Summary")
+        st.markdown("---")
+
+        st.subheader(
+            "💰 Cost Summary"
+        )
 
         cost_summary = df.groupby(
             "Process"
         )["Total"].sum().reset_index()
 
         cost_summary.columns = [
+
             "Process",
             "Total Cost"
+
         ]
+
+        cost_summary["Total Cost"] = (
+            cost_summary["Total Cost"]
+            .round(2)
+        )
 
         st.dataframe(
             cost_summary,
             use_container_width=True
         )
 
-        st.metric(
-            "Total Cost",
-            f"₹ {round(df['Total'].sum(),2)}"
+        # ================= PARTY SUMMARY =================
+        st.markdown("---")
+
+        st.subheader(
+            "🏢 Party Summary"
+        )
+
+        party_summary = df.groupby(
+            "Party"
+        )["Total"].sum().reset_index()
+
+        party_summary.columns = [
+
+            "Party",
+            "Total Cost"
+
+        ]
+
+        party_summary["Total Cost"] = (
+            party_summary["Total Cost"]
+            .round(2)
+        )
+
+        st.dataframe(
+            party_summary,
+            use_container_width=True
+        )
+
+    else:
+
+        st.info(
+            "No Production Entries Added"
         )
 
     # ================= DELETE ROW =================
     st.markdown("---")
 
-    st.subheader("🗑️ Delete Entry")
+    st.subheader(
+        "🗑️ Delete Entry"
+    )
 
     if not df.empty:
 
-        selected_index = st.number_input(
+        delete_index = st.number_input(
 
             "Select Row Number",
 
-            min_value=0,
+            min_value=1,
 
-            max_value=len(df) - 1,
+            max_value=len(df),
 
             step=1
         )
 
-        if st.button("Delete Row"):
+        if st.button(
+            "❌ Delete Selected Entry"
+        ):
 
             data["entries"].pop(
-                selected_index
+                delete_index - 1
             )
 
-            save_json(FILE, data)
+            save_json(
+                FILE,
+                data
+            )
 
             st.success(
-                "✅ Row Deleted"
+                "Entry Deleted Successfully"
             )
 
             st.rerun()
@@ -243,16 +375,23 @@ def run():
     # ================= CLEAR =================
     st.markdown("---")
 
+    st.warning(
+        "⚠️ This will permanently delete all production tracking data"
+    )
+
     if st.button(
         "🗑️ Clear Production Data"
     ):
 
         data["entries"] = []
 
-        save_json(FILE, data)
+        save_json(
+            FILE,
+            data
+        )
 
-        st.warning(
-            "All production data cleared"
+        st.success(
+            "All Production Data Cleared"
         )
 
         st.rerun()

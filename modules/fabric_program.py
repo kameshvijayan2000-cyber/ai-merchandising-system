@@ -52,11 +52,26 @@ def run():
 
     col1, col2, col3 = st.columns(3)
 
-    col1.info(f"Order Qty : {total_qty}")
+    with col1:
 
-    col2.info(f"Pack Extra % : {extra_percent}")
+        st.metric(
+            "Order Qty",
+            total_qty
+        )
 
-    col3.info(f"Cut Qty % : {cut_qty_percent}")
+    with col2:
+
+        st.metric(
+            "Pack Extra %",
+            extra_percent
+        )
+
+    with col3:
+
+        st.metric(
+            "Cut Qty %",
+            cut_qty_percent
+        )
 
     rows = []
 
@@ -78,7 +93,7 @@ def run():
 
     st.subheader("⚖️ Fabric Inputs")
 
-    # 🔥 LOAD OLD INPUTS
+    # ================= LOAD OLD INPUTS =================
     old_inputs = {}
 
     if (
@@ -158,12 +173,14 @@ def run():
 
         results = []
 
+        # TOTAL RATIO
         total_ratio_units = sum(
             sum(v.values())
             for v in color_ratios.values()
         )
 
-        base_value = (
+        # BASE PCS
+        base_qty = (
             total_qty /
             total_ratio_units
         )
@@ -174,36 +191,54 @@ def run():
             rib_total = 0
             sj_total = 0
 
-            color_qty = 0
+            color_order_qty = 0
 
+            # COLOR RATIO TOTAL
+            color_ratio_total = sum(
+                sizes.values()
+            )
+
+            # COLOR ORDER QTY
+            color_qty = (
+                base_qty *
+                color_ratio_total
+            )
+
+            # CUTTING EXTRA
+            color_qty = color_qty * (
+                1 + cut_qty_percent / 100
+            )
+
+            color_order_qty = round(
+                color_qty,
+                0
+            )
+
+            # SIZE CALCULATION
             for size, ratio in sizes.items():
 
-                order_qty = ratio * base_value
+                size_qty = (
+                    color_qty /
+                    color_ratio_total
+                ) * ratio
 
-                # 🔥 CUTTING EXTRA %
-                adjusted_qty = order_qty * (
-                    1 + cut_qty_percent / 100
-                )
-
-                color_qty += adjusted_qty
-
-                # 🔥 BODY
+                # BODY
                 body_total += (
-                    adjusted_qty *
+                    size_qty *
                     body_weight *
                     (1 + body_loss / 100)
                 )
 
-                # 🔥 RIB
+                # RIB
                 rib_total += (
-                    adjusted_qty *
+                    size_qty *
                     rib_weight *
                     (1 + rib_loss / 100)
                 )
 
-                # 🔥 SJ
+                # SJ
                 sj_total += (
-                    adjusted_qty *
+                    size_qty *
                     sj_weight *
                     (1 + sj_loss / 100)
                 )
@@ -213,7 +248,7 @@ def run():
                 "Color": color,
 
                 "Order Qty": round(
-                    color_qty,
+                    color_order_qty,
                     0
                 ),
 
@@ -250,6 +285,56 @@ def run():
             use_container_width=True
         )
 
+        # ================= TOTAL SUMMARY =================
+        total_body = df[
+            "Body Total (Kg)"
+        ].sum()
+
+        total_rib = df[
+            "Rib Total (Kg)"
+        ].sum()
+
+        total_sj = df[
+            "SJ Total (Kg)"
+        ].sum()
+
+        total_grand = df[
+            "Grand Total (Kg)"
+        ].sum()
+
+        summary_df = pd.DataFrame([{
+
+            "Total Body (Kg)": round(
+                total_body,
+                2
+            ),
+
+            "Total Rib (Kg)": round(
+                total_rib,
+                2
+            ),
+
+            "Total SJ (Kg)": round(
+                total_sj,
+                2
+            ),
+
+            "Grand Total (Kg)": round(
+                total_grand,
+                2
+            )
+
+        }])
+
+        st.subheader(
+            "📦 Style Total Summary"
+        )
+
+        st.dataframe(
+            summary_df,
+            use_container_width=True
+        )
+
         # ================= SAVE =================
         fabric_data[selected_style] = {
 
@@ -276,14 +361,18 @@ def run():
             fabric_data
         )
 
-        st.success("✅ Fabric Saved Successfully")
+        st.success(
+            "✅ Fabric Saved Successfully"
+        )
 
     # ================= VIEW SAVED =================
     st.markdown("---")
 
     if selected_style in fabric_data:
 
-        st.subheader("📂 Existing Fabric Data")
+        st.subheader(
+            "📂 Existing Fabric Data"
+        )
 
         old_df = pd.DataFrame(
             fabric_data[selected_style][
@@ -299,7 +388,9 @@ def run():
     # ================= GRAND SUMMARY =================
     st.markdown("---")
 
-    st.subheader("📦 All Styles Fabric Summary")
+    st.subheader(
+        "📦 All Styles Fabric Summary"
+    )
 
     all_rows = []
 
@@ -328,7 +419,7 @@ def run():
             use_container_width=True
         )
 
-        # ================= SUMMARY =================
+        # ================= GRAND TOTAL =================
         summary_df = pd.DataFrame([{
 
             "Body Total (Kg)": round(

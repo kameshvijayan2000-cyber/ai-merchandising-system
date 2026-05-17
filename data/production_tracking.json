@@ -1,0 +1,15 @@
+{
+    "entries": [
+        {
+            "Date": "2026-05-09",
+            "Process": "Yarn",
+            "Type": "Input",
+            "Qty": 360.0,
+            "Unit": "KG",
+            "Party": "KPR Mill",
+            "Description": "60-40",
+            "Rate": 302.4,
+            "Total": 108863.99999999999
+        }
+    ]
+}

@@ -21,13 +21,24 @@ STYLE_FILE = "data/style_master.json"
 FABRIC_STORE_FILE = "data/fabric_store.json"
 PRODUCTION_FILE = "data/production_tracking.json"
 
+# ================= CREATE DATA FOLDER =================
+if not os.path.exists("data"):
+    os.makedirs("data")
+
 # ================= LOAD JSON =================
 def load_json(path):
 
     if os.path.exists(path):
 
-        with open(path, "r") as f:
-            return json.load(f)
+        try:
+
+            with open(path, "r") as f:
+
+                return json.load(f)
+
+        except:
+
+            return {}
 
     return {}
 
@@ -48,6 +59,7 @@ for style, details in style_data.items():
         0
     )
 
+# ================= FABRIC STOCK =================
 total_fabric_stock = 0
 
 if "rolls" in fabric_data:
@@ -58,6 +70,7 @@ if "rolls" in fabric_data:
             roll.get("Kg", 0)
         )
 
+# ================= PRODUCTION =================
 total_entries = 0
 
 if "entries" in production_data:
@@ -71,7 +84,7 @@ st.title("🏭 PRP Garments Management System")
 
 st.caption("AI Merchandising Dashboard")
 
-# ================= OVERVIEW =================
+# ================= LIVE OVERVIEW =================
 st.markdown("## 📊 Live Business Overview")
 
 col1, col2, col3, col4 = st.columns(4)
@@ -104,56 +117,193 @@ with col4:
         total_entries
     )
 
-# ================= EXTRA INSIGHTS =================
+# ================= STYLE OVERVIEW =================
 st.markdown("---")
 
-col5, col6 = st.columns(2)
+st.subheader("📋 Style Overview")
 
-with col5:
+if style_data:
 
-    st.subheader("📋 Current System Status")
+    style_rows = []
 
-    if total_styles == 0:
+    for style, details in style_data.items():
 
-        st.warning(
-            "No styles created"
+        style_rows.append({
+
+            "Style":
+            style,
+
+            "Order Qty":
+            details.get(
+                "total_qty",
+                0
+            ),
+
+            "Extra %":
+            details.get(
+                "extra_percent",
+                0
+            ),
+
+            "Cut Qty %":
+            details.get(
+                "cut_qty_percent",
+                0
+            ),
+
+            "Colors":
+            len(
+                details.get(
+                    "colors",
+                    []
+                )
+            ),
+
+            "Sizes":
+            len(
+                details.get(
+                    "sizes",
+                    []
+                )
+            )
+        })
+
+    style_df = json.loads(
+        json.dumps(style_rows)
+    )
+
+    st.dataframe(
+        style_df,
+        use_container_width=True
+    )
+
+else:
+
+    st.info(
+        "No styles created yet"
+    )
+
+# ================= FABRIC STOCK SUMMARY =================
+st.markdown("---")
+
+st.subheader("🧵 Fabric Stock Summary")
+
+if (
+    "rolls" in fabric_data and
+    fabric_data["rolls"]
+):
+
+    fabric_df = load_json(
+        FABRIC_STORE_FILE
+    )
+
+    df = fabric_df.get(
+        "rolls",
+        []
+    )
+
+    if df:
+
+        temp_df = json.loads(
+            json.dumps(df)
         )
 
-    else:
-
-        st.success(
-            f"{total_styles} styles active in system"
+        temp_df = st.dataframe(
+            temp_df,
+            use_container_width=True
         )
 
-    if total_fabric_stock <= 0:
+else:
 
-        st.warning(
-            "Fabric stock empty"
+    st.info(
+        "No fabric stock available"
+    )
+
+# ================= PRODUCTION SUMMARY =================
+st.markdown("---")
+
+st.subheader("🏭 Production Summary")
+
+if (
+    "entries" in production_data and
+    production_data["entries"]
+):
+
+    prod_df = production_data[
+        "entries"
+    ]
+
+    summary_rows = []
+
+    process_list = list(set(
+
+        row["Process"]
+        for row in prod_df
+
+    ))
+
+    for process in process_list:
+
+        input_qty = sum(
+
+            row["Qty"]
+
+            for row in prod_df
+
+            if (
+                row["Process"] == process
+                and
+                row["Type"] == "Input"
+            )
         )
 
-    else:
+        output_qty = sum(
 
-        st.success(
-            f"{round(total_fabric_stock,2)} Kg fabric available"
+            row["Qty"]
+
+            for row in prod_df
+
+            if (
+                row["Process"] == process
+                and
+                row["Type"] == "Output"
+            )
         )
 
-with col6:
-
-    st.subheader("🏭 Production Status")
-
-    if total_entries == 0:
-
-        st.warning(
-            "No production entries"
+        balance = (
+            input_qty -
+            output_qty
         )
 
-    else:
+        summary_rows.append({
 
-        st.success(
-            f"{total_entries} production entries updated"
-        )
+            "Process":
+            process,
+
+            "Input":
+            round(input_qty, 2),
+
+            "Output":
+            round(output_qty, 2),
+
+            "Balance":
+            round(balance, 2)
+        })
+
+    st.dataframe(
+        summary_rows,
+        use_container_width=True
+    )
+
+else:
+
+    st.info(
+        "No production entries available"
+    )
 
 # ================= GLOBAL CLEAR =================
+st.markdown("---")
+
 with st.expander("⚠️ Danger Zone"):
 
     st.warning(
@@ -210,29 +360,34 @@ if option == "🏠 Home":
 
     st.markdown("---")
 
-    st.subheader("📌 Quick Summary")
+    q1, q2, q3, q4 = st.columns(4)
 
-    quick1, quick2, quick3 = st.columns(3)
-
-    with quick1:
+    with q1:
 
         st.metric(
             "Styles",
             total_styles
         )
 
-    with quick2:
+    with q2:
 
         st.metric(
             "Orders",
             total_order_qty
         )
 
-    with quick3:
+    with q3:
 
         st.metric(
             "Fabric Kg",
             round(total_fabric_stock, 2)
+        )
+
+    with q4:
+
+        st.metric(
+            "Production",
+            total_entries
         )
 
 # ================= STYLE MASTER =================
