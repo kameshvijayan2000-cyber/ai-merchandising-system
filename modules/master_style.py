@@ -9,7 +9,13 @@ def run():
 
     st.header("📋 Style Master Entry")
 
+    # ================= LOAD DATA =================
     data = load_json(FILE)
+
+    # ================= FIX EMPTY =================
+    if not isinstance(data, dict):
+
+        data = {}
 
     # ================= INPUTS =================
     style_name = st.text_input("Style Name")
@@ -20,49 +26,80 @@ def run():
         value=1000
     )
 
-    # 🔥 PACKAGE EXTRA %
+    # ================= CARTON DETAILS =================
+    col_ctn1, col_ctn2 = st.columns(2)
+
+    with col_ctn1:
+
+        cartons = st.number_input(
+            "No of Cartons",
+            min_value=1,
+            value=250
+        )
+
+    with col_ctn2:
+
+        pcs_per_carton = st.number_input(
+            "PCS Per Carton",
+            min_value=1,
+            value=12
+        )
+
+    # ================= PACK EXTRA =================
     extra_percent = st.number_input(
         "Extra Qty % (For Count Calculator / Packing)",
         value=5.0
     )
 
-    # 🔥 CUTTING EXTRA %
+    # ================= CUT EXTRA =================
     cut_qty_percent = st.number_input(
         "Cut Qty % (For Fabric Program)",
         value=3.0
     )
 
+    # ================= SIZE INPUT =================
     sizes = st.text_input(
         "Sizes",
-        value="S,M,L,XL"
+        value="XS,S,M,L,XL"
     )
 
+    # ================= COLOR INPUT =================
     colors = st.text_input(
         "Colors",
         value="BLACK,WHITE"
     )
 
+    # ================= RATIOS =================
     ratio_input = st.text_area(
-        "Enter Ratios\nExample:\nBLACK=1,2,2,1\nWHITE=1,1,1,1"
+        "Enter Ratios\nExample:\nBLACK=1,1,2,1,1\nWHITE=1,2,2,1,1"
     )
 
     # ================= SAVE =================
     if st.button("💾 Save Style"):
 
-        if not style_name:
+        if not style_name.strip():
 
-            st.error("Enter Style Name")
+            st.error("Please Enter Style Name")
+
             return
 
+        # ================= SIZE LIST =================
         size_list = [
+
             x.strip()
+
             for x in sizes.split(",")
+
             if x.strip()
         ]
 
+        # ================= COLOR LIST =================
         color_list = [
+
             x.strip()
+
             for x in colors.split(",")
+
             if x.strip()
         ]
 
@@ -72,6 +109,7 @@ def run():
 
         try:
 
+            # ================= RATIO LOOP =================
             for line in ratio_lines:
 
                 if "=" not in line:
@@ -79,38 +117,54 @@ def run():
 
                 color, values = line.split("=")
 
+                color = color.strip()
+
                 ratios = [
+
                     int(x.strip())
+
                     for x in values.split(",")
                 ]
 
-                # ✅ Ratio validation
+                # ================= VALIDATION =================
                 if len(ratios) != len(size_list):
 
                     st.error(
-                        f"{color.strip()} ratio count not matching sizes"
+                        f"{color} ratio count not matching with sizes"
                     )
+
                     return
 
                 ratio_dict = {}
 
-                for i, s in enumerate(size_list):
+                for i, size in enumerate(size_list):
 
-                    ratio_dict[s] = ratios[i]
+                    ratio_dict[size] = ratios[i]
 
-                color_ratios[color.strip()] = ratio_dict
+                color_ratios[color] = ratio_dict
 
-            # ================= SAVE DATA =================
+            # ================= SAVE STYLE =================
             data[style_name] = {
 
-                "total_qty": total_qty,
+                "total_qty": int(total_qty),
 
-                # 🔥 For Count Calculator
-                "extra_percent": extra_percent,
+                # ================= CARTON INFO =================
+                "cartons": int(cartons),
 
-                # 🔥 For Fabric Program
-                "cut_qty_percent": cut_qty_percent,
+                "pcs_per_carton": int(
+                    pcs_per_carton
+                ),
 
+                # ================= EXTRAS =================
+                "extra_percent": float(
+                    extra_percent
+                ),
+
+                "cut_qty_percent": float(
+                    cut_qty_percent
+                ),
+
+                # ================= BASIC INFO =================
                 "sizes": size_list,
 
                 "colors": color_list,
@@ -118,9 +172,14 @@ def run():
                 "color_ratios": color_ratios
             }
 
+            # ================= SAVE JSON =================
             save_json(FILE, data)
 
-            st.success("✅ Style Saved Successfully")
+            st.success(
+                "✅ Style Saved Successfully"
+            )
+
+            st.rerun()
 
         except Exception as e:
 
@@ -131,57 +190,120 @@ def run():
 
     st.subheader("📂 Saved Styles")
 
-    if data:
+    # ================= EMPTY CHECK =================
+    if not data:
 
-        for style, details in data.items():
+        st.info("No styles saved")
 
-            st.write(f"## 🧵 {style}")
+        return
 
-            col1, col2, col3 = st.columns(3)
+    # ================= DISPLAY LOOP =================
+    for style, details in data.items():
 
-            col1.info(
-                f"Order Qty : {details['total_qty']}"
+        st.markdown("---")
+
+        st.write(f"## 🧵 {style}")
+
+        # ================= METRICS =================
+        col1, col2, col3, col4 = st.columns(4)
+
+        with col1:
+
+            st.metric(
+                "Order Qty",
+                details.get(
+                    "total_qty",
+                    0
+                )
             )
 
-            col2.info(
-                f"Pack Extra % : {details.get('extra_percent', 0)}"
+        with col2:
+
+            st.metric(
+                "Cartons",
+                details.get(
+                    "cartons",
+                    0
+                )
             )
 
-            col3.info(
-                f"Cut Qty % : {details.get('cut_qty_percent', 0)}"
+        with col3:
+
+            st.metric(
+                "PCS / Carton",
+                details.get(
+                    "pcs_per_carton",
+                    0
+                )
             )
 
-            rows = []
+        with col4:
 
-            for color, ratios in details[
-                "color_ratios"
-            ].items():
+            st.metric(
+                "Pack Extra %",
+                details.get(
+                    "extra_percent",
+                    0
+                )
+            )
 
-                row = {"Color": color}
+        # ================= CUT EXTRA =================
+        st.info(
+            f"Cut Qty % : {details.get('cut_qty_percent', 0)}"
+        )
 
-                row.update(ratios)
+        # ================= RATIO TABLE =================
+        rows = []
 
-                rows.append(row)
+        color_ratios = details.get(
+            "color_ratios",
+            {}
+        )
+
+        for color, ratios in color_ratios.items():
+
+            row = {"Color": color}
+
+            row.update(ratios)
+
+            rows.append(row)
+
+        if rows:
+
+            ratio_df = pd.DataFrame(rows)
 
             st.dataframe(
-                pd.DataFrame(rows),
+                ratio_df,
                 use_container_width=True
             )
 
-            # ================= DELETE =================
-            if st.button(
-                f"🗑️ Delete {style}",
-                key=style
-            ):
+        # ================= SUMMARY =================
+        total_ratio = 0
+
+        for color, ratios in color_ratios.items():
+
+            total_ratio += sum(
+                ratios.values()
+            )
+
+        st.success(
+            f"Total Ratio : {total_ratio}"
+        )
+
+        # ================= DELETE =================
+        if st.button(
+            f"🗑️ Delete {style}",
+            key=f"delete_{style}"
+        ):
+
+            if style in data:
 
                 del data[style]
 
                 save_json(FILE, data)
 
-                st.warning(f"{style} deleted")
+                st.success(
+                    f"{style} deleted successfully"
+                )
 
                 st.rerun()
-
-    else:
-
-        st.info("No styles saved")

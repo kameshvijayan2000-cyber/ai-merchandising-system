@@ -13,6 +13,7 @@ def count_calculator_module():
 
     masters = load_json(MASTER_FILE)
 
+    # ================= EMPTY CHECK =================
     if not masters:
 
         st.warning(
@@ -21,9 +22,14 @@ def count_calculator_module():
 
         return
 
+    # ================= LOAD COUNT DATA =================
     count_data = load_json(COUNT_FILE)
 
-    # ================= STYLE =================
+    if not isinstance(count_data, dict):
+
+        count_data = {}
+
+    # ================= STYLE SELECT =================
     selected_style = st.selectbox(
         "Select Style",
         list(masters.keys())
@@ -31,7 +37,11 @@ def count_calculator_module():
 
     master = masters[selected_style]
 
-    total_qty = master["total_qty"]
+    # ================= MASTER VALUES =================
+    total_qty = master.get(
+        "total_qty",
+        0
+    )
 
     extra_percent_master = master.get(
         "extra_percent",
@@ -43,9 +53,10 @@ def count_calculator_module():
         0
     )
 
-    color_ratios = master[
-        "color_ratios"
-    ]
+    color_ratios = master.get(
+        "color_ratios",
+        {}
+    )
 
     # ================= STYLE INFO =================
     st.subheader("📋 Style Information")
@@ -73,6 +84,29 @@ def count_calculator_module():
             cut_qty_percent
         )
 
+    # ================= SHOW CARTON INFO =================
+    col4, col5 = st.columns(2)
+
+    with col4:
+
+        st.metric(
+            "Cartons",
+            master.get(
+                "cartons",
+                250
+            )
+        )
+
+    with col5:
+
+        st.metric(
+            "PCS / Carton",
+            master.get(
+                "pcs_per_carton",
+                12
+            )
+        )
+
     # ================= RATIO DISPLAY =================
     rows = []
 
@@ -84,12 +118,14 @@ def count_calculator_module():
 
         rows.append(row)
 
-    st.dataframe(
-        pd.DataFrame(rows),
-        use_container_width=True
-    )
+    if rows:
 
-    # ================= INPUTS =================
+        st.dataframe(
+            pd.DataFrame(rows),
+            use_container_width=True
+        )
+
+    # ================= INPUT SECTION =================
     st.markdown("---")
 
     st.subheader("📦 Carton Planning")
@@ -112,13 +148,25 @@ def count_calculator_module():
             selected_style
         ]["inputs"]
 
+    # ================= DEFAULT VALUES FROM MASTER =================
+    default_cartons = master.get(
+        "cartons",
+        250
+    )
+
+    default_pcs = master.get(
+        "pcs_per_carton",
+        12
+    )
+
+    # ================= INPUTS =================
     cartons = st.number_input(
         "Cartons",
         min_value=1,
         value=int(
             old_inputs.get(
                 "cartons",
-                250
+                default_cartons
             )
         )
     )
@@ -129,7 +177,7 @@ def count_calculator_module():
         value=int(
             old_inputs.get(
                 "pcs_per_carton",
-                12
+                default_pcs
             )
         )
     )
@@ -145,10 +193,15 @@ def count_calculator_module():
     )
 
     # ================= CALCULATIONS =================
-    base_qty = cartons * pcs_per_carton
+    base_qty = (
+        cartons *
+        pcs_per_carton
+    )
 
     extra_cartons = math.ceil(
+
         cartons *
+
         (extra_percent / 100)
     )
 
@@ -157,23 +210,24 @@ def count_calculator_module():
         extra_cartons
     )
 
+    # ================= DISPLAY SUMMARY =================
     st.markdown("---")
 
-    col4, col5, col6 = st.columns(3)
+    col6, col7, col8 = st.columns(3)
 
-    with col4:
+    with col6:
 
         st.info(
             f"Base Qty : {base_qty}"
         )
 
-    with col5:
+    with col7:
 
         st.info(
             f"Extra Cartons : {extra_cartons}"
         )
 
-    with col6:
+    with col8:
 
         st.success(
             f"Final Cartons : {final_cartons}"
@@ -220,7 +274,7 @@ def count_calculator_module():
                     "Qty": int(qty)
                 })
 
-            # ================= SUMMARY =================
+            # ================= COLOR SUMMARY =================
             summary_rows.append({
 
                 "Color": color,
@@ -350,7 +404,7 @@ def count_calculator_module():
         # ================= NEW FORMAT =================
         elif isinstance(old_data, dict):
 
-            # ===== RESULTS =====
+            # ================= RESULTS =================
             if "results" in old_data:
 
                 old_df = pd.DataFrame(
@@ -362,7 +416,7 @@ def count_calculator_module():
                     use_container_width=True
                 )
 
-            # ===== SUMMARY =====
+            # ================= SUMMARY =================
             if "summary" in old_data:
 
                 st.subheader(
