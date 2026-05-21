@@ -15,6 +15,7 @@ from modules.count_calculator import count_calculator_module
 from modules.fabric_store import run as fabric_store_module
 from modules.production_tracker import run as production_tracker_module
 from modules.master_style import run as master_style_module
+from modules.cost_estimator import run as cost_estimator_module
 
 # ================= FILES =================
 STYLE_FILE = "data/style_master.json"
@@ -47,6 +48,16 @@ style_data = load_json(STYLE_FILE)
 fabric_data = load_json(FABRIC_STORE_FILE)
 production_data = load_json(PRODUCTION_FILE)
 
+# ================= FIX INVALID DATA =================
+if not isinstance(style_data, dict):
+    style_data = {}
+
+if not isinstance(fabric_data, dict):
+    fabric_data = {}
+
+if not isinstance(production_data, dict):
+    production_data = {}
+
 # ================= CALCULATIONS =================
 total_styles = len(style_data)
 
@@ -54,10 +65,12 @@ total_order_qty = 0
 
 for style, details in style_data.items():
 
-    total_order_qty += details.get(
-        "total_qty",
-        0
-    )
+    if isinstance(details, dict):
+
+        total_order_qty += details.get(
+            "total_qty",
+            0
+        )
 
 # ================= FABRIC STOCK =================
 total_fabric_stock = 0
@@ -128,6 +141,9 @@ if style_data:
 
     for style, details in style_data.items():
 
+        if not isinstance(details, dict):
+            continue
+
         style_rows.append({
 
             "Style":
@@ -168,14 +184,12 @@ if style_data:
             )
         })
 
-    style_df = json.loads(
-        json.dumps(style_rows)
-    )
+    if style_rows:
 
-    st.dataframe(
-        style_df,
-        use_container_width=True
-    )
+        st.dataframe(
+            style_rows,
+            use_container_width=True
+        )
 
 else:
 
@@ -193,25 +207,10 @@ if (
     fabric_data["rolls"]
 ):
 
-    fabric_df = load_json(
-        FABRIC_STORE_FILE
+    st.dataframe(
+        fabric_data["rolls"],
+        use_container_width=True
     )
-
-    df = fabric_df.get(
-        "rolls",
-        []
-    )
-
-    if df:
-
-        temp_df = json.loads(
-            json.dumps(df)
-        )
-
-        temp_df = st.dataframe(
-            temp_df,
-            use_container_width=True
-        )
 
 else:
 
@@ -344,6 +343,7 @@ option = st.sidebar.radio(
         "📋 Style Master",
         "🧵 Fabric Program",
         "📊 Count Calculator",
+        "💰 Cost Estimator",
         "📁 Fabric Store",
         "🏭 Production Tracker"
     ]
@@ -404,6 +404,11 @@ elif option == "🧵 Fabric Program":
 elif option == "📊 Count Calculator":
 
     count_calculator_module()
+
+# ================= COST ESTIMATOR =================
+elif option == "💰 Cost Estimator":
+
+    cost_estimator_module()
 
 # ================= FABRIC STORE =================
 elif option == "📁 Fabric Store":
