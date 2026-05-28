@@ -1,0 +1,20 @@
+{
+    "rolls": [
+        {
+            "Roll No": "15",
+            "Fabric": "RIB_60-40_Vinayaka_07-05-2026",
+            "Color": "BORDEAUX",
+            "Kg": 325.4,
+            "Rolls": 1,
+            "Date": "2026-05-27"
+        },
+        {
+            "Roll No": "72",
+            "Fabric": "LoopKnit_60-40_Bairava_20-05-2026",
+            "Color": "BORDEAUX",
+            "Kg": 1407.0,
+            "Rolls": 1,
+            "Date": "2026-05-27"
+        }
+    ]
+}

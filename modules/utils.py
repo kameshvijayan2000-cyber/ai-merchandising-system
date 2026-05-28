@@ -1,46 +1,77 @@
-import os
 import json
+import os
 import shutil
-
-DATA_FOLDER = "data"
-
-
-# ================= CREATE DATA FOLDER =================
-def ensure_data_folder():
-
-    if not os.path.exists(DATA_FOLDER):
-        os.makedirs(DATA_FOLDER)
-
+from datetime import datetime
 
 # ================= LOAD JSON =================
-def load_json(file_path):
+def load_json(path):
 
-    ensure_data_folder()
+    if os.path.exists(path):
 
-    if not os.path.exists(file_path):
-        return {}
+        try:
 
-    try:
-        with open(file_path, "r") as f:
-            return json.load(f)
+            with open(path, "r") as f:
 
-    except:
-        return {}
+                return json.load(f)
 
+        except:
+
+            return {}
+
+    return {}
 
 # ================= SAVE JSON =================
-def save_json(file_path, data):
+def save_json(path, data):
 
-    ensure_data_folder()
+    # CREATE FOLDER
+    os.makedirs(
+        os.path.dirname(path),
+        exist_ok=True
+    )
 
-    with open(file_path, "w") as f:
-        json.dump(data, f, indent=4)
+    # SAVE FILE
+    with open(path, "w") as f:
 
+        json.dump(
+            data,
+            f,
+            indent=4
+        )
 
-# ================= CLEAR ALL DATA =================
+    # ================= AUTO BACKUP =================
+    os.makedirs(
+        "backup",
+        exist_ok=True
+    )
+
+    timestamp = datetime.now().strftime(
+        "%Y%m%d_%H%M%S"
+    )
+
+    filename = os.path.basename(path)
+
+    backup_path = os.path.join(
+        "backup",
+        f"{timestamp}_{filename}"
+    )
+
+    shutil.copy(path, backup_path)
+
+# ================= CLEAR ALL =================
 def clear_all_data():
 
-    if os.path.exists(DATA_FOLDER):
-        shutil.rmtree(DATA_FOLDER)
+    files = [
 
-    os.makedirs(DATA_FOLDER)
+        "data/style_master.json",
+        "data/fabric_program.json",
+        "data/count_data.json",
+        "data/fabric_store.json",
+        "data/production_tracking.json"
+
+    ]
+
+    for file in files:
+
+        with open(file, "w") as f:
+
+            json.dump({}, f)

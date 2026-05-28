@@ -1,0 +1,22 @@
+{
+    "rolls": [
+        {
+            "Roll No": "2",
+            "Fabric": "LoopKnit_60-40_Bairava_22-04-2026",
+            "Color": "BORDEAUX",
+            "Kg": 41.8
+        },
+        {
+            "Roll No": "2",
+            "Fabric": "LoopKnit_60-40_Bairava_30-04-2026",
+            "Color": "BORDEAUX",
+            "Kg": 40.8
+        },
+        {
+            "Roll No": "61",
+            "Fabric": "LoopKnit_60-40_Bairava_07-05-2026",
+            "Color": "BORDEAUX",
+            "Kg": 1332.2
+        }
+    ]
+}

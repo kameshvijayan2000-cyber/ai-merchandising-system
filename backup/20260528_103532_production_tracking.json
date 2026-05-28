@@ -1,0 +1,139 @@
+{
+    "entries": [
+        {
+            "Date": "2026-05-09",
+            "Process": "Yarn",
+            "Type": "Input",
+            "Qty": 360.0,
+            "Unit": "KG",
+            "Party": "NSP Mills",
+            "Description": "30's_Semicombed_100% cotton_Sylla-Sonna-Solange",
+            "Rate": 302.4,
+            "Total": 108863.99999999999
+        },
+        {
+            "Date": "2026-05-09",
+            "Process": "Yarn",
+            "Type": "Output",
+            "Qty": 360.0,
+            "Unit": "KG",
+            "Party": "Shri Vishnu Knits",
+            "Description": "30's_Semicombed_100% cotton_Sylla-Sonna-Solange",
+            "Rate": 0.0,
+            "Total": 0.0
+        },
+        {
+            "Date": "2026-05-09",
+            "Process": "Knitting",
+            "Type": "Input",
+            "Qty": 360.0,
+            "Unit": "KG",
+            "Party": "Shri Vishnu Knits",
+            "Description": "30's_Semicombed_100% cotton_Sylla-Sonna-Solange",
+            "Rate": 10.0,
+            "Total": 3600.0
+        },
+        {
+            "Date": "2026-05-15",
+            "Process": "Knitting",
+            "Type": "Output",
+            "Qty": 360.0,
+            "Unit": "KG",
+            "Party": "Parkavi process",
+            "Description": "30's_Semicombed_100% cotton_Sylla-Sonna-Solange",
+            "Rate": 0.0,
+            "Total": 0.0
+        },
+        {
+            "Date": "2026-05-15",
+            "Process": "Cutting",
+            "Style": "SONNA",
+            "Color": "BORDEAUX",
+            "Size": "XS",
+            "Target Qty": 215,
+            "Completed Qty": 215,
+            "Balance": 0,
+            "Party": "PRP",
+            "Rate": 0.0,
+            "Total": 0.0
+        },
+        {
+            "Date": "2026-05-15",
+            "Process": "Cutting",
+            "Style": "SONNA",
+            "Color": "BORDEAUX",
+            "Size": "S",
+            "Target Qty": 215,
+            "Completed Qty": 215,
+            "Balance": 0,
+            "Party": "PRP",
+            "Rate": 0.0,
+            "Total": 0.0
+        },
+        {
+            "Date": "2026-05-15",
+            "Process": "Cutting",
+            "Style": "SONNA",
+            "Color": "BORDEAUX",
+            "Size": "M",
+            "Target Qty": 430,
+            "Completed Qty": 430,
+            "Balance": 0,
+            "Party": "PRP",
+            "Rate": 0.0,
+            "Total": 0.0
+        },
+        {
+            "Date": "2026-05-15",
+            "Process": "Cutting",
+            "Style": "SONNA",
+            "Color": "BORDEAUX",
+            "Size": "L",
+            "Target Qty": 430,
+            "Completed Qty": 430,
+            "Balance": 0,
+            "Party": "PRP",
+            "Rate": 0.0,
+            "Total": 0.0
+        },
+        {
+            "Date": "2026-05-15",
+            "Process": "Cutting",
+            "Style": "SONNA",
+            "Color": "BORDEAUX",
+            "Size": "XL",
+            "Target Qty": 215,
+            "Completed Qty": 215,
+            "Balance": 0,
+            "Party": "PRP",
+            "Rate": 0.0,
+            "Total": 0.0
+        },
+        {
+            "Date": "2026-05-15",
+            "Process": "Cutting",
+            "Style": "SYLLA",
+            "Color": "BORDEAUX",
+            "Size": "XS",
+            "Target Qty": 268,
+            "Completed Qty": 268,
+            "Balance": 0,
+            "Party": "PRP",
+            "Rate": 0.0,
+            "Total": 0.0
+        },
+        {
+            "Date": "2026-05-15",
+            "Process": "Cutting",
+            "Style": "SYLLA",
+            "Color": "BORDEAUX",
+            "Size": "S",
+            "Target Qty": 536,
+            "Completed Qty": 536,
+            "Balance": 0,
+            "Party": "PRP",
+            "Rate": 0.0,
+            "Total": 0.0
+        }
+    ]
+}

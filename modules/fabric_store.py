@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from datetime import date
 from modules.utils import load_json, save_json
 
 FILE = "data/fabric_store.json"
@@ -15,19 +16,42 @@ def run():
     if "rolls" not in data:
         data["rolls"] = []
 
-    # ================= ADD ROLL =================
-    st.subheader("➕ Add Fabric Roll")
+    # ================= FIX OLD DATA =================
+    for item in data["rolls"]:
+
+        if "Rolls" not in item:
+            item["Rolls"] = 1
+
+        if "Date" not in item:
+            item["Date"] = str(date.today())
+
+        if "Company" not in item:
+            item["Company"] = "Unknown"
+
+    # ================= ADD FABRIC =================
+    st.subheader("➕ Add Fabric Stock")
 
     col1, col2 = st.columns(2)
 
     with col1:
 
-        roll = st.text_input(
-            "Roll No"
+        entry_date = st.date_input(
+            "Date",
+            value=date.today()
         )
 
         fabric = st.text_input(
             "Fabric Type"
+        )
+
+        company = st.text_input(
+            "Company Name"
+        )
+
+        no_of_rolls = st.number_input(
+            "No Of Rolls",
+            min_value=1,
+            value=1
         )
 
     with col2:
@@ -43,12 +67,12 @@ def run():
         )
 
     # ================= SAVE =================
-    if st.button("💾 Add Roll"):
+    if st.button("💾 Add Fabric"):
 
         if (
-            not roll or
             not fabric or
-            not color
+            not color or
+            not company
         ):
 
             st.warning(
@@ -59,13 +83,17 @@ def run():
 
             data["rolls"].append({
 
-                "Roll No": roll,
+                "Date": str(entry_date),
+
+                "Company": company,
 
                 "Fabric": fabric,
 
                 "Color": color,
 
-                "Kg": kg
+                "Rolls": int(no_of_rolls),
+
+                "Kg": float(kg)
             })
 
             save_json(
@@ -74,7 +102,7 @@ def run():
             )
 
             st.success(
-                "✅ Roll Added Successfully"
+                "✅ Fabric Added Successfully"
             )
 
             st.rerun()
@@ -92,7 +120,17 @@ def run():
 
     if not df.empty:
 
-        # ================= STOCK TABLE =================
+        # ================= FIX COLUMNS =================
+        if "Rolls" not in df.columns:
+            df["Rolls"] = 1
+
+        if "Date" not in df.columns:
+            df["Date"] = str(date.today())
+
+        if "Company" not in df.columns:
+            df["Company"] = "Unknown"
+
+        # ================= DISPLAY TABLE =================
         display_df = df.copy()
 
         display_df.index = (
@@ -107,7 +145,9 @@ def run():
         # ================= TOP METRICS =================
         st.markdown("---")
 
-        total_rolls = len(df)
+        total_rolls = int(
+            df["Rolls"].sum()
+        )
 
         total_kg = round(
             df["Kg"].sum(),
@@ -156,12 +196,18 @@ def run():
         st.markdown("---")
 
         st.subheader(
-            "📊 Fabric Summary"
+            "📊 Fabric Type Summary"
         )
 
         fabric_summary = df.groupby(
             "Fabric"
-        )["Kg"].sum().reset_index()
+        ).agg({
+
+            "Rolls": "sum",
+
+            "Kg": "sum"
+
+        }).reset_index()
 
         fabric_summary["Kg"] = (
             fabric_summary["Kg"]
@@ -170,6 +216,33 @@ def run():
 
         st.dataframe(
             fabric_summary,
+            use_container_width=True
+        )
+
+        # ================= COMPANY SUMMARY =================
+        st.markdown("---")
+
+        st.subheader(
+            "🏢 Company Summary"
+        )
+
+        company_summary = df.groupby(
+            "Company"
+        ).agg({
+
+            "Rolls": "sum",
+
+            "Kg": "sum"
+
+        }).reset_index()
+
+        company_summary["Kg"] = (
+            company_summary["Kg"]
+            .round(2)
+        )
+
+        st.dataframe(
+            company_summary,
             use_container_width=True
         )
 
@@ -182,7 +255,13 @@ def run():
 
         color_summary = df.groupby(
             "Color"
-        )["Kg"].sum().reset_index()
+        ).agg({
+
+            "Rolls": "sum",
+
+            "Kg": "sum"
+
+        }).reset_index()
 
         color_summary["Kg"] = (
             color_summary["Kg"]
@@ -203,7 +282,13 @@ def run():
 
         summary_df = df.groupby(
             ["Fabric", "Color"]
-        )["Kg"].sum().reset_index()
+        ).agg({
+
+            "Rolls": "sum",
+
+            "Kg": "sum"
+
+        }).reset_index()
 
         summary_df["Kg"] = (
             summary_df["Kg"]
@@ -215,11 +300,38 @@ def run():
             use_container_width=True
         )
 
-        # ================= DELETE ROLL =================
+        # ================= DATE SUMMARY =================
         st.markdown("---")
 
         st.subheader(
-            "🗑️ Delete Roll"
+            "📅 Date Wise Summary"
+        )
+
+        date_summary = df.groupby(
+            "Date"
+        ).agg({
+
+            "Rolls": "sum",
+
+            "Kg": "sum"
+
+        }).reset_index()
+
+        date_summary["Kg"] = (
+            date_summary["Kg"]
+            .round(2)
+        )
+
+        st.dataframe(
+            date_summary,
+            use_container_width=True
+        )
+
+        # ================= DELETE =================
+        st.markdown("---")
+
+        st.subheader(
+            "🗑️ Delete Entry"
         )
 
         delete_index = st.number_input(
@@ -230,7 +342,7 @@ def run():
         )
 
         if st.button(
-            "❌ Delete Selected Roll"
+            "❌ Delete Selected Entry"
         ):
 
             data["rolls"].pop(
@@ -243,7 +355,7 @@ def run():
             )
 
             st.success(
-                "Roll Deleted Successfully"
+                "Entry Deleted Successfully"
             )
 
             st.rerun()
@@ -251,7 +363,7 @@ def run():
     else:
 
         st.info(
-            "No Fabric Rolls Added"
+            "No Fabric Stock Added"
         )
 
     # ================= CLEAR STORE =================

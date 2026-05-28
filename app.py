@@ -236,58 +236,113 @@ if (
 
     process_list = list(set(
 
-        row["Process"]
+        row.get("Process", "")
         for row in prod_df
 
     ))
 
+    garment_processes = [
+
+        "Cutting",
+        "Stitching",
+        "Checking",
+        "Ironing",
+        "Packing"
+
+    ]
+
     for process in process_list:
 
-        input_qty = sum(
+        process_entries = [
 
-            row["Qty"]
+            row for row in prod_df
 
-            for row in prod_df
+            if row.get("Process") == process
+        ]
 
-            if (
-                row["Process"] == process
-                and
-                row["Type"] == "Input"
+        # =========================================
+        # GARMENT PROCESS SUMMARY
+        # =========================================
+
+        if process in garment_processes:
+
+            target_qty = sum(
+
+                row.get("Target Qty", 0)
+
+                for row in process_entries
             )
-        )
 
-        output_qty = sum(
+            completed_qty = sum(
 
-            row["Qty"]
+                row.get("Qty", 0)
 
-            for row in prod_df
-
-            if (
-                row["Process"] == process
-                and
-                row["Type"] == "Output"
+                for row in process_entries
             )
-        )
 
-        balance = (
-            input_qty -
-            output_qty
-        )
+            balance = (
+                target_qty -
+                completed_qty
+            )
 
-        summary_rows.append({
+            summary_rows.append({
 
-            "Process":
-            process,
+                "Process":
+                process,
 
-            "Input":
-            round(input_qty, 2),
+                "Target":
+                round(target_qty, 2),
 
-            "Output":
-            round(output_qty, 2),
+                "Completed":
+                round(completed_qty, 2),
 
-            "Balance":
-            round(balance, 2)
-        })
+                "Balance":
+                round(balance, 2)
+            })
+
+        # =========================================
+        # FABRIC PROCESS SUMMARY
+        # =========================================
+
+        else:
+
+            input_qty = sum(
+
+                row.get("Qty", 0)
+
+                for row in process_entries
+
+                if row.get("Type") == "Input"
+            )
+
+            output_qty = sum(
+
+                row.get("Qty", 0)
+
+                for row in process_entries
+
+                if row.get("Type") == "Output"
+            )
+
+            balance = (
+                input_qty -
+                output_qty
+            )
+
+            summary_rows.append({
+
+                "Process":
+                process,
+
+                "Input":
+                round(input_qty, 2),
+
+                "Output":
+                round(output_qty, 2),
+
+                "Balance":
+                round(balance, 2)
+            })
 
     st.dataframe(
         summary_rows,

@@ -1,0 +1,194 @@
+{
+    "SONNA": {
+        "results": [
+            {
+                "Color": "BORDEAUX",
+                "Order Qty": 1498.0,
+                "Body Total (Kg)": 592.46,
+                "Rib Total (Kg)": 164.78,
+                "SJ Total (Kg)": 4.49,
+                "Grand Total (Kg)": 761.73
+            },
+            {
+                "Color": "NOIR",
+                "Order Qty": 1712.0,
+                "Body Total (Kg)": 677.1,
+                "Rib Total (Kg)": 188.32,
+                "SJ Total (Kg)": 5.14,
+                "Grand Total (Kg)": 870.55
+            },
+            {
+                "Color": "VERT",
+                "Order Qty": 1284.0,
+                "Body Total (Kg)": 507.82,
+                "Rib Total (Kg)": 141.24,
+                "SJ Total (Kg)": 3.85,
+                "Grand Total (Kg)": 652.91
+            }
+        ],
+        "inputs": {
+            "body_weight": 0.35,
+            "rib_weight": 0.1,
+            "sj_weight": 0.003,
+            "body_loss": 13.0,
+            "rib_loss": 10.0,
+            "sj_loss": 0.0
+        }
+    },
+    "SYLLA": {
+        "results": [
+            {
+                "Color": "BEIGE",
+                "Order Qty": 1605.0,
+                "Body Total (Kg)": 725.46,
+                "Rib Total (Kg)": 158.9,
+                "SJ Total (Kg)": 70.62,
+                "Grand Total (Kg)": 954.98
+            },
+            {
+                "Color": "BORDEAUX",
+                "Order Qty": 2942.0,
+                "Body Total (Kg)": 1330.01,
+                "Rib Total (Kg)": 291.31,
+                "SJ Total (Kg)": 129.47,
+                "Grand Total (Kg)": 1750.79
+            },
+            {
+                "Color": "VERT",
+                "Order Qty": 1605.0,
+                "Body Total (Kg)": 725.46,
+                "Rib Total (Kg)": 158.9,
+                "SJ Total (Kg)": 70.62,
+                "Grand Total (Kg)": 954.98
+            }
+        ],
+        "inputs": {
+            "body_weight": 0.4,
+            "rib_weight": 0.09,
+            "sj_weight": 0.04,
+            "body_loss": 13.0,
+            "rib_loss": 10.0,
+            "sj_loss": 10.0
+        }
+    },
+    "SOLANGE": {
+        "results": [
+            {
+                "Color": "ECRU",
+                "Order Qty": 1498.0,
+                "Body Total (Kg)": 727.88,
+                "Rib Total (Kg)": 148.3,
+                "SJ Total (Kg)": 82.39,
+                "Grand Total (Kg)": 958.57
+            },
+            {
+                "Color": "GRISMELANGE",
+                "Order Qty": 1498.0,
+                "Body Total (Kg)": 727.88,
+                "Rib Total (Kg)": 148.3,
+                "SJ Total (Kg)": 82.39,
+                "Grand Total (Kg)": 958.57
+            },
+            {
+                "Color": "NOIR",
+                "Order Qty": 2354.0,
+                "Body Total (Kg)": 1143.81,
+                "Rib Total (Kg)": 233.05,
+                "SJ Total (Kg)": 129.47,
+                "Grand Total (Kg)": 1506.32
+            }
+        ],
+        "inputs": {
+            "body_weight": 0.43,
+            "rib_weight": 0.09,
+            "sj_weight": 0.05,
+            "body_loss": 13.0,
+            "rib_loss": 10.0,
+            "sj_loss": 10.0
+        }
+    },
+    "PEXWAY": {
+        "results": [
+            {
+                "Color": "ECRU",
+                "Order Qty": 2022.0,
+                "Body Total (Kg)": 868.38,
+                "Rib Total (Kg)": 155.72,
+                "SJ Total (Kg)": 0.0,
+                "Grand Total (Kg)": 1024.09
+            },
+            {
+                "Color": "GRISMELANGE",
+                "Order Qty": 2600.0,
+                "Body Total (Kg)": 1116.48,
+                "Rib Total (Kg)": 200.21,
+                "SJ Total (Kg)": 0.0,
+                "Grand Total (Kg)": 1316.69
+            },
+            {
+                "Color": "NOIR",
+                "Order Qty": 4334.0,
+                "Body Total (Kg)": 1860.8,
+                "Rib Total (Kg)": 333.68,
+                "SJ Total (Kg)": 0.0,
+                "Grand Total (Kg)": 2194.48
+            }
+        ],
+        "inputs": {
+            "body_weight": 0.38,
+            "rib_weight": 0.07,
+            "sj_weight": 0.0,
+            "body_loss": 13.0,
+            "rib_loss": 10.0,
+            "sj_loss": 0.0
+        }
+    },
+    "PEXWAYMOD1": {
+        "results": [
+            {
+                "Color": "BEIGE",
+                "Order Qty": 1605.0,
+                "Body Total (Kg)": 689.19,
+                "Rib Total (Kg)": 123.59,
+                "SJ Total (Kg)": 0.0,
+                "Grand Total (Kg)": 812.77
+            },
+            {
+                "Color": "VERT",
+                "Order Qty": 1338.0,
+                "Body Total (Kg)": 574.32,
+                "Rib Total (Kg)": 102.99,
+                "SJ Total (Kg)": 0.0,
+                "Grand Total (Kg)": 677.31
+            }
+        ],
+        "inputs": {
+            "body_weight": 0.38,
+            "rib_weight": 0.07,
+            "sj_weight": 0.0,
+            "body_loss": 13.0,
+            "rib_loss": 10.0,
+            "sj_loss": 0.0
+        }
+    },
+    "PEXWAYMOD2": {
+        "results": [
+            {
+                "Color": "BORDEAUX",
+                "Order Qty": 3210.0,
+                "Body Total (Kg)": 1378.37,
+                "Rib Total (Kg)": 247.17,
+                "SJ Total (Kg)": 0.0,
+                "Grand Total (Kg)": 1625.54
+            }
+        ],
+        "inputs": {
+            "body_weight": 0.38,
+            "rib_weight": 0.07,
+            "sj_weight": 0.0,
+            "body_loss": 13.0,
+            "rib_loss": 10.0,
+            "sj_loss": 0.0
+        }
+    }
+}

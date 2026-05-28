@@ -1,0 +1,86 @@
+{
+    "Sylla": {
+        "total_qty": 5750,
+        "cartons": 250,
+        "pcs_per_carton": 23,
+        "extra_percent": 5.0,
+        "cut_qty_percent": 7.0,
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "colors": [
+            "BLACK",
+            "WHITE",
+            "BLUE"
+        ],
+        "color_ratios": {
+            "BLACK": {
+                "XS": 1,
+                "S": 1,
+                "M": 2,
+                "L": 1,
+                "XL": 1
+            },
+            "WHITE": {
+                "XS": 1,
+                "S": 2,
+                "M": 4,
+                "L": 3,
+                "XL": 1
+            },
+            "BLUE": {
+                "XS": 1,
+                "S": 1,
+                "M": 2,
+                "L": 1,
+                "XL": 1
+            }
+        }
+    },
+    "Sonna": {
+        "total_qty": 4000,
+        "cartons": 250,
+        "pcs_per_carton": 21,
+        "extra_percent": 5.0,
+        "cut_qty_percent": 7.0,
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "colors": [
+            "BLACK",
+            "WHITE",
+            "RED"
+        ],
+        "color_ratios": {
+            "BLACK": {
+                "XS": 1,
+                "S": 1,
+                "M": 1,
+                "L": 1,
+                "XL": 1
+            },
+            "WHITE": {
+                "XS": 1,
+                "S": 1,
+                "M": 2,
+                "L": 2,
+                "XL": 1
+            },
+            "RED": {
+                "XS": 1,
+                "S": 2,
+                "M": 2,
+                "L": 1,
+                "XL": 1
+            }
+        }
+    }
+}

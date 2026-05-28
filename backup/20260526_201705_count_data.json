@@ -1,0 +1,236 @@
+{
+    "SONNA": {
+        "results": [
+            {
+                "Color": "BORDEAUX",
+                "Size": "XS",
+                "Ratio": 1,
+                "Qty": 210
+            },
+            {
+                "Color": "BORDEAUX",
+                "Size": "S",
+                "Ratio": 1,
+                "Qty": 210
+            },
+            {
+                "Color": "BORDEAUX",
+                "Size": "M",
+                "Ratio": 2,
+                "Qty": 420
+            },
+            {
+                "Color": "BORDEAUX",
+                "Size": "L",
+                "Ratio": 2,
+                "Qty": 420
+            },
+            {
+                "Color": "BORDEAUX",
+                "Size": "XL",
+                "Ratio": 1,
+                "Qty": 210
+            },
+            {
+                "Color": "NOIR",
+                "Size": "XS",
+                "Ratio": 1,
+                "Qty": 210
+            },
+            {
+                "Color": "NOIR",
+                "Size": "S",
+                "Ratio": 1,
+                "Qty": 210
+            },
+            {
+                "Color": "NOIR",
+                "Size": "M",
+                "Ratio": 3,
+                "Qty": 630
+            },
+            {
+                "Color": "NOIR",
+                "Size": "L",
+                "Ratio": 2,
+                "Qty": 420
+            },
+            {
+                "Color": "NOIR",
+                "Size": "XL",
+                "Ratio": 1,
+                "Qty": 210
+            },
+            {
+                "Color": "VERT",
+                "Size": "XS",
+                "Ratio": 1,
+                "Qty": 210
+            },
+            {
+                "Color": "VERT",
+                "Size": "S",
+                "Ratio": 1,
+                "Qty": 210
+            },
+            {
+                "Color": "VERT",
+                "Size": "M",
+                "Ratio": 2,
+                "Qty": 420
+            },
+            {
+                "Color": "VERT",
+                "Size": "L",
+                "Ratio": 1,
+                "Qty": 210
+            },
+            {
+                "Color": "VERT",
+                "Size": "XL",
+                "Ratio": 1,
+                "Qty": 210
+            }
+        ],
+        "summary": [
+            {
+                "Color": "BORDEAUX",
+                "Color Ratio Total": 7,
+                "Total Qty": 1470
+            },
+            {
+                "Color": "NOIR",
+                "Color Ratio Total": 8,
+                "Total Qty": 1680
+            },
+            {
+                "Color": "VERT",
+                "Color Ratio Total": 6,
+                "Total Qty": 1260
+            }
+        ],
+        "inputs": {
+            "cartons": 200,
+            "pcs_per_carton": 21,
+            "extra_percent": 5.0,
+            "final_cartons": 210
+        }
+    },
+    "SYLLA": {
+        "results": [
+            {
+                "Color": "BEIGE",
+                "Size": "XS",
+                "Ratio": 1,
+                "Qty": 263
+            },
+            {
+                "Color": "BEIGE",
+                "Size": "S",
+                "Ratio": 1,
+                "Qty": 263
+            },
+            {
+                "Color": "BEIGE",
+                "Size": "M",
+                "Ratio": 2,
+                "Qty": 526
+            },
+            {
+                "Color": "BEIGE",
+                "Size": "L",
+                "Ratio": 1,
+                "Qty": 263
+            },
+            {
+                "Color": "BEIGE",
+                "Size": "XL",
+                "Ratio": 1,
+                "Qty": 263
+            },
+            {
+                "Color": "BORDEAUX",
+                "Size": "XS",
+                "Ratio": 1,
+                "Qty": 263
+            },
+            {
+                "Color": "BORDEAUX",
+                "Size": "S",
+                "Ratio": 2,
+                "Qty": 526
+            },
+            {
+                "Color": "BORDEAUX",
+                "Size": "M",
+                "Ratio": 4,
+                "Qty": 1052
+            },
+            {
+                "Color": "BORDEAUX",
+                "Size": "L",
+                "Ratio": 3,
+                "Qty": 789
+            },
+            {
+                "Color": "BORDEAUX",
+                "Size": "XL",
+                "Ratio": 1,
+                "Qty": 263
+            },
+            {
+                "Color": "VERT",
+                "Size": "XS",
+                "Ratio": 1,
+                "Qty": 263
+            },
+            {
+                "Color": "VERT",
+                "Size": "S",
+                "Ratio": 1,
+                "Qty": 263
+            },
+            {
+                "Color": "VERT",
+                "Size": "M",
+                "Ratio": 2,
+                "Qty": 526
+            },
+            {
+                "Color": "VERT",
+                "Size": "L",
+                "Ratio": 1,
+                "Qty": 263
+            },
+            {
+                "Color": "VERT",
+                "Size": "XL",
+                "Ratio": 1,
+                "Qty": 263
+            }
+        ],
+        "summary": [
+            {
+                "Color": "BEIGE",
+                "Color Ratio Total": 6,
+                "Total Qty": 1578
+            },
+            {
+                "Color": "BORDEAUX",
+                "Color Ratio Total": 11,
+                "Total Qty": 2893
+            },
+            {
+                "Color": "VERT",
+                "Color Ratio Total": 6,
+                "Total Qty": 1578
+            }
+        ],
+        "inputs": {
+            "cartons": 250,
+            "pcs_per_carton": 23,
+            "extra_percent": 5.0,
+            "final_cartons": 263
+        }
+    }
+}

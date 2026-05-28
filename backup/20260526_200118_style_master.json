@@ -1,0 +1,44 @@
+{
+    "SYLLA": {
+        "total_qty": 5750,
+        "cartons": 250,
+        "pcs_per_carton": 23,
+        "extra_percent": 5.0,
+        "cut_qty_percent": 7.0,
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "colors": [
+            "BORDEAUX",
+            "NOIR",
+            "VERT"
+        ],
+        "color_ratios": {
+            "BORDEAUX": {
+                "XS": 1,
+                "S": 1,
+                "M": 2,
+                "L": 2,
+                "XL": 1
+            },
+            "NOIR": {
+                "XS": 1,
+                "S": 1,
+                "M": 3,
+                "L": 2,
+                "XL": 1
+            },
+            "VERT": {
+                "XS": 1,
+                "S": 1,
+                "M": 2,
+                "L": 1,
+                "XL": 1
+            }
+        }
+    }
+}

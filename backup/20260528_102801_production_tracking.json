@@ -1,0 +1,118 @@
+{
+    "entries": [
+        {
+            "Date": "2026-05-09",
+            "Process": "Yarn",
+            "Type": "Input",
+            "Qty": 360.0,
+            "Unit": "KG",
+            "Party": "NSP Mills",
+            "Description": "30's_Semicombed_100% cotton_Sylla-Sonna-Solange",
+            "Rate": 302.4,
+            "Total": 108863.99999999999
+        },
+        {
+            "Date": "2026-05-09",
+            "Process": "Yarn",
+            "Type": "Output",
+            "Qty": 360.0,
+            "Unit": "KG",
+            "Party": "Shri Vishnu Knits",
+            "Description": "30's_Semicombed_100% cotton_Sylla-Sonna-Solange",
+            "Rate": 0.0,
+            "Total": 0.0
+        },
+        {
+            "Date": "2026-05-09",
+            "Process": "Knitting",
+            "Type": "Input",
+            "Qty": 360.0,
+            "Unit": "KG",
+            "Party": "Shri Vishnu Knits",
+            "Description": "30's_Semicombed_100% cotton_Sylla-Sonna-Solange",
+            "Rate": 10.0,
+            "Total": 3600.0
+        },
+        {
+            "Date": "2026-05-15",
+            "Process": "Knitting",
+            "Type": "Output",
+            "Qty": 360.0,
+            "Unit": "KG",
+            "Party": "Parkavi process",
+            "Description": "30's_Semicombed_100% cotton_Sylla-Sonna-Solange",
+            "Rate": 0.0,
+            "Total": 0.0
+        },
+        {
+            "Date": "2026-05-15",
+            "Process": "Cutting",
+            "Type": "Input",
+            "Qty": 268.0,
+            "Unit": "PCS",
+            "Party": "PRP",
+            "Description": "",
+            "Rate": 0.0,
+            "Total": 0.0,
+            "Style": "SYLLA",
+            "Color": "BORDEAUX",
+            "Size": "XS"
+        },
+        {
+            "Date": "2026-05-15",
+            "Process": "Cutting",
+            "Type": "Input",
+            "Qty": 536.0,
+            "Unit": "PCS",
+            "Party": "PRP",
+            "Description": "",
+            "Rate": 0.0,
+            "Total": 0.0,
+            "Style": "SYLLA",
+            "Color": "BORDEAUX",
+            "Size": "S"
+        },
+        {
+            "Date": "2026-05-15",
+            "Process": "Cutting",
+            "Type": "Input",
+            "Qty": 1072.0,
+            "Unit": "PCS",
+            "Party": "PRP",
+            "Description": "",
+            "Rate": 0.0,
+            "Total": 0.0,
+            "Style": "SYLLA",
+            "Color": "BORDEAUX",
+            "Size": "M"
+        },
+        {
+            "Date": "2026-05-15",
+            "Process": "Cutting",
+            "Type": "Input",
+            "Qty": 804.0,
+            "Unit": "PCS",
+            "Party": "PRP",
+            "Description": "",
+            "Rate": 0.0,
+            "Total": 0.0,
+            "Style": "SYLLA",
+            "Color": "BORDEAUX",
+            "Size": "L"
+        },
+        {
+            "Date": "2026-05-15",
+            "Process": "Cutting",
+            "Type": "Input",
+            "Qty": 268.0,
+            "Unit": "PCS",
+            "Party": "PRP",
+            "Description": "",
+            "Rate": 0.0,
+            "Total": 0.0,
+            "Style": "SYLLA",
+            "Color": "BORDEAUX",
+            "Size": "XL"
+        }
+    ]
+}

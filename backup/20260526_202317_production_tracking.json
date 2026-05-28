@@ -1,0 +1,26 @@
+{
+    "entries": [
+        {
+            "Date": "2026-05-09",
+            "Process": "Yarn",
+            "Type": "Input",
+            "Qty": 360.0,
+            "Unit": "KG",
+            "Party": "NSP Mills",
+            "Description": "30's_Semicombed_100% cotton_Sylla-Sonna-Solange",
+            "Rate": 302.4,
+            "Total": 108863.99999999999
+        },
+        {
+            "Date": "2026-05-09",
+            "Process": "Yarn",
+            "Type": "Output",
+            "Qty": 360.0,
+            "Unit": "KG",
+            "Party": "Shri Vishnu Knits",
+            "Description": "30's_Semicombed_100% cotton_Sylla-Sonna-Solange",
+            "Rate": 0.0,
+            "Total": 0.0
+        }
+    ]
+}

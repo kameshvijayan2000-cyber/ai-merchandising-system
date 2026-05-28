@@ -1,0 +1,599 @@
+{
+    "SONNA": {
+        "results": [
+            {
+                "Color": "BORDEAUX",
+                "Size": "XS",
+                "Ratio": 1,
+                "Qty": 215
+            },
+            {
+                "Color": "BORDEAUX",
+                "Size": "S",
+                "Ratio": 1,
+                "Qty": 215
+            },
+            {
+                "Color": "BORDEAUX",
+                "Size": "M",
+                "Ratio": 2,
+                "Qty": 430
+            },
+            {
+                "Color": "BORDEAUX",
+                "Size": "L",
+                "Ratio": 2,
+                "Qty": 430
+            },
+            {
+                "Color": "BORDEAUX",
+                "Size": "XL",
+                "Ratio": 1,
+                "Qty": 215
+            },
+            {
+                "Color": "NOIR",
+                "Size": "XS",
+                "Ratio": 1,
+                "Qty": 215
+            },
+            {
+                "Color": "NOIR",
+                "Size": "S",
+                "Ratio": 1,
+                "Qty": 215
+            },
+            {
+                "Color": "NOIR",
+                "Size": "M",
+                "Ratio": 3,
+                "Qty": 645
+            },
+            {
+                "Color": "NOIR",
+                "Size": "L",
+                "Ratio": 2,
+                "Qty": 430
+            },
+            {
+                "Color": "NOIR",
+                "Size": "XL",
+                "Ratio": 1,
+                "Qty": 215
+            },
+            {
+                "Color": "VERT",
+                "Size": "XS",
+                "Ratio": 1,
+                "Qty": 215
+            },
+            {
+                "Color": "VERT",
+                "Size": "S",
+                "Ratio": 1,
+                "Qty": 215
+            },
+            {
+                "Color": "VERT",
+                "Size": "M",
+                "Ratio": 2,
+                "Qty": 430
+            },
+            {
+                "Color": "VERT",
+                "Size": "L",
+                "Ratio": 1,
+                "Qty": 215
+            },
+            {
+                "Color": "VERT",
+                "Size": "XL",
+                "Ratio": 1,
+                "Qty": 215
+            }
+        ],
+        "summary": [
+            {
+                "Color": "BORDEAUX",
+                "Color Ratio Total": 7,
+                "Total Qty": 1505
+            },
+            {
+                "Color": "NOIR",
+                "Color Ratio Total": 8,
+                "Total Qty": 1720
+            },
+            {
+                "Color": "VERT",
+                "Color Ratio Total": 6,
+                "Total Qty": 1290
+            }
+        ],
+        "inputs": {
+            "cartons": 200,
+            "pcs_per_carton": 21,
+            "extra_percent": 7.0,
+            "final_cartons": 215
+        }
+    },
+    "SYLLA": {
+        "results": [
+            {
+                "Color": "BEIGE",
+                "Size": "XS",
+                "Ratio": 1,
+                "Qty": 268
+            },
+            {
+                "Color": "BEIGE",
+                "Size": "S",
+                "Ratio": 1,
+                "Qty": 268
+            },
+            {
+                "Color": "BEIGE",
+                "Size": "M",
+                "Ratio": 2,
+                "Qty": 536
+            },
+            {
+                "Color": "BEIGE",
+                "Size": "L",
+                "Ratio": 1,
+                "Qty": 268
+            },
+            {
+                "Color": "BEIGE",
+                "Size": "XL",
+                "Ratio": 1,
+                "Qty": 268
+            },
+            {
+                "Color": "BORDEAUX",
+                "Size": "XS",
+                "Ratio": 1,
+                "Qty": 268
+            },
+            {
+                "Color": "BORDEAUX",
+                "Size": "S",
+                "Ratio": 2,
+                "Qty": 536
+            },
+            {
+                "Color": "BORDEAUX",
+                "Size": "M",
+                "Ratio": 4,
+                "Qty": 1072
+            },
+            {
+                "Color": "BORDEAUX",
+                "Size": "L",
+                "Ratio": 3,
+                "Qty": 804
+            },
+            {
+                "Color": "BORDEAUX",
+                "Size": "XL",
+                "Ratio": 1,
+                "Qty": 268
+            },
+            {
+                "Color": "VERT",
+                "Size": "XS",
+                "Ratio": 1,
+                "Qty": 268
+            },
+            {
+                "Color": "VERT",
+                "Size": "S",
+                "Ratio": 1,
+                "Qty": 268
+            },
+            {
+                "Color": "VERT",
+                "Size": "M",
+                "Ratio": 2,
+                "Qty": 536
+            },
+            {
+                "Color": "VERT",
+                "Size": "L",
+                "Ratio": 1,
+                "Qty": 268
+            },
+            {
+                "Color": "VERT",
+                "Size": "XL",
+                "Ratio": 1,
+                "Qty": 268
+            }
+        ],
+        "summary": [
+            {
+                "Color": "BEIGE",
+                "Color Ratio Total": 6,
+                "Total Qty": 1608
+            },
+            {
+                "Color": "BORDEAUX",
+                "Color Ratio Total": 11,
+                "Total Qty": 2948
+            },
+            {
+                "Color": "VERT",
+                "Color Ratio Total": 6,
+                "Total Qty": 1608
+            }
+        ],
+        "inputs": {
+            "cartons": 250,
+            "pcs_per_carton": 23,
+            "extra_percent": 7.0,
+            "final_cartons": 268
+        }
+    },
+    "SOLANGE": {
+        "results": [
+            {
+                "Color": "ECRU",
+                "Size": "XS",
+                "Ratio": 1,
+                "Qty": 215
+            },
+            {
+                "Color": "ECRU",
+                "Size": "S",
+                "Ratio": 1,
+                "Qty": 215
+            },
+            {
+                "Color": "ECRU",
+                "Size": "M",
+                "Ratio": 2,
+                "Qty": 430
+            },
+            {
+                "Color": "ECRU",
+                "Size": "L",
+                "Ratio": 2,
+                "Qty": 430
+            },
+            {
+                "Color": "ECRU",
+                "Size": "XL",
+                "Ratio": 1,
+                "Qty": 215
+            },
+            {
+                "Color": "GRISMELANGE",
+                "Size": "XS",
+                "Ratio": 1,
+                "Qty": 215
+            },
+            {
+                "Color": "GRISMELANGE",
+                "Size": "S",
+                "Ratio": 1,
+                "Qty": 215
+            },
+            {
+                "Color": "GRISMELANGE",
+                "Size": "M",
+                "Ratio": 2,
+                "Qty": 430
+            },
+            {
+                "Color": "GRISMELANGE",
+                "Size": "L",
+                "Ratio": 2,
+                "Qty": 430
+            },
+            {
+                "Color": "GRISMELANGE",
+                "Size": "XL",
+                "Ratio": 1,
+                "Qty": 215
+            },
+            {
+                "Color": "NOIR",
+                "Size": "XS",
+                "Ratio": 1,
+                "Qty": 215
+            },
+            {
+                "Color": "NOIR",
+                "Size": "S",
+                "Ratio": 2,
+                "Qty": 430
+            },
+            {
+                "Color": "NOIR",
+                "Size": "M",
+                "Ratio": 4,
+                "Qty": 860
+            },
+            {
+                "Color": "NOIR",
+                "Size": "L",
+                "Ratio": 3,
+                "Qty": 645
+            },
+            {
+                "Color": "NOIR",
+                "Size": "XL",
+                "Ratio": 1,
+                "Qty": 215
+            }
+        ],
+        "summary": [
+            {
+                "Color": "ECRU",
+                "Color Ratio Total": 7,
+                "Total Qty": 1505
+            },
+            {
+                "Color": "GRISMELANGE",
+                "Color Ratio Total": 7,
+                "Total Qty": 1505
+            },
+            {
+                "Color": "NOIR",
+                "Color Ratio Total": 11,
+                "Total Qty": 2365
+            }
+        ],
+        "inputs": {
+            "cartons": 200,
+            "pcs_per_carton": 25,
+            "extra_percent": 7.0,
+            "final_cartons": 215
+        }
+    },
+    "PEXWAY": {
+        "results": [
+            {
+                "Color": "ECRU",
+                "Size": "XS",
+                "Ratio": 1,
+                "Qty": 289
+            },
+            {
+                "Color": "ECRU",
+                "Size": "S",
+                "Ratio": 1,
+                "Qty": 289
+            },
+            {
+                "Color": "ECRU",
+                "Size": "M",
+                "Ratio": 2,
+                "Qty": 578
+            },
+            {
+                "Color": "ECRU",
+                "Size": "L",
+                "Ratio": 2,
+                "Qty": 578
+            },
+            {
+                "Color": "ECRU",
+                "Size": "XL",
+                "Ratio": 1,
+                "Qty": 289
+            },
+            {
+                "Color": "GRISMELANGE",
+                "Size": "XS",
+                "Ratio": 1,
+                "Qty": 289
+            },
+            {
+                "Color": "GRISMELANGE",
+                "Size": "S",
+                "Ratio": 1,
+                "Qty": 289
+            },
+            {
+                "Color": "GRISMELANGE",
+                "Size": "M",
+                "Ratio": 3,
+                "Qty": 867
+            },
+            {
+                "Color": "GRISMELANGE",
+                "Size": "L",
+                "Ratio": 3,
+                "Qty": 867
+            },
+            {
+                "Color": "GRISMELANGE",
+                "Size": "XL",
+                "Ratio": 1,
+                "Qty": 289
+            },
+            {
+                "Color": "NOIR",
+                "Size": "XS",
+                "Ratio": 1,
+                "Qty": 289
+            },
+            {
+                "Color": "NOIR",
+                "Size": "S",
+                "Ratio": 3,
+                "Qty": 867
+            },
+            {
+                "Color": "NOIR",
+                "Size": "M",
+                "Ratio": 5,
+                "Qty": 1445
+            },
+            {
+                "Color": "NOIR",
+                "Size": "L",
+                "Ratio": 5,
+                "Qty": 1445
+            },
+            {
+                "Color": "NOIR",
+                "Size": "XL",
+                "Ratio": 1,
+                "Qty": 289
+            }
+        ],
+        "summary": [
+            {
+                "Color": "ECRU",
+                "Color Ratio Total": 7,
+                "Total Qty": 2023
+            },
+            {
+                "Color": "GRISMELANGE",
+                "Color Ratio Total": 9,
+                "Total Qty": 2601
+            },
+            {
+                "Color": "NOIR",
+                "Color Ratio Total": 15,
+                "Total Qty": 4335
+            }
+        ],
+        "inputs": {
+            "cartons": 270,
+            "pcs_per_carton": 31,
+            "extra_percent": 7.0,
+            "final_cartons": 289
+        }
+    },
+    "PEXWAYMOD1": {
+        "results": [
+            {
+                "Color": "BEIGE",
+                "Size": "XS",
+                "Ratio": 1,
+                "Qty": 263
+            },
+            {
+                "Color": "BEIGE",
+                "Size": "S",
+                "Ratio": 1,
+                "Qty": 263
+            },
+            {
+                "Color": "BEIGE",
+                "Size": "M",
+                "Ratio": 2,
+                "Qty": 526
+            },
+            {
+                "Color": "BEIGE",
+                "Size": "L",
+                "Ratio": 1,
+                "Qty": 263
+            },
+            {
+                "Color": "BEIGE",
+                "Size": "XL",
+                "Ratio": 1,
+                "Qty": 263
+            },
+            {
+                "Color": "VERT",
+                "Size": "XS",
+                "Ratio": 1,
+                "Qty": 263
+            },
+            {
+                "Color": "VERT",
+                "Size": "S",
+                "Ratio": 1,
+                "Qty": 263
+            },
+            {
+                "Color": "VERT",
+                "Size": "M",
+                "Ratio": 1,
+                "Qty": 263
+            },
+            {
+                "Color": "VERT",
+                "Size": "L",
+                "Ratio": 1,
+                "Qty": 263
+            },
+            {
+                "Color": "VERT",
+                "Size": "XL",
+                "Ratio": 1,
+                "Qty": 263
+            }
+        ],
+        "summary": [
+            {
+                "Color": "BEIGE",
+                "Color Ratio Total": 6,
+                "Total Qty": 1578
+            },
+            {
+                "Color": "VERT",
+                "Color Ratio Total": 5,
+                "Total Qty": 1315
+            }
+        ],
+        "inputs": {
+            "cartons": 250,
+            "pcs_per_carton": 11,
+            "extra_percent": 5.0,
+            "final_cartons": 263
+        }
+    },
+    "PEXWAYMOD2": {
+        "results": [
+            {
+                "Color": "BORDEAUX",
+                "Size": "XS",
+                "Ratio": 1,
+                "Qty": 263
+            },
+            {
+                "Color": "BORDEAUX",
+                "Size": "S",
+                "Ratio": 2,
+                "Qty": 526
+            },
+            {
+                "Color": "BORDEAUX",
+                "Size": "M",
+                "Ratio": 4,
+                "Qty": 1052
+            },
+            {
+                "Color": "BORDEAUX",
+                "Size": "L",
+                "Ratio": 4,
+                "Qty": 1052
+            },
+            {
+                "Color": "BORDEAUX",
+                "Size": "XL",
+                "Ratio": 1,
+                "Qty": 263
+            }
+        ],
+        "summary": [
+            {
+                "Color": "BORDEAUX",
+                "Color Ratio Total": 12,
+                "Total Qty": 3156
+            }
+        ],
+        "inputs": {
+            "cartons": 250,
+            "pcs_per_carton": 12,
+            "extra_percent": 5.0,
+            "final_cartons": 263
+        }
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "rolls": [
+        {
+            "Date": "2026-04-22",
+            "Company": "Bairava",
+            "Fabric": "LoopKnit_60-40",
+            "Color": "BORDEAUX",
+            "Rolls": 2,
+            "Kg": 41.8
+        },
+        {
+            "Date": "2026-04-30",
+            "Company": "Bairava",
+            "Fabric": "LoopKnit_60-40",
+            "Color": "BORDEAUX",
+            "Rolls": 2,
+            "Kg": 40.8
+        },
+        {
+            "Date": "2026-05-07",
+            "Company": "Bairava",
+            "Fabric": "LoopKnit_60-40",
+            "Color": "BORDEAUX",
+            "Rolls": 61,
+            "Kg": 1332.2
+        }
+    ]
+}
