@@ -1,0 +1,265 @@
+{
+    "SONNA": {
+        "total_qty": 4200,
+        "cartons": 200,
+        "pcs_per_carton": 21,
+        "extra_percent": 5.0,
+        "cut_qty_percent": 7.0,
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "colors": [
+            "BORDEAUX",
+            "NOIR",
+            "VERT"
+        ],
+        "color_ratios": {
+            "BORDEAUX": {
+                "XS": 1,
+                "S": 1,
+                "M": 2,
+                "L": 2,
+                "XL": 1
+            },
+            "NOIR": {
+                "XS": 1,
+                "S": 1,
+                "M": 3,
+                "L": 2,
+                "XL": 1
+            },
+            "VERT": {
+                "XS": 1,
+                "S": 1,
+                "M": 2,
+                "L": 1,
+                "XL": 1
+            }
+        }
+    },
+    "SYLLA": {
+        "total_qty": 5750,
+        "cartons": 250,
+        "pcs_per_carton": 23,
+        "extra_percent": 5.0,
+        "cut_qty_percent": 7.0,
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "colors": [
+            "BEIGE",
+            "BORDEAUX",
+            "VERT"
+        ],
+        "color_ratios": {
+            "BEIGE": {
+                "XS": 1,
+                "S": 1,
+                "M": 2,
+                "L": 1,
+                "XL": 1
+            },
+            "BORDEAUX": {
+                "XS": 1,
+                "S": 2,
+                "M": 4,
+                "L": 3,
+                "XL": 1
+            },
+            "VERT": {
+                "XS": 1,
+                "S": 1,
+                "M": 2,
+                "L": 1,
+                "XL": 1
+            }
+        }
+    },
+    "SOLANGE": {
+        "total_qty": 5000,
+        "cartons": 200,
+        "pcs_per_carton": 25,
+        "extra_percent": 5.0,
+        "cut_qty_percent": 7.0,
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "colors": [
+            "ECRU",
+            "GRISMELANGE",
+            "NOIR"
+        ],
+        "color_ratios": {
+            "ECRU": {
+                "XS": 1,
+                "S": 1,
+                "M": 2,
+                "L": 2,
+                "XL": 1
+            },
+            "GRISMELANGE": {
+                "XS": 1,
+                "S": 1,
+                "M": 2,
+                "L": 2,
+                "XL": 1
+            },
+            "NOIR": {
+                "XS": 1,
+                "S": 2,
+                "M": 4,
+                "L": 3,
+                "XL": 1
+            }
+        }
+    },
+    "PEXWAY": {
+        "total_qty": 8370,
+        "cartons": 270,
+        "pcs_per_carton": 31,
+        "extra_percent": 5.0,
+        "cut_qty_percent": 7.0,
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "colors": [
+            "ECRU",
+            "GRISMELANGE",
+            "NOIR"
+        ],
+        "color_ratios": {
+            "ECRU": {
+                "XS": 1,
+                "S": 1,
+                "M": 2,
+                "L": 2,
+                "XL": 1
+            },
+            "GRISMELANGE": {
+                "XS": 1,
+                "S": 1,
+                "M": 3,
+                "L": 3,
+                "XL": 1
+            },
+            "NOIR": {
+                "XS": 1,
+                "S": 3,
+                "M": 5,
+                "L": 5,
+                "XL": 1
+            }
+        }
+    },
+    "PEXWAYMOD1": {
+        "total_qty": 2750,
+        "cartons": 250,
+        "pcs_per_carton": 11,
+        "extra_percent": 5.0,
+        "cut_qty_percent": 7.0,
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "colors": [
+            "BEIGE",
+            "VERT"
+        ],
+        "color_ratios": {
+            "BEIGE": {
+                "XS": 1,
+                "S": 1,
+                "M": 2,
+                "L": 1,
+                "XL": 1
+            },
+            "VERT": {
+                "XS": 1,
+                "S": 1,
+                "M": 1,
+                "L": 1,
+                "XL": 1
+            }
+        }
+    },
+    "PEXWAYMOD2": {
+        "total_qty": 3000,
+        "cartons": 250,
+        "pcs_per_carton": 12,
+        "extra_percent": 5.0,
+        "cut_qty_percent": 7.0,
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "colors": [
+            "BORDEAUX"
+        ],
+        "color_ratios": {
+            "BORDEAUX": {
+                "XS": 1,
+                "S": 2,
+                "M": 4,
+                "L": 4,
+                "XL": 1
+            }
+        }
+    },
+    "Make": {
+        "po_number": "1206007",
+        "total_qty": 1000,
+        "cartons": 250,
+        "pcs_per_carton": 12,
+        "extra_percent": 5.0,
+        "cut_qty_percent": 3.0,
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "colors": [
+            "BLACK",
+            "WHITE"
+        ],
+        "color_ratios": {
+            "BLACK": {
+                "XS": 1,
+                "S": 1,
+                "M": 1,
+                "L": 1,
+                "XL": 1
+            },
+            "WHITE": {
+                "XS": 2,
+                "S": 2,
+                "M": 2,
+                "L": 2,
+                "XL": 2
+            }
+        }
+    }
+}

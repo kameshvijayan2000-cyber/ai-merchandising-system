@@ -5,7 +5,7 @@ from modules.utils import clear_all_data
 
 # ================= PAGE CONFIG =================
 st.set_page_config(
-    page_title="PRP Garments System",
+    page_title="MERCHANDISING CALCULATOR",
     layout="wide"
 )
 
@@ -93,7 +93,7 @@ if "entries" in production_data:
     )
 
 # ================= TITLE =================
-st.title("🏭 PRP Garments Management System")
+st.title("🏭 MERCHANDISING CALCULATOR")
 
 st.caption("AI Merchandising Dashboard")
 

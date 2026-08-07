@@ -24,9 +24,55 @@ def run():
     fabric_data = load_json(FABRIC_FILE)
 
     # ================= STYLE =================
+    po_list = sorted(
+
+        list(
+
+            set(
+
+                details.get(
+                    "po_number",
+                    "N/A"
+                )
+
+                for details in masters.values()
+            )
+        )
+    )
+
+    selected_po = st.selectbox(
+        "Select PO Number",
+        po_list
+    )   
+
+    filtered_styles = [
+
+        style
+
+        for style, details in masters.items()
+
+        if details.get(
+            "po_number",
+            "N/A"
+        ) == selected_po
+
+    ]
+
+    if not filtered_styles:
+
+        st.warning(
+            f"No styles found under PO : {selected_po}"
+        )
+
+        st.info(
+            "Open Style Master and save styles with PO Number."
+        )
+
+        return
+
     selected_style = st.selectbox(
         "Select Style",
-        list(masters.keys())
+        filtered_styles
     )
 
     master = masters[selected_style]
@@ -127,11 +173,11 @@ def run():
         format="%.3f"
     )
 
-    sj_weight = st.number_input(
-        "SJ Weight",
+    ADDFAB_weight = st.number_input(
+        "ADDFAB Weight",
         value=float(
             old_inputs.get(
-                "sj_weight",
+                "ADDFAB_weight",
                 0.003
             )
         ),
@@ -158,11 +204,11 @@ def run():
         )
     )
 
-    sj_loss = st.number_input(
-        "SJ Loss %",
+    ADDFAB_loss = st.number_input(
+        "ADDFAB Loss %",
         value=float(
             old_inputs.get(
-                "sj_loss",
+                "ADDFAB_loss",
                 0.0
             )
         )
@@ -189,7 +235,7 @@ def run():
 
             body_total = 0
             rib_total = 0
-            sj_total = 0
+            ADDFAB_total = 0
 
             color_order_qty = 0
 
@@ -236,11 +282,11 @@ def run():
                     (1 + rib_loss / 100)
                 )
 
-                # SJ
-                sj_total += (
+                # ADDFAB
+                ADDFAB_total += (
                     size_qty *
-                    sj_weight *
-                    (1 + sj_loss / 100)
+                    ADDFAB_weight *
+                    (1 + ADDFAB_loss / 100)
                 )
 
             results.append({
@@ -262,15 +308,15 @@ def run():
                     2
                 ),
 
-                "SJ Total (Kg)": round(
-                    sj_total,
+                "ADDFAB Total (Kg)": round(
+                    ADDFAB_total,
                     2
                 ),
 
                 "Grand Total (Kg)": round(
                     body_total +
                     rib_total +
-                    sj_total,
+                    ADDFAB_total,
                     2
                 )
             })
@@ -294,8 +340,8 @@ def run():
             "Rib Total (Kg)"
         ].sum()
 
-        total_sj = df[
-            "SJ Total (Kg)"
+        total_ADDFAB = df[
+            "ADDFAB Total (Kg)"
         ].sum()
 
         total_grand = df[
@@ -314,8 +360,8 @@ def run():
                 2
             ),
 
-            "Total SJ (Kg)": round(
-                total_sj,
+            "Total ADDFAB (Kg)": round(
+                total_ADDFAB,
                 2
             ),
 
@@ -346,13 +392,13 @@ def run():
 
                 "rib_weight": rib_weight,
 
-                "sj_weight": sj_weight,
+                "ADDFAB_weight": ADDFAB_weight,
 
                 "body_loss": body_loss,
 
                 "rib_loss": rib_loss,
 
-                "sj_loss": sj_loss
+                "ADDFAB_loss": ADDFAB_loss
             }
         }
 
@@ -436,9 +482,9 @@ def run():
                 2
             ),
 
-            "SJ Total (Kg)": round(
+            "ADDFAB Total (Kg)": round(
                 final_df[
-                    "SJ Total (Kg)"
+                    "ADDFAB Total (Kg)"
                 ].sum(),
                 2
             ),

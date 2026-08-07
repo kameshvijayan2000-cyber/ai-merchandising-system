@@ -1,0 +1,22 @@
+{
+    "Reddragon": {
+        "results": [
+            {
+                "Color": "BLACK",
+                "Order Qty": 1030.0,
+                "Body Total (Kg)": 407.36,
+                "Rib Total (Kg)": 113.3,
+                "ADDFAB Total (Kg)": 3.24,
+                "Grand Total (Kg)": 523.91
+            }
+        ],
+        "inputs": {
+            "body_weight": 0.35,
+            "rib_weight": 0.1,
+            "ADDFAB_weight": 0.003,
+            "body_loss": 13.0,
+            "rib_loss": 10.0,
+            "ADDFAB_loss": 5.0
+        }
+    }
+}

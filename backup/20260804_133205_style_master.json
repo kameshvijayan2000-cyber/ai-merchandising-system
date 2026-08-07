@@ -1,0 +1,56 @@
+{
+    "Reddragon": {
+        "po_number": "256",
+        "total_qty": 1000,
+        "cartons": 250,
+        "pcs_per_carton": 12,
+        "extra_percent": 5.0,
+        "cut_qty_percent": 3.0,
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "colors": [
+            "BLACK"
+        ],
+        "color_ratios": {
+            "BLACK": {
+                "XS": 1,
+                "S": 2,
+                "M": 3,
+                "L": 2,
+                "XL": 1
+            }
+        }
+    },
+    "REDDRAGON": {
+        "po_number": "256",
+        "total_qty": 3000,
+        "cartons": 250,
+        "pcs_per_carton": 12,
+        "extra_percent": 5.0,
+        "cut_qty_percent": 3.0,
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "colors": [
+            "BLACK"
+        ],
+        "color_ratios": {
+            "BLACK": {
+                "XS": 1,
+                "S": 2,
+                "M": 3,
+                "L": 2,
+                "XL": 1
+            }
+        }
+    }
+}

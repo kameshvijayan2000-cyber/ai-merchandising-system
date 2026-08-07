@@ -1,0 +1,65 @@
+{
+    "SHYNO": {
+        "po_number": "2603584",
+        "total_qty": 8700,
+        "cartons": 290,
+        "pcs_per_carton": 30,
+        "extra_percent": 5.0,
+        "cut_qty_percent": 7.0,
+        "sizes": [
+            "S",
+            "M",
+            "L",
+            "XL",
+            "XXL"
+        ],
+        "colors": [
+            "BLUE",
+            "NOIR",
+            "ROSE"
+        ],
+        "color_ratios": {
+            "BLUE": {
+                "S": 1,
+                "M": 2,
+                "L": 2,
+                "XL": 2,
+                "XXL": 1
+            },
+            "NOIR": {
+                "S": 2,
+                "M": 3,
+                "L": 3,
+                "XL": 2,
+                "XXL": 2
+            },
+            "ROSE": {
+                "S": 1,
+                "M": 3,
+                "L": 3,
+                "XL": 2,
+                "XXL": 1
+            }
+        }
+    },
+    "EERR": {
+        "po_number": "24",
+        "total_qty": 1000,
+        "cartons": 250,
+        "pcs_per_carton": 12,
+        "extra_percent": 5.0,
+        "cut_qty_percent": 3.0,
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "colors": [
+            "BLACK",
+            "WHITE"
+        ],
+        "color_ratios": {}
+    }
+}

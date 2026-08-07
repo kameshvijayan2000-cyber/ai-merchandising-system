@@ -1,0 +1,49 @@
+{
+    "256_Reddragon": {
+        "results": [
+            {
+                "Color": "BLACK",
+                "Size": "XS",
+                "Ratio": 1,
+                "Qty": 263
+            },
+            {
+                "Color": "BLACK",
+                "Size": "S",
+                "Ratio": 2,
+                "Qty": 526
+            },
+            {
+                "Color": "BLACK",
+                "Size": "M",
+                "Ratio": 3,
+                "Qty": 789
+            },
+            {
+                "Color": "BLACK",
+                "Size": "L",
+                "Ratio": 2,
+                "Qty": 526
+            },
+            {
+                "Color": "BLACK",
+                "Size": "XL",
+                "Ratio": 1,
+                "Qty": 263
+            }
+        ],
+        "summary": [
+            {
+                "Color": "BLACK",
+                "Color Ratio Total": 9,
+                "Total Qty": 2367
+            }
+        ],
+        "inputs": {
+            "cartons": 250,
+            "pcs_per_carton": 12,
+            "extra_percent": 5.0,
+            "final_cartons": 263
+        }
+    }
+}

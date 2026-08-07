@@ -1,0 +1,22 @@
+{
+    "": {
+        "Style Name": "",
+        "Order Qty": 1000,
+        "Avg Piece Weight": 215.86,
+        "Total Fabric Kg": 242.52,
+        "Fabric Amount": 98221.9,
+        "Trims Cost": 0.0,
+        "Final Amount": 193455.18,
+        "Cost Per Piece": 193.46
+    },
+    "SHYNO": {
+        "Style Name": "SHYNO",
+        "Order Qty": 6815,
+        "Avg Piece Weight": 520.61,
+        "Total Fabric Kg": 4215.0,
+        "Fabric Amount": 1837738.86,
+        "Trims Cost": 102225.0,
+        "Final Amount": 2636541.01,
+        "Cost Per Piece": 386.87
+    }
+}

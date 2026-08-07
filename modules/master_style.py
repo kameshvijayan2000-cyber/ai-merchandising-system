@@ -18,6 +18,11 @@ def run():
         data = {}
 
     # ================= INPUTS =================
+    
+    po_number = st.text_input(
+        "PO Number"
+    )
+    
     style_name = st.text_input("Style Name")
 
     total_qty = st.number_input(
@@ -82,7 +87,10 @@ def run():
             st.error("Please Enter Style Name")
 
             return
-
+        if not po_number.strip():
+            
+            st.error("Please Enter PO Number")
+            return
         # ================= SIZE LIST =================
         size_list = [
 
@@ -145,7 +153,8 @@ def run():
 
             # ================= SAVE STYLE =================
             data[style_name] = {
-
+                
+                "po_number": po_number,
                 "total_qty": int(total_qty),
 
                 # ================= CARTON INFO =================
@@ -203,7 +212,7 @@ def run():
         st.markdown("---")
 
         st.write(f"## 🧵 {style}")
-
+        st.info(f"PO Number : {details.get('po_number','N/A')}")
         # ================= METRICS =================
         col1, col2, col3, col4 = st.columns(4)
 

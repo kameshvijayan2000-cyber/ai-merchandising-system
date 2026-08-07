@@ -29,10 +29,54 @@ def count_calculator_module():
 
         count_data = {}
 
-    # ================= STYLE SELECT =================
+    
+    # ================= PO SELECT =================
+
+    po_list = sorted(
+
+        list(
+
+            set(
+
+                details.get(
+                    "po_number",
+                    "N/A"
+                )
+
+                for details in masters.values()
+            )
+        )
+    )   
+
+    selected_po = st.selectbox(
+        "Select PO Number",
+        po_list
+    )
+
+    filtered_styles = [
+
+        style
+
+        for style, details in masters.items()
+
+        if details.get(
+            "po_number",
+            "N/A"
+        ) == selected_po
+
+    ]
+
+    if not filtered_styles:
+
+        st.warning(
+            f"No styles found under PO : {selected_po}"
+        )
+
+        return
+
     selected_style = st.selectbox(
         "Select Style",
-        list(masters.keys())
+        filtered_styles
     )
 
     master = masters[selected_style]
@@ -131,21 +175,22 @@ def count_calculator_module():
     st.subheader("📦 Carton Planning")
 
     # ================= LOAD OLD INPUTS =================
+    count_key = f"{selected_po}_{selected_style}"
     old_inputs = {}
 
     if (
-        selected_style in count_data and
+        count_key in count_data and
         isinstance(
-            count_data[selected_style],
+            count_data[count_key],
             dict
         ) and
         "inputs" in count_data[
-            selected_style
+            count_key
         ]
     ):
 
         old_inputs = count_data[
-            selected_style
+            count_key
         ]["inputs"]
 
     # ================= DEFAULT VALUES FROM MASTER =================
@@ -343,7 +388,9 @@ def count_calculator_module():
         )
 
         # ================= SAVE =================
-        count_data[selected_style] = {
+        count_key = f"{selected_po}_{selected_style}"
+
+        count_data[count_key] ={
 
             "results":
             result_rows,
@@ -379,14 +426,15 @@ def count_calculator_module():
     # ================= OLD DATA =================
     st.markdown("---")
 
-    if selected_style in count_data:
+    count_key = f"{selected_po}_{selected_style}"
+    if count_key in count_data:
 
         st.subheader(
             "📂 Existing Count Data"
         )
 
         old_data = count_data[
-            selected_style
+            count_key
         ]
 
         # ================= OLD FORMAT =================
@@ -497,8 +545,8 @@ def count_calculator_module():
     if st.button(
         "🗑️ Clear Current Style Count Data"
     ):
-
-        if selected_style in count_data:
+        count_key = f"{selected_po}_{selected_style}"
+        if count_key in count_data:
 
             del count_data[
                 selected_style
@@ -506,7 +554,7 @@ def count_calculator_module():
 
             save_json(
                 COUNT_FILE,
-                count_data
+                count_key
             )
 
             st.success(

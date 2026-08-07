@@ -5,6 +5,7 @@ from modules.utils import load_json, save_json
 
 FILE = "data/production_tracking.json"
 COUNT_FILE = "data/count_data.json"
+STYLE_FILE = "data/style_master.json"
 
 
 def run():
@@ -18,6 +19,7 @@ def run():
     data = load_json(FILE)
 
     count_data = load_json(COUNT_FILE)
+    masters = load_json(STYLE_FILE)
 
     # =========================================================
     # INITIALIZE
@@ -45,6 +47,29 @@ def run():
     # =========================================================
 
     st.subheader("➕ Add Production Entry")
+    
+    # ================= PO SELECT =================
+
+    po_list = sorted(
+
+        list(
+
+            set(
+
+                details.get(
+                    "po_number",
+                    "N/A"
+                )
+
+                for details in masters.values()
+            )
+        )
+    )
+
+    selected_po = st.selectbox(
+        "Select PO Number",
+        po_list
+    )
 
     process = st.selectbox(
 
@@ -103,11 +128,29 @@ def run():
         # STYLE SELECT
         # =====================================================
 
+        filtered_styles = []
+
+        for key in count_data.keys():
+
+            if key.startswith(
+                f"{selected_po}_"
+            ):
+
+                filtered_styles.append(key)
+
+        if not filtered_styles:
+
+            st.warning(
+                "No Count Data Found For This PO"
+            )
+
+            return
+
         style = st.selectbox(
 
             "Select Style",
 
-            list(count_data.keys())
+            filtered_styles
         )
 
         style_data = count_data[style]
@@ -218,7 +261,16 @@ def run():
 
             value=0
         )
+        # ==========================================
+        # CUTTING PART
+        # ==========================================
+        cutting_part = ""
 
+        if process == "Cutting":
+
+            cutting_part = st.text_input(
+                "Cutting Part (Body / Sleeve / Hood / Rib / Pocket etc.)"
+            )
         # =====================================================
         # BALANCE
         # =====================================================
@@ -301,6 +353,9 @@ def run():
         if st.button("💾 Save Entry"):
 
             data["entries"].append({
+                
+                "PO Number":
+                selected_po,
 
                 "Date":
                 str(entry_date),
@@ -317,6 +372,9 @@ def run():
                 "Size":
                 selected_size,
 
+                "Cutting Part":
+                cutting_part,
+                
                 "Target Qty":
                 target_qty,
 
@@ -394,6 +452,9 @@ def run():
         if st.button("💾 Save Entry"):
 
             data["entries"].append({
+                
+                "PO Number":
+                selected_po,
 
                 "Date":
                 str(entry_date),
@@ -439,7 +500,16 @@ def run():
     df = pd.DataFrame(
         data["entries"]
     )
+    if not df.empty:
 
+        if "PO Number" in df.columns:
+
+            df = df[
+
+                df["PO Number"]
+                == selected_po
+
+            ]
     if not df.empty:
 
         display_df = df.copy()
@@ -563,6 +633,16 @@ def run():
                 if balance_qty < 0:
                     balance_qty = 0
 
+                cutting_part_value = ""
+
+                if "Cutting Part" in group.columns:
+
+                    cutting_part_value = (
+                        group["Cutting Part"]
+                        .fillna("")
+                        .iloc[0]
+                    )
+
                 garment_rows.append({
 
                     "Process":
@@ -576,6 +656,9 @@ def run():
 
                     "Size":
                     size_name,
+
+                    "Cutting Part":
+                    cutting_part_value,
 
                     "Target Qty":
                     target_qty,

@@ -1,0 +1,140 @@
+{
+    "rolls": [
+        {
+            "Date": "2026-04-22",
+            "Company": "Bairava",
+            "Fabric": "LoopKnit_60-40",
+            "Color": "BORDEAUX",
+            "Rolls": 2,
+            "Kg": 41.8
+        },
+        {
+            "Date": "2026-04-30",
+            "Company": "Bairava",
+            "Fabric": "LoopKnit_60-40",
+            "Color": "BORDEAUX",
+            "Rolls": 2,
+            "Kg": 40.8
+        },
+        {
+            "Date": "2026-05-07",
+            "Company": "Bairava",
+            "Fabric": "LoopKnit_60-40",
+            "Color": "BORDEAUX",
+            "Rolls": 61,
+            "Kg": 1332.2
+        },
+        {
+            "Date": "2026-05-20",
+            "Company": "Bairava",
+            "Fabric": "LoopKnit_60-40",
+            "Color": "BORDEAUX",
+            "Rolls": 72,
+            "Kg": 1407.0
+        },
+        {
+            "Date": "2026-05-07",
+            "Company": "Vinayaka",
+            "Fabric": "D.Rib",
+            "Color": "BORDEAUX",
+            "Rolls": 15,
+            "Kg": 325.4
+        },
+        {
+            "Date": "2026-05-30",
+            "Company": "Vinayaka Compactors",
+            "Fabric": "D.Rib",
+            "Color": "BORDEAUX",
+            "Rolls": 12,
+            "Kg": 275.0
+        },
+        {
+            "Date": "2026-05-24",
+            "Company": "Bairava",
+            "Fabric": "LoopKnit_60-40",
+            "Color": "BORDEAUX",
+            "Rolls": 20,
+            "Kg": 387.8
+        },
+        {
+            "Date": "2026-05-29",
+            "Company": "Sathyam Compacting",
+            "Fabric": "SJ_32D",
+            "Color": "BORDEAUX",
+            "Rolls": 7,
+            "Kg": 130.0
+        },
+        {
+            "Date": "2026-05-29",
+            "Company": "Sathyam Compacting",
+            "Fabric": "D.Rib_38D",
+            "Color": "BORDEAUX",
+            "Rolls": 5,
+            "Kg": 104.4
+        },
+        {
+            "Date": "2026-06-09",
+            "Company": "Vinayaka",
+            "Fabric": "LoopKnit_60-40",
+            "Color": "BEIGE",
+            "Rolls": 34,
+            "Kg": 654.8
+        },
+        {
+            "Date": "2026-06-09",
+            "Company": "Vinayaka",
+            "Fabric": "LoopKnit_60-40",
+            "Color": "OFFWHITE",
+            "Rolls": 71,
+            "Kg": 1310.2
+        },
+        {
+            "Date": "2026-06-04",
+            "Company": "Vinayaka",
+            "Fabric": "LoopKnit_60-40_32D",
+            "Color": "VERT",
+            "Rolls": 77,
+            "Kg": 1455.4
+        },
+        {
+            "Date": "2026-06-06",
+            "Company": "Vinayaka",
+            "Fabric": "D.Rib_38D",
+            "Color": "VERT",
+            "Rolls": 3,
+            "Kg": 64.0
+        },
+        {
+            "Date": "2026-06-06",
+            "Company": "Vinayaka",
+            "Fabric": "SJ_32D",
+            "Color": "VERT",
+            "Rolls": 1,
+            "Kg": 10.0
+        },
+        {
+            "Date": "2026-06-06",
+            "Company": "Vinayaka",
+            "Fabric": "SJ_32D",
+            "Color": "OFFWHITE",
+            "Rolls": 3,
+            "Kg": 56.0
+        },
+        {
+            "Date": "2026-06-06",
+            "Company": "Vinayaka",
+            "Fabric": "D.Rib_38D",
+            "Color": "OFFWHITE",
+            "Rolls": 13,
+            "Kg": 252.8
+        },
+        {
+            "Date": "2026-06-06",
+            "Company": "Vinayaka",
+            "Fabric": "D.Rib_38D",
+            "Color": "VERT",
+            "Rolls": 14,
+            "Kg": 273.8
+        }
+    ]
+}

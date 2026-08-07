@@ -4,12 +4,61 @@ from datetime import date
 from modules.utils import load_json, save_json
 
 FILE = "data/fabric_store.json"
+STYLE_FILE = "data/style_master.json"
 
 
 def run():
 
     st.header("🧵 Fabric Store")
+    
+    # ================= LOAD STYLE MASTER =================
+    masters = load_json(STYLE_FILE)
 
+    if not masters:
+
+        st.warning(
+            "No styles found. Create Style Master first."
+        )
+
+        return
+
+    po_list = sorted(
+
+        list(
+
+            set(
+
+                details.get(
+                    "po_number",
+                    "N/A"
+                )
+
+                for details in masters.values()
+            )
+        )
+    )
+
+    selected_po = st.selectbox(
+        "Select PO Number",
+        po_list
+    )
+    filtered_styles = [
+
+        style
+
+        for style, details in masters.items()
+
+        if details.get(
+            "po_number",
+            "N/A"
+        ) == selected_po
+
+    ]
+
+    selected_style = st.selectbox(
+        "Select Style",
+        filtered_styles
+    )
     # ================= LOAD DATA =================
     data = load_json(FILE)
 
@@ -18,6 +67,12 @@ def run():
 
     # ================= FIX OLD DATA =================
     for item in data["rolls"]:
+        
+        if "PO Number" not in item:
+            item["PO Number"] = "N/A"
+        
+        if "Style" not in item:
+            item["Style"] = "N/A"
 
         if "Rolls" not in item:
             item["Rolls"] = 1
@@ -82,6 +137,10 @@ def run():
         else:
 
             data["rolls"].append({
+                
+                "PO Number": selected_po,
+                
+                "Style": selected_style,
 
                 "Date": str(entry_date),
 
@@ -119,6 +178,21 @@ def run():
     )
 
     if not df.empty:
+        df = df[
+
+        df["PO Number"]
+        == selected_po
+
+        ]
+
+        if selected_style:
+
+            df = df[
+
+                df["Style"]
+                == selected_style
+
+            ]
 
         # ================= FIX COLUMNS =================
         if "Rolls" not in df.columns:

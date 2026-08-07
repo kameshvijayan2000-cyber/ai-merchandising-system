@@ -1,0 +1,52 @@
+{
+    "rolls": [
+        {
+            "Date": "2026-04-22",
+            "Company": "Bairava",
+            "Fabric": "LoopKnit_60-40",
+            "Color": "BORDEAUX",
+            "Rolls": 2,
+            "Kg": 41.8
+        },
+        {
+            "Date": "2026-04-30",
+            "Company": "Bairava",
+            "Fabric": "LoopKnit_60-40",
+            "Color": "BORDEAUX",
+            "Rolls": 2,
+            "Kg": 40.8
+        },
+        {
+            "Date": "2026-05-07",
+            "Company": "Bairava",
+            "Fabric": "LoopKnit_60-40",
+            "Color": "BORDEAUX",
+            "Rolls": 61,
+            "Kg": 1332.2
+        },
+        {
+            "Date": "2026-05-20",
+            "Company": "Bairava",
+            "Fabric": "LoopKnit_60-40",
+            "Color": "BORDEAUX",
+            "Rolls": 72,
+            "Kg": 1407.0
+        },
+        {
+            "Date": "2026-05-07",
+            "Company": "Vinayaka",
+            "Fabric": "D.Rib",
+            "Color": "BORDEAUX",
+            "Rolls": 15,
+            "Kg": 325.4
+        },
+        {
+            "Date": "2026-05-30",
+            "Company": "Vinayaka Compactors",
+            "Fabric": "D.Rib",
+            "Color": "BORDEAUX",
+            "Rolls": 12,
+            "Kg": 275.0
+        }
+    ]
+}

@@ -1,9 +1,18 @@
 import streamlit as st
 import pandas as pd
+from modules.utils import load_json, save_json
+
+FILE = "data/cost_estimator.json"
 
 def run():
 
     st.header("💰 Cost Estimator")
+    # ================= LOAD DATA =================
+
+    data = load_json(FILE)
+
+    if not isinstance(data, dict):
+        data = {}
 
     st.markdown("---")
 
@@ -359,7 +368,7 @@ def run():
             cuff_area = (
                 cuff_length *
                 cuff_width *
-                2
+                4
             )
 
             cuff_weight = (
@@ -551,14 +560,24 @@ def run():
     # =========================================================
 
     fabric_loss_percent = st.number_input(
-        "Fabric Loss %",
-        value=5.0
+    "Fabric Loss %",
+    value=5.0
     )
 
-    total_fabric_kg = (
+    # Fabric consumption before loss
+    base_fabric_kg = (
         avg_piece_weight *
         final_fabric_qty
     ) / 1000
+
+    # Add fabric loss to consumption
+    total_fabric_kg = (
+        base_fabric_kg *
+        (
+            1 +
+            fabric_loss_percent / 100
+        )
+    )
 
     fabric_rate = (
 
@@ -573,19 +592,10 @@ def run():
         extra_process_total
     )
 
-    fabric_amount = (
+    # Cost calculated on increased consumption
+    final_fabric_amount = (
         total_fabric_kg *
         fabric_rate
-    )
-
-    fabric_loss_amount = (
-        fabric_amount *
-        fabric_loss_percent / 100
-    )
-
-    final_fabric_amount = (
-        fabric_amount +
-        fabric_loss_amount
     )
 
     # =========================================================
@@ -816,3 +826,72 @@ def run():
     st.success(
         f"✅ Final Garment Cost : ₹ {round(cost_per_piece, 2)} / Piece"
     )
+    st.markdown("---")
+
+    if st.button("💾 Save Costing"):
+
+        data[style_name] = {
+
+            "Style Name": style_name,
+
+            "Order Qty": order_qty,
+
+            "Avg Piece Weight":
+            round(avg_piece_weight, 2),
+
+            "Total Fabric Kg":
+            round(total_fabric_kg, 2),
+
+            "Fabric Amount":
+            round(final_fabric_amount, 2),
+
+            "Trims Cost":
+            round(trims_total, 2),
+
+            "Final Amount":
+            round(final_amount, 2),
+
+            "Cost Per Piece":
+            round(cost_per_piece, 2)
+        }
+
+        save_json(
+            FILE,
+            data
+        )
+
+        st.success(
+            "✅ Costing Saved Successfully"
+        )
+    # =========================================================
+    # SAVED COSTINGS
+    # =========================================================
+
+    st.markdown("---")
+
+    st.subheader("📂 Saved Costings")
+
+    saved_data = load_json(FILE)
+
+    if saved_data:
+
+        saved_rows = []
+
+        for style, details in saved_data.items():
+
+            saved_rows.append(details)
+
+        saved_df = pd.DataFrame(
+            saved_rows
+        )
+
+        st.dataframe(
+            saved_df,
+            use_container_width=True
+        )
+
+    else:
+
+        st.info(
+            "No Costings Saved Yet"
+        )

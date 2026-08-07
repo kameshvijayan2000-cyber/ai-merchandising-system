@@ -1,0 +1,32 @@
+{
+    "": {
+        "Style Name": "",
+        "Order Qty": 1000,
+        "Avg Piece Weight": 215.86,
+        "Total Fabric Kg": 242.52,
+        "Fabric Amount": 98221.9,
+        "Trims Cost": 0.0,
+        "Final Amount": 193455.18,
+        "Cost Per Piece": 193.46
+    },
+    "SHYNO": {
+        "Style Name": "SHYNO",
+        "Order Qty": 6815,
+        "Avg Piece Weight": 520.61,
+        "Total Fabric Kg": 4215.0,
+        "Fabric Amount": 1837738.86,
+        "Trims Cost": 102225.0,
+        "Final Amount": 2636541.01,
+        "Cost Per Piece": 386.87
+    },
+    "SEVILLE": {
+        "Style Name": "SEVILLE",
+        "Order Qty": 7525,
+        "Avg Piece Weight": 552.4,
+        "Total Fabric Kg": 4938.3,
+        "Fabric Amount": 2153100.02,
+        "Trims Cost": 150500.0,
+        "Final Amount": 3500312.52,
+        "Cost Per Piece": 465.16
+    }
+}
