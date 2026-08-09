@@ -5,8 +5,10 @@ from modules.utils import clear_all_data
 
 # ================= PAGE CONFIG =================
 st.set_page_config(
-    page_title="MERCHANDISING CALCULATOR",
-    layout="wide"
+    page_title="AI Merchandising System",
+    page_icon="assets/app_icon.png",
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
 # ================= IMPORT MODULES =================
