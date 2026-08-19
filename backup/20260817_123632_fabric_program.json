@@ -1,0 +1,38 @@
+{
+    "SHYNO": {
+        "results": [
+            {
+                "Color": "BLUE",
+                "Order Qty": 2482.0,
+                "Body Total (Kg)": 1127.66,
+                "Rib Total (Kg)": 300.37,
+                "ADDFAB Total (Kg)": 0.0,
+                "Grand Total (Kg)": 1428.03
+            },
+            {
+                "Color": "BLACK",
+                "Order Qty": 3724.0,
+                "Body Total (Kg)": 1691.48,
+                "Rib Total (Kg)": 450.56,
+                "ADDFAB Total (Kg)": 0.0,
+                "Grand Total (Kg)": 2142.04
+            },
+            {
+                "Color": "ROSE",
+                "Order Qty": 3103.0,
+                "Body Total (Kg)": 1409.57,
+                "Rib Total (Kg)": 375.46,
+                "ADDFAB Total (Kg)": 0.0,
+                "Grand Total (Kg)": 1785.03
+            }
+        ],
+        "inputs": {
+            "body_weight": 0.402,
+            "rib_weight": 0.11,
+            "ADDFAB_weight": 0.0,
+            "body_loss": 13.0,
+            "rib_loss": 10.0,
+            "ADDFAB_loss": 0.0
+        }
+    }
+}

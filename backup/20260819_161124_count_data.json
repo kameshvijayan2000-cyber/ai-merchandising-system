@@ -275,104 +275,104 @@
                 "Color": "BLANC",
                 "Size": "3",
                 "Ratio": 1,
-                "Qty": 172
+                "Qty": 168
             },
             {
                 "Color": "BLANC",
                 "Size": "4",
                 "Ratio": 2,
-                "Qty": 344
+                "Qty": 336
             },
             {
                 "Color": "BLANC",
                 "Size": "5",
                 "Ratio": 2,
-                "Qty": 344
+                "Qty": 336
             },
             {
                 "Color": "BLANC",
                 "Size": "6",
                 "Ratio": 1,
-                "Qty": 172
+                "Qty": 168
             },
             {
                 "Color": "BLANC",
                 "Size": "8",
                 "Ratio": 2,
-                "Qty": 344
+                "Qty": 336
             },
             {
                 "Color": "BLANC",
                 "Size": "10",
                 "Ratio": 2,
-                "Qty": 344
+                "Qty": 336
             },
             {
                 "Color": "BLANC",
                 "Size": "12",
                 "Ratio": 1,
-                "Qty": 172
+                "Qty": 168
             },
             {
                 "Color": "GRIS",
                 "Size": "3",
                 "Ratio": 1,
-                "Qty": 172
+                "Qty": 168
             },
             {
                 "Color": "GRIS",
                 "Size": "4",
                 "Ratio": 1,
-                "Qty": 172
+                "Qty": 168
             },
             {
                 "Color": "GRIS",
                 "Size": "5",
                 "Ratio": 2,
-                "Qty": 344
+                "Qty": 336
             },
             {
                 "Color": "GRIS",
                 "Size": "6",
                 "Ratio": 1,
-                "Qty": 172
+                "Qty": 168
             },
             {
                 "Color": "GRIS",
                 "Size": "8",
                 "Ratio": 1,
-                "Qty": 172
+                "Qty": 168
             },
             {
                 "Color": "GRIS",
                 "Size": "10",
                 "Ratio": 1,
-                "Qty": 172
+                "Qty": 168
             },
             {
                 "Color": "GRIS",
                 "Size": "12",
                 "Ratio": 1,
-                "Qty": 172
+                "Qty": 168
             }
         ],
         "summary": [
             {
                 "Color": "BLANC",
                 "Color Ratio Total": 11,
-                "Total Qty": 1892
+                "Total Qty": 1848
             },
             {
                 "Color": "GRIS",
                 "Color Ratio Total": 8,
-                "Total Qty": 1376
+                "Total Qty": 1344
             }
         ],
         "inputs": {
             "cartons": 160,
             "pcs_per_carton": 19,
-            "extra_percent": 7.0,
-            "final_cartons": 172
+            "extra_percent": 5.0,
+            "final_cartons": 168
         }
     },
     "2603999_SELIMUNI": {
@@ -381,151 +381,151 @@
                 "Color": "GRIS",
                 "Size": "3",
                 "Ratio": 1,
-                "Qty": 193
+                "Qty": 189
             },
             {
                 "Color": "GRIS",
                 "Size": "4",
                 "Ratio": 1,
-                "Qty": 193
+                "Qty": 189
             },
             {
                 "Color": "GRIS",
                 "Size": "5",
                 "Ratio": 1,
-                "Qty": 193
+                "Qty": 189
             },
             {
                 "Color": "GRIS",
                 "Size": "6",
                 "Ratio": 2,
-                "Qty": 386
+                "Qty": 378
             },
             {
                 "Color": "GRIS",
                 "Size": "8",
                 "Ratio": 2,
-                "Qty": 386
+                "Qty": 378
             },
             {
                 "Color": "GRIS",
                 "Size": "10",
                 "Ratio": 2,
-                "Qty": 386
+                "Qty": 378
             },
             {
                 "Color": "GRIS",
                 "Size": "12",
                 "Ratio": 1,
-                "Qty": 193
+                "Qty": 189
             },
             {
                 "Color": "MARINE",
                 "Size": "3",
                 "Ratio": 1,
-                "Qty": 193
+                "Qty": 189
             },
             {
                 "Color": "MARINE",
                 "Size": "4",
                 "Ratio": 1,
-                "Qty": 193
+                "Qty": 189
             },
             {
                 "Color": "MARINE",
                 "Size": "5",
                 "Ratio": 1,
-                "Qty": 193
+                "Qty": 189
             },
             {
                 "Color": "MARINE",
                 "Size": "6",
                 "Ratio": 2,
-                "Qty": 386
+                "Qty": 378
             },
             {
                 "Color": "MARINE",
                 "Size": "8",
                 "Ratio": 2,
-                "Qty": 386
+                "Qty": 378
             },
             {
                 "Color": "MARINE",
                 "Size": "10",
                 "Ratio": 2,
-                "Qty": 386
+                "Qty": 378
             },
             {
                 "Color": "MARINE",
                 "Size": "12",
                 "Ratio": 1,
-                "Qty": 193
+                "Qty": 189
             },
             {
                 "Color": "NOIR",
                 "Size": "3",
                 "Ratio": 1,
-                "Qty": 193
+                "Qty": 189
             },
             {
                 "Color": "NOIR",
                 "Size": "4",
                 "Ratio": 1,
-                "Qty": 193
+                "Qty": 189
             },
             {
                 "Color": "NOIR",
                 "Size": "5",
                 "Ratio": 2,
-                "Qty": 386
+                "Qty": 378
             },
             {
                 "Color": "NOIR",
                 "Size": "6",
                 "Ratio": 2,
-                "Qty": 386
+                "Qty": 378
             },
             {
                 "Color": "NOIR",
                 "Size": "8",
                 "Ratio": 2,
-                "Qty": 386
+                "Qty": 378
             },
             {
                 "Color": "NOIR",
                 "Size": "10",
                 "Ratio": 2,
-                "Qty": 386
+                "Qty": 378
             },
             {
                 "Color": "NOIR",
                 "Size": "12",
                 "Ratio": 1,
-                "Qty": 193
+                "Qty": 189
             }
         ],
         "summary": [
             {
                 "Color": "GRIS",
                 "Color Ratio Total": 10,
-                "Total Qty": 1930
+                "Total Qty": 1890
             },
             {
                 "Color": "MARINE",
                 "Color Ratio Total": 10,
-                "Total Qty": 1930
+                "Total Qty": 1890
             },
             {
                 "Color": "NOIR",
                 "Color Ratio Total": 11,
-                "Total Qty": 2123
+                "Total Qty": 2079
             }
         ],
         "inputs": {
             "cartons": 180,
             "pcs_per_carton": 31,
-            "extra_percent": 7.0,
-            "final_cartons": 193
+            "extra_percent": 5.0,
+            "final_cartons": 189
         }
     }
 }

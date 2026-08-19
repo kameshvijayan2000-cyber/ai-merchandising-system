@@ -1,0 +1,38 @@
+{
+    "REDDRAGON": {
+        "results": [
+            {
+                "Color": "BLUE",
+                "Order Qty": 2482.0,
+                "Body Total (Kg)": 1127655.02,
+                "Rib Total (Kg)": 300370.4,
+                "ADDFAB Total (Kg)": 0.0,
+                "Grand Total (Kg)": 1428025.42
+            },
+            {
+                "Color": "BLACK",
+                "Order Qty": 3724.0,
+                "Body Total (Kg)": 1691482.54,
+                "Rib Total (Kg)": 450555.6,
+                "ADDFAB Total (Kg)": 0.0,
+                "Grand Total (Kg)": 2142038.14
+            },
+            {
+                "Color": "ROSE",
+                "Order Qty": 3103.0,
+                "Body Total (Kg)": 1409568.78,
+                "Rib Total (Kg)": 375463.0,
+                "ADDFAB Total (Kg)": 0.0,
+                "Grand Total (Kg)": 1785031.78
+            }
+        ],
+        "inputs": {
+            "body_weight": 402.0,
+            "rib_weight": 110.0,
+            "ADDFAB_weight": 0.0,
+            "body_loss": 13.0,
+            "rib_loss": 10.0,
+            "ADDFAB_loss": 0.0
+        }
+    }
+}

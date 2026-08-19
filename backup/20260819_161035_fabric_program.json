@@ -39,27 +39,27 @@
         "results": [
             {
                 "Color": "BEIGE",
-                "Order Qty": 1204,
-                "Body Total (Kg)": 170.06,
-                "Rib Total (Kg)": 2.98,
+                "Order Qty": 1176,
+                "Body Total (Kg)": 166.11,
+                "Rib Total (Kg)": 2.91,
                 "ADDFAB Total (Kg)": 0.0,
-                "Grand Total (Kg)": 173.04
+                "Grand Total (Kg)": 169.02
             },
             {
                 "Color": "BORDEAUX",
-                "Order Qty": 1204,
-                "Body Total (Kg)": 170.06,
-                "Rib Total (Kg)": 2.98,
+                "Order Qty": 1176,
+                "Body Total (Kg)": 166.11,
+                "Rib Total (Kg)": 2.91,
                 "ADDFAB Total (Kg)": 0.0,
-                "Grand Total (Kg)": 173.04
+                "Grand Total (Kg)": 169.02
             },
             {
                 "Color": "VERT",
-                "Order Qty": 1204,
-                "Body Total (Kg)": 170.06,
-                "Rib Total (Kg)": 2.98,
+                "Order Qty": 1176,
+                "Body Total (Kg)": 166.11,
+                "Rib Total (Kg)": 2.91,
                 "ADDFAB Total (Kg)": 0.0,
-                "Grand Total (Kg)": 173.04
+                "Grand Total (Kg)": 169.02
             }
         ],
         "inputs": {
@@ -75,19 +75,19 @@
         "results": [
             {
                 "Color": "BLANC",
-                "Order Qty": 1892,
-                "Body Total (Kg)": 222.35,
-                "Rib Total (Kg)": 9.57,
+                "Order Qty": 1883.0,
+                "Body Total (Kg)": 221.31,
+                "Rib Total (Kg)": 9.53,
                 "ADDFAB Total (Kg)": 0.0,
-                "Grand Total (Kg)": 231.92
+                "Grand Total (Kg)": 230.84
             },
             {
                 "Color": "GRIS",
-                "Order Qty": 1376,
-                "Body Total (Kg)": 161.71,
-                "Rib Total (Kg)": 6.96,
+                "Order Qty": 1370.0,
+                "Body Total (Kg)": 160.96,
+                "Rib Total (Kg)": 6.93,
                 "ADDFAB Total (Kg)": 0.0,
-                "Grand Total (Kg)": 168.67
+                "Grand Total (Kg)": 167.89
             }
         ],
         "inputs": {
@@ -103,27 +103,27 @@
         "results": [
             {
                 "Color": "GRIS",
-                "Order Qty": 1930,
-                "Body Total (Kg)": 545.22,
-                "Rib Total (Kg)": 106.15,
-                "ADDFAB Total (Kg)": 63.69,
-                "Grand Total (Kg)": 715.06
+                "Order Qty": 1926.0,
+                "Body Total (Kg)": 544.09,
+                "Rib Total (Kg)": 105.93,
+                "ADDFAB Total (Kg)": 63.56,
+                "Grand Total (Kg)": 713.58
             },
             {
                 "Color": "MARINE",
-                "Order Qty": 1930,
-                "Body Total (Kg)": 545.22,
-                "Rib Total (Kg)": 106.15,
-                "ADDFAB Total (Kg)": 63.69,
-                "Grand Total (Kg)": 715.06
+                "Order Qty": 1926.0,
+                "Body Total (Kg)": 544.09,
+                "Rib Total (Kg)": 105.93,
+                "ADDFAB Total (Kg)": 63.56,
+                "Grand Total (Kg)": 713.58
             },
             {
                 "Color": "NOIR",
-                "Order Qty": 2123,
-                "Body Total (Kg)": 599.75,
-                "Rib Total (Kg)": 116.77,
-                "ADDFAB Total (Kg)": 70.06,
-                "Grand Total (Kg)": 786.57
+                "Order Qty": 2119.0,
+                "Body Total (Kg)": 598.5,
+                "Rib Total (Kg)": 116.52,
+                "ADDFAB Total (Kg)": 69.91,
+                "Grand Total (Kg)": 784.94
             }
         ],
         "inputs": {

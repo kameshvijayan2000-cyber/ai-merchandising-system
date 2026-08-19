@@ -4,6 +4,7 @@ from modules.utils import load_json, save_json
 
 MASTER_FILE = "data/style_master.json"
 FABRIC_FILE = "data/fabric_program.json"
+COUNT_FILE = "data/count_data.json"
 
 
 # ================= MAIN =================
@@ -219,6 +220,13 @@ def run():
 
         results = []
 
+        # LOAD COUNT DATA TO SYNC COLOR QUANTITIES
+        count_data = load_json(COUNT_FILE)
+        if not isinstance(count_data, dict):
+            count_data = {}
+
+        count_key = f"{selected_po}_{selected_style}"
+
         # TOTAL RATIO
         total_ratio_units = sum(
             sum(v.values())
@@ -229,7 +237,7 @@ def run():
         base_qty = (
             total_qty /
             total_ratio_units
-        )
+        ) if total_ratio_units > 0 else 0
 
         for color, sizes in color_ratios.items():
 
@@ -237,36 +245,37 @@ def run():
             rib_total = 0
             ADDFAB_total = 0
 
-            color_order_qty = 0
-
             # COLOR RATIO TOTAL
             color_ratio_total = sum(
                 sizes.values()
             )
 
-            # COLOR ORDER QTY
-            color_qty = (
-                base_qty *
-                color_ratio_total
-            )
+            # READ FROM COUNT DATA IF AVAILABLE
+            base_color_qty = 0
+            if (
+                count_key in count_data and
+                isinstance(count_data[count_key], dict) and
+                "summary" in count_data[count_key]
+            ):
+                for item in count_data[count_key]["summary"]:
+                    if item.get("Color") == color:
+                        base_color_qty = item.get("Total Qty", 0)
+                        break
 
-            # CUTTING EXTRA
-            color_qty = color_qty * (
-                1 + cut_qty_percent / 100
-            )
+            # FALLBACK TO MASTER TOTAL_QTY IF NOT FOUND IN COUNT DATA
+            if base_color_qty == 0:
+                base_color_qty = base_qty * color_ratio_total
 
-            color_order_qty = round(
-                color_qty,
-                0
-            )
+            # Directly set Order Qty from Count Data
+            color_order_qty = round(base_color_qty, 0)
 
             # SIZE CALCULATION
             for size, ratio in sizes.items():
 
                 size_qty = (
-                    color_qty /
+                    base_color_qty /
                     color_ratio_total
-                ) * ratio
+                ) * ratio if color_ratio_total > 0 else 0
 
                 # BODY
                 body_total += (
@@ -468,7 +477,7 @@ def run():
         # ================= GRAND TOTAL =================
         summary_df = pd.DataFrame([{
 
-            "Body Total (Kg)": round(
+            "Total Body (Kg)": round(
                 final_df[
                     "Body Total (Kg)"
                 ].sum(),

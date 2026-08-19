@@ -1,0 +1,119 @@
+{
+    "2603584_SHYNO": {
+        "results": [
+            {
+                "Color": "BLUE",
+                "Size": "S",
+                "Ratio": 1,
+                "Qty": 311
+            },
+            {
+                "Color": "BLUE",
+                "Size": "M",
+                "Ratio": 2,
+                "Qty": 622
+            },
+            {
+                "Color": "BLUE",
+                "Size": "L",
+                "Ratio": 2,
+                "Qty": 622
+            },
+            {
+                "Color": "BLUE",
+                "Size": "XL",
+                "Ratio": 2,
+                "Qty": 622
+            },
+            {
+                "Color": "BLUE",
+                "Size": "XXL",
+                "Ratio": 1,
+                "Qty": 311
+            },
+            {
+                "Color": "BLACK",
+                "Size": "S",
+                "Ratio": 2,
+                "Qty": 622
+            },
+            {
+                "Color": "BLACK",
+                "Size": "M",
+                "Ratio": 3,
+                "Qty": 933
+            },
+            {
+                "Color": "BLACK",
+                "Size": "L",
+                "Ratio": 3,
+                "Qty": 933
+            },
+            {
+                "Color": "BLACK",
+                "Size": "XL",
+                "Ratio": 2,
+                "Qty": 622
+            },
+            {
+                "Color": "BLACK",
+                "Size": "XXL",
+                "Ratio": 2,
+                "Qty": 622
+            },
+            {
+                "Color": "ROSE",
+                "Size": "S",
+                "Ratio": 1,
+                "Qty": 311
+            },
+            {
+                "Color": "ROSE",
+                "Size": "M",
+                "Ratio": 3,
+                "Qty": 933
+            },
+            {
+                "Color": "ROSE",
+                "Size": "L",
+                "Ratio": 3,
+                "Qty": 933
+            },
+            {
+                "Color": "ROSE",
+                "Size": "XL",
+                "Ratio": 2,
+                "Qty": 622
+            },
+            {
+                "Color": "ROSE",
+                "Size": "XXL",
+                "Ratio": 1,
+                "Qty": 311
+            }
+        ],
+        "summary": [
+            {
+                "Color": "BLUE",
+                "Color Ratio Total": 8,
+                "Total Qty": 2488
+            },
+            {
+                "Color": "BLACK",
+                "Color Ratio Total": 12,
+                "Total Qty": 3732
+            },
+            {
+                "Color": "ROSE",
+                "Color Ratio Total": 10,
+                "Total Qty": 3110
+            }
+        ],
+        "inputs": {
+            "cartons": 290,
+            "pcs_per_carton": 30,
+            "extra_percent": 7.0,
+            "final_cartons": 311
+        }
+    }
+}
