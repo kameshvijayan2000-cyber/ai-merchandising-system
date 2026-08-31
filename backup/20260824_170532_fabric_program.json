@@ -5,25 +5,25 @@
                 "Color": "BLUE",
                 "Order Qty": 2488,
                 "Body Total (Kg)": 1138.63,
-                "Rib Total (Kg)": 295.57,
+                "Rib Total (Kg)": 301.05,
                 "ADDFAB Total (Kg)": 0.0,
-                "Grand Total (Kg)": 1434.21
+                "Grand Total (Kg)": 1439.68
             },
             {
                 "Color": "BLACK",
                 "Order Qty": 3732,
                 "Body Total (Kg)": 1707.95,
-                "Rib Total (Kg)": 443.36,
+                "Rib Total (Kg)": 451.57,
                 "ADDFAB Total (Kg)": 0.0,
-                "Grand Total (Kg)": 2151.31
+                "Grand Total (Kg)": 2159.52
             },
             {
                 "Color": "ROSE",
                 "Order Qty": 3110,
                 "Body Total (Kg)": 1423.29,
-                "Rib Total (Kg)": 369.47,
+                "Rib Total (Kg)": 376.31,
                 "ADDFAB Total (Kg)": 0.0,
-                "Grand Total (Kg)": 1792.76
+                "Grand Total (Kg)": 1799.6
             }
         ],
         "inputs": {
@@ -31,7 +31,7 @@
             "rib_weight": 0.11,
             "ADDFAB_weight": 0.0,
             "body_loss": 13.0,
-            "rib_loss": 8.0,
+            "rib_loss": 10.0,
             "ADDFAB_loss": 0.0
         }
     },
@@ -76,25 +76,25 @@
             {
                 "Color": "BLANC",
                 "Order Qty": 1892,
-                "Body Total (Kg)": 114.47,
+                "Body Total (Kg)": 117.59,
                 "Rib Total (Kg)": 104.06,
                 "ADDFAB Total (Kg)": 10.41,
-                "Grand Total (Kg)": 228.93
+                "Grand Total (Kg)": 232.05
             },
             {
                 "Color": "GRIS",
                 "Order Qty": 1376,
-                "Body Total (Kg)": 83.25,
+                "Body Total (Kg)": 85.52,
                 "Rib Total (Kg)": 75.68,
                 "ADDFAB Total (Kg)": 7.57,
-                "Grand Total (Kg)": 166.5
+                "Grand Total (Kg)": 168.77
             }
         ],
         "inputs": {
             "body_weight": 0.055,
             "rib_weight": 0.05,
             "ADDFAB_weight": 0.005,
-            "body_loss": 10.0,
+            "body_loss": 13.0,
             "rib_loss": 10.0,
             "ADDFAB_loss": 10.0
         }

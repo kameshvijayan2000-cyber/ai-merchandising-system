@@ -1,0 +1,59 @@
+{
+    "entries": [
+        {
+            "PO Number": "2603584",
+            "Date": "2026-08-25",
+            "Process": "Tag",
+            "Type": "Input",
+            "Qty": 9500.0,
+            "Party": "THARIGA SHREE TRADING",
+            "Description": "Seal Tag Tiger",
+            "Rate": 3.245,
+            "Total": 30827.5
+        },
+        {
+            "PO Number": "2603999",
+            "Date": "2026-08-22",
+            "Process": "Yarn",
+            "Type": "Input",
+            "Qty": 640.0,
+            "Party": "OASIS TEXTILES",
+            "Description": "20s BW1722 Grey Melange Yarn 60/40",
+            "Rate": 222.6,
+            "Total": 142464.0
+        },
+        {
+            "PO Number": "2603999",
+            "Date": "2026-08-28",
+            "Process": "Yarn",
+            "Type": "Input",
+            "Qty": 80.0,
+            "Party": "FABTECH",
+            "Description": "60/40 - YARN TO FABRIC - 28s",
+            "Rate": 220.5,
+            "Total": 17640.0
+        },
+        {
+            "PO Number": "2603999",
+            "Date": "2026-08-28",
+            "Process": "Yarn",
+            "Type": "Input",
+            "Qty": 600.0,
+            "Party": "FABTECH",
+            "Description": "60/40 - YARN TO FABRIC - 20s",
+            "Rate": 200.55,
+            "Total": 120330.0
+        },
+        {
+            "PO Number": "2603999",
+            "Date": "2026-08-28",
+            "Process": "Yarn",
+            "Type": "Input",
+            "Qty": 119.0,
+            "Party": "FABTECH",
+            "Description": "60/40 - YARN TO FABRIC - 20s RIB",
+            "Rate": 233.1,
+            "Total": 27738.899999999998
+        }
+    ]
+}

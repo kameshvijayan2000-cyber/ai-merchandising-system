@@ -175,17 +175,6 @@
             "Description": "",
             "Rate": 0.0,
             "Total": 0.0
-        },
-        {
-            "PO Number": "2603584",
-            "Date": "2026-08-25",
-            "Process": "Yarn",
-            "Type": "Output",
-            "Qty": 2600.64,
-            "Party": "MARXX KNITS",
-            "Description": "",
-            "Rate": 0.0,
-            "Total": 0.0
         }
     ]
 }

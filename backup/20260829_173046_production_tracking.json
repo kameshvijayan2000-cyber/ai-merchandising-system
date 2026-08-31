@@ -142,50 +142,6 @@
             "Description": "",
             "Rate": 0.0,
             "Total": 0.0
-        },
-        {
-            "PO Number": "2603998",
-            "Date": "2026-08-27",
-            "Process": "Yarn",
-            "Type": "Output",
-            "Qty": 302.4,
-            "Party": "SHRI VISHNU KNITS",
-            "Description": "",
-            "Rate": 0.0,
-            "Total": 0.0
-        },
-        {
-            "PO Number": "2603999",
-            "Date": "2026-08-27",
-            "Process": "Yarn",
-            "Type": "Output",
-            "Qty": 640.0,
-            "Party": "RS KNITS",
-            "Description": "",
-            "Rate": 0.0,
-            "Total": 0.0
-        },
-        {
-            "PO Number": "2603584",
-            "Date": "2026-08-25",
-            "Process": "Yarn",
-            "Type": "Output",
-            "Qty": 665.28,
-            "Party": "MARXX KNITS",
-            "Description": "",
-            "Rate": 0.0,
-            "Total": 0.0
-        },
-        {
-            "PO Number": "2603584",
-            "Date": "2026-08-25",
-            "Process": "Yarn",
-            "Type": "Output",
-            "Qty": 2600.64,
-            "Party": "MARXX KNITS",
-            "Description": "",
-            "Rate": 0.0,
-            "Total": 0.0
         }
     ]
 }
