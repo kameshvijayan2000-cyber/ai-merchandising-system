@@ -63,6 +63,7 @@ def run():
 
                 for details in masters.values()
             )
+
         )
     )
 
@@ -490,44 +491,74 @@ def run():
             st.rerun()
 
     # =========================================================
-    # DISPLAY DATA
+    # DISPLAY DATA & IN-ROW DELETE
     # =========================================================
 
     st.markdown("---")
 
     st.subheader("📊 Production Entries")
 
-    df = pd.DataFrame(
-        data["entries"]
-    )
-    if not df.empty:
+    # Map filtered items with their actual index in the main list
+    po_entries = [
+        (idx, entry)
+        for idx, entry in enumerate(data["entries"])
+        if entry.get("PO Number") == selected_po
+    ]
 
-        if "PO Number" in df.columns:
+    if po_entries:
 
-            df = df[
+        # Header columns
+        cols = st.columns([1, 2, 2, 2, 1, 1, 2, 3, 1, 1, 1])
 
-                df["PO Number"]
-                == selected_po
+        cols[0].markdown("**#**")
+        cols[1].markdown("**PO Number**")
+        cols[2].markdown("**Date**")
+        cols[3].markdown("**Process**")
+        cols[4].markdown("**Type**")
+        cols[5].markdown("**Qty**")
+        cols[6].markdown("**Party**")
+        cols[7].markdown("**Description**")
+        cols[8].markdown("**Rate**")
+        cols[9].markdown("**Total**")
+        cols[10].markdown("**Action**")
 
-            ]
-    if not df.empty:
+        st.markdown("---")
 
-        display_df = df.copy()
+        for row_num, (orig_idx, entry) in enumerate(po_entries, 1):
 
-        display_df.index = (
-            display_df.index + 1
-        )
+            c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11 = st.columns(
+                [1, 2, 2, 2, 1, 1, 2, 3, 1, 1, 1]
+            )
 
-        st.dataframe(
-            display_df,
-            use_container_width=True
-        )
+            c1.write(str(row_num))
+            c2.write(str(entry.get("PO Number", "")))
+            c3.write(str(entry.get("Date", "")))
+            c4.write(str(entry.get("Process", "")))
+            c5.write(str(entry.get("Type", "-")))
+            c6.write(str(entry.get("Qty", entry.get("Completed Qty", "-"))))
+            c7.write(str(entry.get("Party", "")))
+            c8.write(str(entry.get("Description", entry.get("Cutting Part", ""))))
+            c9.write(str(entry.get("Rate", "")))
+            c10.write(str(entry.get("Total", "")))
+
+            # Delete button directly inside the row's last column
+            if c11.button("🗑️", key=f"del_{orig_idx}"):
+
+                data["entries"].pop(orig_idx)
+
+                save_json(FILE, data)
+
+                st.success("Entry Deleted Successfully")
+
+                st.rerun()
 
         # =====================================================
         # METRICS
         # =====================================================
 
         st.markdown("---")
+
+        df = pd.DataFrame([e for _, e in po_entries])
 
         total_entries = len(df)
 
@@ -762,48 +793,6 @@ def run():
         st.info(
             "No Production Entries Added"
         )
-
-    # =========================================================
-    # DELETE ENTRY
-    # =========================================================
-
-    st.markdown("---")
-
-    st.subheader(
-        "🗑️ Delete Entry"
-    )
-
-    if not df.empty:
-
-        delete_index = st.number_input(
-
-            "Select Row Number",
-
-            min_value=1,
-
-            max_value=len(df),
-
-            step=1
-        )
-
-        if st.button(
-            "❌ Delete Selected Entry"
-        ):
-
-            data["entries"].pop(
-                delete_index - 1
-            )
-
-            save_json(
-                FILE,
-                data
-            )
-
-            st.success(
-                "Entry Deleted Successfully"
-            )
-
-            st.rerun()
 
     # =========================================================
     # CLEAR DATA
