@@ -354,6 +354,28 @@
         },
         {
             "PO Number": "2603999",
+            "Date": "2026-09-03",
+            "Process": "Knitting",
+            "Type": "Output",
+            "Qty": 20.3,
+            "Party": "Sulochana Textiles",
+            "Description": "Navy  -  S/J",
+            "Rate": 0.0,
+            "Total": 0.0
+        },
+        {
+            "PO Number": "2603999",
+            "Date": "2026-09-03",
+            "Process": "Knitting",
+            "Type": "Output",
+            "Qty": 18.8,
+            "Party": "Sulochana Textiles",
+            "Description": "Navy  -  Durby Rib",
+            "Rate": 0.0,
+            "Total": 0.0
+        },
+        {
+            "PO Number": "2603999",
             "Date": "2026-09-12",
             "Process": "Compacting",
             "Type": "Input",

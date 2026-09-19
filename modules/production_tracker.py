@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from io import BytesIO
 from datetime import date
 from modules.utils import load_json, save_json
 
@@ -498,14 +499,48 @@ def run():
 
     st.subheader("📊 Production Entries")
 
-    # Map filtered items with their actual index in the main list
-    po_entries = [
-        (idx, entry)
-        for idx, entry in enumerate(data["entries"])
-        if entry.get("PO Number") == selected_po
-    ]
+    # View Mode Selection: Consolidated or Single PO
+    view_mode = st.radio(
+        "Select View Type:",
+        ["Single PO View", "All POs (Consolidated)"],
+        horizontal=True
+    )
 
-    if po_entries:
+    # Filter entries based on selected view mode
+    if view_mode == "Single PO View":
+        display_entries = [
+            (idx, entry)
+            for idx, entry in enumerate(data["entries"])
+            if entry.get("PO Number") == selected_po
+        ]
+    else:
+        display_entries = [
+            (idx, entry)
+            for idx, entry in enumerate(data["entries"])
+        ]
+
+    if display_entries:
+
+        # Extract DataFrame for Excel export
+        df = pd.DataFrame([e for _, e in display_entries])
+
+        # =====================================================
+        # EXCEL DOWNLOAD BUTTON
+        # =====================================================
+        buffer = BytesIO()
+        with pd.ExcelWriter(buffer, engine="openpyxl") as writer:
+            df.to_excel(writer, index=False, sheet_name="Production Data")
+
+        file_label = f"Production_Tracker_{selected_po}.xlsx" if view_mode == "Single PO View" else "Production_Tracker_Consolidated.xlsx"
+
+        st.download_button(
+            label="📥 Download Excel",
+            data=buffer.getvalue(),
+            file_name=file_label,
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
+
+        st.markdown("---")
 
         # Header columns
         cols = st.columns([1, 2, 2, 2, 1, 1, 2, 3, 1, 1, 1])
@@ -524,7 +559,7 @@ def run():
 
         st.markdown("---")
 
-        for row_num, (orig_idx, entry) in enumerate(po_entries, 1):
+        for row_num, (orig_idx, entry) in enumerate(display_entries, 1):
 
             c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11 = st.columns(
                 [1, 2, 2, 2, 1, 1, 2, 3, 1, 1, 1]
@@ -557,8 +592,6 @@ def run():
         # =====================================================
 
         st.markdown("---")
-
-        df = pd.DataFrame([e for _, e in po_entries])
 
         total_entries = len(df)
 

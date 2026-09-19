@@ -354,6 +354,39 @@
         },
         {
             "PO Number": "2603999",
+            "Date": "2026-09-03",
+            "Process": "Knitting",
+            "Type": "Output",
+            "Qty": 15.5,
+            "Party": "Sulochana Textiles",
+            "Description": "Navy  -  Loop Knit",
+            "Rate": 0.0,
+            "Total": 0.0
+        },
+        {
+            "PO Number": "2603999",
+            "Date": "2026-09-03",
+            "Process": "Knitting",
+            "Type": "Output",
+            "Qty": 20.3,
+            "Party": "Sulochana Textiles",
+            "Description": "Navy  -  S/J",
+            "Rate": 0.0,
+            "Total": 0.0
+        },
+        {
+            "PO Number": "2603999",
+            "Date": "2026-09-03",
+            "Process": "Knitting",
+            "Type": "Output",
+            "Qty": 18.8,
+            "Party": "Sulochana Textiles",
+            "Description": "Navy  -  Durby Rib",
+            "Rate": 0.0,
+            "Total": 0.0
+        },
+        {
+            "PO Number": "2603999",
             "Date": "2026-09-12",
             "Process": "Compacting",
             "Type": "Input",
@@ -582,39 +615,6 @@
             "Description": "Black - S/J",
             "Rate": 23.1,
             "Total": 1834.1400000000003
-        },
-        {
-            "PO Number": "2603999",
-            "Date": "2026-09-03",
-            "Process": "Knitting",
-            "Type": "Output",
-            "Qty": 15.5,
-            "Party": "Smart Knit Finishers",
-            "Description": "Navy  - Loop Knit",
-            "Rate": 0.0,
-            "Total": 0.0
-        },
-        {
-            "PO Number": "2603999",
-            "Date": "2026-09-03",
-            "Process": "Knitting",
-            "Type": "Output",
-            "Qty": 20.3,
-            "Party": "Smart Knit Finishers",
-            "Description": "Navy  - S/J",
-            "Rate": 0.0,
-            "Total": 0.0
-        },
-        {
-            "PO Number": "2603999",
-            "Date": "2026-09-03",
-            "Process": "Knitting",
-            "Type": "Output",
-            "Qty": 18.8,
-            "Party": "Smart Knit Finishers",
-            "Description": "Navy  - Durby Rib",
-            "Rate": 0.0,
-            "Total": 0.0
         }
     ]
 }
