@@ -299,17 +299,6 @@
         },
         {
             "PO Number": "2603999",
-            "Date": "2026-08-31",
-            "Process": "Yarn",
-            "Type": "Output",
-            "Qty": 720.0,
-            "Party": "Image Knits",
-            "Description": "Navy ",
-            "Rate": 0.0,
-            "Total": 0.0
-        },
-        {
-            "PO Number": "2603999",
             "Date": "2026-09-03",
             "Process": "Knitting",
             "Type": "Output",
@@ -615,6 +604,215 @@
             "Description": "Navy  - Durby Rib",
             "Rate": 0.0,
             "Total": 0.0
+        },
+        {
+            "PO Number": "2603584",
+            "Date": "2026-08-28",
+            "Process": "Yarn",
+            "Type": "Output",
+            "Qty": 453.0,
+            "Party": "FABTECH",
+            "Description": "Black - Durby Rib",
+            "Rate": 0.0,
+            "Total": 0.0
+        },
+        {
+            "PO Number": "2603584",
+            "Date": "2026-08-28",
+            "Process": "Yarn",
+            "Type": "Output",
+            "Qty": 1708.0,
+            "Party": "FABTECH",
+            "Description": "Black - Loop Knit",
+            "Rate": 0.0,
+            "Total": 0.0
+        },
+        {
+            "PO Number": "2603999",
+            "Date": "2026-08-28",
+            "Process": "Yarn",
+            "Type": "Output",
+            "Qty": 600.0,
+            "Party": "FABTECH",
+            "Description": "Black - Loop Knit",
+            "Rate": 0.0,
+            "Total": 0.0
+        },
+        {
+            "PO Number": "2603999",
+            "Date": "2026-08-28",
+            "Process": "Yarn",
+            "Type": "Output",
+            "Qty": 119.0,
+            "Party": "FABTECH",
+            "Description": "Black - Durby Rib",
+            "Rate": 0.0,
+            "Total": 0.0
+        },
+        {
+            "PO Number": "2603998",
+            "Date": "2026-09-05",
+            "Process": "Yarn",
+            "Type": "Output",
+            "Qty": 85.7,
+            "Party": "SHRI VISHNU KNITS",
+            "Description": "34s Combed Compact Yarn - Grey melange 100% Cotton Selimuni",
+            "Rate": 0.0,
+            "Total": 0.0
+        },
+        {
+            "PO Number": "2603999",
+            "Date": "2026-08-31",
+            "Process": "Knitting",
+            "Type": "Input",
+            "Qty": 548.2,
+            "Party": "Image Knits",
+            "Description": "Navy - Loop Knit",
+            "Rate": 14.7,
+            "Total": 8058.54
+        },
+        {
+            "PO Number": "2603999",
+            "Date": "2026-08-31",
+            "Process": "Knitting",
+            "Type": "Input",
+            "Qty": 69.7,
+            "Party": "Image Knits",
+            "Description": "Navy - S/J",
+            "Rate": 10.5,
+            "Total": 731.85
+        },
+        {
+            "PO Number": "2603999",
+            "Date": "2026-08-31",
+            "Process": "Yarn",
+            "Type": "Output",
+            "Qty": 620.0,
+            "Party": "Image Knits",
+            "Description": "Navy - Loop Knit & S/J",
+            "Rate": 0.0,
+            "Total": 0.0
+        },
+        {
+            "PO Number": "2603584",
+            "Date": "2026-09-07",
+            "Process": "Knitting",
+            "Type": "Output",
+            "Qty": 1106.5,
+            "Party": "Smart knit finishers",
+            "Description": "Black - S/J",
+            "Rate": 0.0,
+            "Total": 0.0
+        },
+        {
+            "PO Number": "2603584",
+            "Date": "2026-09-07",
+            "Process": "Compacting",
+            "Type": "Input",
+            "Qty": 1106.5,
+            "Party": "Smart knit finishers",
+            "Description": "Black - S/J",
+            "Rate": 0.0,
+            "Total": 0.0
+        },
+        {
+            "PO Number": "2603584",
+            "Date": "2026-09-16",
+            "Process": "Compacting",
+            "Type": "Output",
+            "Qty": 965.0,
+            "Party": "PRP",
+            "Description": "Black - S/J",
+            "Rate": 21.0,
+            "Total": 20265.0
+        },
+        {
+            "PO Number": "2603584",
+            "Date": "2026-09-16",
+            "Process": "Compacting",
+            "Type": "Output",
+            "Qty": 76.0,
+            "Party": "PRP",
+            "Description": "Black - S/J",
+            "Rate": 58.8,
+            "Total": 4468.8
+        },
+        {
+            "PO Number": "2603584",
+            "Date": "2026-09-16",
+            "Process": "Compacting",
+            "Type": "Output",
+            "Qty": 5.6,
+            "Party": "PRP",
+            "Description": "Black - S/J",
+            "Rate": 46.965,
+            "Total": 263.004
+        },
+        {
+            "PO Number": "2603584",
+            "Date": "2026-09-22",
+            "Process": "Compacting",
+            "Type": "Output",
+            "Qty": 35.0,
+            "Party": "PRP",
+            "Description": "Loop Knit - Pink",
+            "Rate": 0.0,
+            "Total": 0.0
+        },
+        {
+            "PO Number": "2603584",
+            "Date": "2026-09-22",
+            "Process": "Compacting",
+            "Type": "Output",
+            "Qty": 1308.0,
+            "Party": "PRP",
+            "Description": "Loop Knit - Pink",
+            "Rate": 0.0,
+            "Total": 0.0
+        },
+        {
+            "PO Number": "2603584",
+            "Date": "2026-09-07",
+            "Process": "Compacting",
+            "Type": "Input",
+            "Qty": 279.0,
+            "Party": "Smart Knit Finishers",
+            "Description": "Black RIB",
+            "Rate": 23.1,
+            "Total": 6444.900000000001
+        },
+        {
+            "PO Number": "2603584",
+            "Date": "2026-09-08",
+            "Process": "Compacting",
+            "Type": "Input",
+            "Qty": 178.6,
+            "Party": "Sulochana Textile process",
+            "Description": "Black RIB",
+            "Rate": 17.85,
+            "Total": 3188.01
+        },
+        {
+            "PO Number": "2603584",
+            "Date": "2026-09-10",
+            "Process": "Compacting",
+            "Type": "Input",
+            "Qty": 286.7,
+            "Party": "Sulochana Textile process",
+            "Description": "Black RIB",
+            "Rate": 17.85,
+            "Total": 5117.595
+        },
+        {
+            "PO Number": "2603584",
+            "Date": "2026-09-10",
+            "Process": "Compacting",
+            "Type": "Input",
+            "Qty": 40.0,
+            "Party": "Sulochana Textile process",
+            "Description": "Black Loop Knit",
+            "Rate": 56.7,
+            "Total": 2268.0
         }
     ]
 }

@@ -20,9 +20,64 @@ def run():
     st.subheader("📂 Load Existing Style")
     saved_styles = ["-- Create New --"] + list(data.keys())
     
-    selected_style = st.selectbox("Select a Style to Edit/Load", saved_styles)
+    # Callback to update session state when selected style changes
+    def on_style_change():
+        selected = st.session_state.get("selected_style_dropdown")
+        if selected and selected != "-- Create New --" and selected in data:
+            s_data = data[selected]
+            st.session_state["style_name"] = s_data.get("Style Name", selected)
+            st.session_state["order_qty"] = int(s_data.get("Order Qty", 1000))
+            st.session_state["fabric_excess_percent"] = float(s_data.get("Fabric Excess %", 7.0))
+            st.session_state["size_input"] = s_data.get("Sizes", "XS,S,M,L,XL")
+            st.session_state["inc_body"] = s_data.get("Include Body", True)
+            st.session_state["body_gsm"] = float(s_data.get("Body GSM", 220.0))
+            st.session_state["inc_sleeve"] = s_data.get("Include Sleeve", True)
+            st.session_state["sleeve_gsm"] = float(s_data.get("Sleeve GSM", 220.0))
+            st.session_state["inc_bottom_rib"] = s_data.get("Include Bottom Rib", False)
+            st.session_state["bottom_rib_gsm"] = float(s_data.get("Bottom Rib GSM", 320.0))
+            st.session_state["inc_cuff"] = s_data.get("Include Cuff", False)
+            st.session_state["cuff_gsm"] = float(s_data.get("Cuff GSM", 320.0))
+            st.session_state["inc_neck"] = s_data.get("Include Neck", False)
+            st.session_state["neck_gsm"] = float(s_data.get("Neck GSM", 320.0))
+            st.session_state["inc_hoodie"] = s_data.get("Include Hoodie", False)
+            st.session_state["hoodie_gsm"] = float(s_data.get("Hoodie GSM", 220.0))
+            
+            # Measurements
+            measurements = s_data.get("Measurements", {})
+            for sz, m_vals in measurements.items():
+                for m_key, val in m_vals.items():
+                    st.session_state[f"{m_key}_{sz}"] = float(val)
 
-    # Pre-fill data if a saved style is selected
+            # Rates & Losses
+            st.session_state["yarn_rate"] = float(s_data.get("Yarn Rate", 280.0))
+            st.session_state["dyeing_rate"] = float(s_data.get("Dyeing Rate", 80.0))
+            st.session_state["compacting_rate"] = float(s_data.get("Compacting Rate", 25.0))
+            st.session_state["washing_rate"] = float(s_data.get("Washing Rate", 20.0))
+            st.session_state["process_count"] = int(s_data.get("Process Count", 0))
+
+            extra_processes = s_data.get("Extra Processes", [])
+            for idx, proc in enumerate(extra_processes):
+                st.session_state[f"process_name_{idx}"] = proc.get("name", "")
+                st.session_state[f"process_rate_{idx}"] = float(proc.get("rate", 0.0))
+
+            st.session_state["fabric_loss_percent"] = float(s_data.get("Fabric Loss %", 5.0))
+            st.session_state["trims_excess_percent"] = float(s_data.get("Trims Excess %", 5.0))
+            st.session_state["trim_count"] = int(s_data.get("Trim Count", 1))
+
+            trims_detail = s_data.get("Trims Detail", [])
+            for idx, trim in enumerate(trims_detail):
+                st.session_state[f"trim_name_{idx}"] = trim.get("name", "")
+                st.session_state[f"trim_rate_{idx}"] = float(trim.get("rate", 0.0))
+
+            st.session_state["cmt_value"] = float(s_data.get("CMT Value", 50.0))
+            st.session_state["fob_value"] = float(s_data.get("FOB Value", 20.0))
+            st.session_state["commission_percent"] = float(s_data.get("Commission %", 2.0))
+            st.session_state["other_expense_percent"] = float(s_data.get("Other Expense %", 3.0))
+            st.session_state["profit_percent"] = float(s_data.get("Profit Margin %", 10.0))
+
+    selected_style = st.selectbox("Select a Style to Edit/Load", saved_styles, key="selected_style_dropdown", on_change=on_style_change)
+
+    # Pre-fill data fallback if key not yet in session_state
     style_data = data.get(selected_style, {}) if selected_style != "-- Create New --" else {}
 
     st.markdown("---")
