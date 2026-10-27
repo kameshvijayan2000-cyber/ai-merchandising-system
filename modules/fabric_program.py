@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import math
 from modules.utils import load_json, save_json
 
 MASTER_FILE = "data/style_master.json"
@@ -220,24 +221,22 @@ def run():
 
         results = []
 
-        # LOAD COUNT DATA TO SYNC COLOR QUANTITIES
-        count_data = load_json(COUNT_FILE)
-        if not isinstance(count_data, dict):
-            count_data = {}
-
-        count_key = f"{selected_po}_{selected_style}"
-
-        # TOTAL RATIO
+        # TOTAL RATIO UNITS
         total_ratio_units = sum(
             sum(v.values())
             for v in color_ratios.values()
         )
 
-        # BASE PCS
-        base_qty = (
+        # BASE MULTIPLIER
+        raw_base_qty = (
             total_qty /
             total_ratio_units
         ) if total_ratio_units > 0 else 0
+
+        # 🔥 APPLY CUT QTY % AND ALWAYS ROUND UP TO THE NEXT WHOLE NUMBER (Ceil)
+        effective_base_qty = float(
+            math.ceil(raw_base_qty * (1 + cut_qty_percent / 100))
+        )
 
         for color, sizes in color_ratios.items():
 
@@ -245,35 +244,20 @@ def run():
             rib_total = 0
             ADDFAB_total = 0
 
-            # COLOR RATIO TOTAL
             color_ratio_total = sum(
                 sizes.values()
             )
 
-            # READ FROM COUNT DATA IF AVAILABLE
-            base_color_qty = 0
-            if (
-                count_key in count_data and
-                isinstance(count_data[count_key], dict) and
-                "summary" in count_data[count_key]
-            ):
-                for item in count_data[count_key]["summary"]:
-                    if item.get("Color") == color:
-                        base_color_qty = item.get("Total Qty", 0)
-                        break
-
-            # FALLBACK TO MASTER TOTAL_QTY IF NOT FOUND IN COUNT DATA
-            if base_color_qty == 0:
-                base_color_qty = base_qty * color_ratio_total
-
-            # Directly set Order Qty from Count Data
+            # CALCULATE CUT-ADJUSTED COLOR QTY DIRECTLY FROM RATIO
+            base_color_qty = effective_base_qty * color_ratio_total
             color_order_qty = round(base_color_qty, 0)
+            effective_color_qty = base_color_qty
 
             # SIZE CALCULATION
             for size, ratio in sizes.items():
 
                 size_qty = (
-                    base_color_qty /
+                    effective_color_qty /
                     color_ratio_total
                 ) * ratio if color_ratio_total > 0 else 0
 
@@ -302,10 +286,7 @@ def run():
 
                 "Color": color,
 
-                "Order Qty": round(
-                    color_order_qty,
-                    0
-                ),
+                "Order Qty": color_order_qty,
 
                 "Body Total (Kg)": round(
                     body_total,

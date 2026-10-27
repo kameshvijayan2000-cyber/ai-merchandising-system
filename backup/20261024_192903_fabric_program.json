@@ -1,0 +1,182 @@
+{
+    "SHYNO": {
+        "results": [
+            {
+                "Color": "BLUE",
+                "Order Qty": 2488,
+                "Body Total (Kg)": 1138.63,
+                "Rib Total (Kg)": 295.57,
+                "ADDFAB Total (Kg)": 0.0,
+                "Grand Total (Kg)": 1434.21
+            },
+            {
+                "Color": "BLACK",
+                "Order Qty": 3732,
+                "Body Total (Kg)": 1707.95,
+                "Rib Total (Kg)": 443.36,
+                "ADDFAB Total (Kg)": 0.0,
+                "Grand Total (Kg)": 2151.31
+            },
+            {
+                "Color": "ROSE",
+                "Order Qty": 3110,
+                "Body Total (Kg)": 1423.29,
+                "Rib Total (Kg)": 369.47,
+                "ADDFAB Total (Kg)": 0.0,
+                "Grand Total (Kg)": 1792.76
+            }
+        ],
+        "inputs": {
+            "body_weight": 0.405,
+            "rib_weight": 0.11,
+            "ADDFAB_weight": 0.0,
+            "body_loss": 13.0,
+            "rib_loss": 8.0,
+            "ADDFAB_loss": 0.0
+        }
+    },
+    "TARTE": {
+        "results": [
+            {
+                "Color": "BEIGE",
+                "Order Qty": 1204,
+                "Body Total (Kg)": 170.06,
+                "Rib Total (Kg)": 2.98,
+                "ADDFAB Total (Kg)": 0.0,
+                "Grand Total (Kg)": 173.04
+            },
+            {
+                "Color": "BORDEAUX",
+                "Order Qty": 1204,
+                "Body Total (Kg)": 170.06,
+                "Rib Total (Kg)": 2.98,
+                "ADDFAB Total (Kg)": 0.0,
+                "Grand Total (Kg)": 173.04
+            },
+            {
+                "Color": "VERT",
+                "Order Qty": 1204,
+                "Body Total (Kg)": 170.06,
+                "Rib Total (Kg)": 2.98,
+                "ADDFAB Total (Kg)": 0.0,
+                "Grand Total (Kg)": 173.04
+            }
+        ],
+        "inputs": {
+            "body_weight": 0.125,
+            "rib_weight": 0.00225,
+            "ADDFAB_weight": 0.0,
+            "body_loss": 13.0,
+            "rib_loss": 10.0,
+            "ADDFAB_loss": 0.0
+        }
+    },
+    "TAMARO": {
+        "results": [
+            {
+                "Color": "BLANC",
+                "Order Qty": 1892,
+                "Body Total (Kg)": 118.63,
+                "Rib Total (Kg)": 104.06,
+                "ADDFAB Total (Kg)": 10.41,
+                "Grand Total (Kg)": 233.09
+            },
+            {
+                "Color": "GRIS",
+                "Order Qty": 1376,
+                "Body Total (Kg)": 86.28,
+                "Rib Total (Kg)": 75.68,
+                "ADDFAB Total (Kg)": 7.57,
+                "Grand Total (Kg)": 169.52
+            }
+        ],
+        "inputs": {
+            "body_weight": 0.057,
+            "rib_weight": 0.05,
+            "ADDFAB_weight": 0.005,
+            "body_loss": 10.0,
+            "rib_loss": 10.0,
+            "ADDFAB_loss": 10.0
+        }
+    },
+    "SELIMUNI": {
+        "results": [
+            {
+                "Color": "GRIS",
+                "Order Qty": 1930,
+                "Body Total (Kg)": 545.22,
+                "Rib Total (Kg)": 106.15,
+                "ADDFAB Total (Kg)": 63.69,
+                "Grand Total (Kg)": 715.06
+            },
+            {
+                "Color": "MARINE",
+                "Order Qty": 1930,
+                "Body Total (Kg)": 545.22,
+                "Rib Total (Kg)": 106.15,
+                "ADDFAB Total (Kg)": 63.69,
+                "Grand Total (Kg)": 715.06
+            },
+            {
+                "Color": "NOIR",
+                "Order Qty": 2123,
+                "Body Total (Kg)": 599.75,
+                "Rib Total (Kg)": 116.77,
+                "ADDFAB Total (Kg)": 70.06,
+                "Grand Total (Kg)": 786.57
+            }
+        ],
+        "inputs": {
+            "body_weight": 0.25,
+            "rib_weight": 0.05,
+            "ADDFAB_weight": 0.03,
+            "body_loss": 13.0,
+            "rib_loss": 10.0,
+            "ADDFAB_loss": 10.0
+        }
+    },
+    "POLO": {
+        "results": [
+            {
+                "Color": "MARINE",
+                "Order Qty": 1638.0,
+                "Body Total (Kg)": 166.58,
+                "Rib Total (Kg)": 0.0,
+                "ADDFAB Total (Kg)": 0.0,
+                "Grand Total (Kg)": 166.58
+            },
+            {
+                "Color": "ROSE",
+                "Order Qty": 1260.0,
+                "Body Total (Kg)": 128.14,
+                "Rib Total (Kg)": 0.0,
+                "ADDFAB Total (Kg)": 0.0,
+                "Grand Total (Kg)": 128.14
+            },
+            {
+                "Color": "BLANC",
+                "Order Qty": 1260.0,
+                "Body Total (Kg)": 128.14,
+                "Rib Total (Kg)": 0.0,
+                "ADDFAB Total (Kg)": 0.0,
+                "Grand Total (Kg)": 128.14
+            },
+            {
+                "Color": "VERT",
+                "Order Qty": 2016.0,
+                "Body Total (Kg)": 205.03,
+                "Rib Total (Kg)": 0.0,
+                "ADDFAB Total (Kg)": 0.0,
+                "Grand Total (Kg)": 205.03
+            }
+        ],
+        "inputs": {
+            "body_weight": 0.09,
+            "rib_weight": 0.0,
+            "ADDFAB_weight": 0.0,
+            "body_loss": 13.0,
+            "rib_loss": 0.0,
+            "ADDFAB_loss": 0.0
+        }
+    }
+}
